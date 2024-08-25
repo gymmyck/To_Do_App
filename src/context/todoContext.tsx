@@ -17,14 +17,14 @@ type TodoContextType = {
 };
 
 type TodoProviderProps = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export const TodoContext = createContext<TodoContextType | undefined>(
   undefined
 );
 
-export const TodoProvider = ({ children }: TodoProviderProps) => {
+const TodoProvider = ({ children }: TodoProviderProps) => {
   const { id } = useParams();
   const [todos, setTodos] = useState<Todo[]>([]);
 
@@ -57,3 +57,5 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
     </TodoContext.Provider>
   );
 };
+
+export default TodoProvider;
