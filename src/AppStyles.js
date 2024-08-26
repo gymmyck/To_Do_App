@@ -7,8 +7,10 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
+    display: flex;
     background:${(props) => props.theme.main};
     overflow: hidden;
+    justify-content: center;
   }
 
   .main {
