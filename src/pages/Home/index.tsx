@@ -1,15 +1,18 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { MainContainer } from "./styles.js";
+import { InputButton, InputContainer, MainContainer } from "./styles.js";
 import SearchInput from "../../components/SearchInput";
 
-const Home = () => {
+const Home: React.FC = (props) => {
   return (
     <MainContainer>
-        <SearchInput placeholder="Search..."></SearchInput>
+      <InputContainer>
+        <SearchInput placeholder="Search..." {...props}></SearchInput>
+        <InputButton></InputButton>
+      </InputContainer>
       <FontAwesomeIcon icon={faArrowLeft} />
-      Hi
+        Hi
     </MainContainer>
   );
 };

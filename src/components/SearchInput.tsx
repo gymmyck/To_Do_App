@@ -2,18 +2,30 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledSearchInput = styled.input`
-  width: 398px;
-  height: 60px;
-  border-radius:60px;
-  border: 1px solid #E2E2E2;
+  width: 100%;
+  height: 100%;
+  border-radius: 60px;
+  border: 1px solid #e2e2e2;
+  text-indent: 42px;
+  position: relative;
+  font-size:14px;
+
+  &::placeholder {
+    font-size: 14px;
+    font-weight: 100;
+    color: ${(props) => props.theme.inputSecondary};
+  }
 `;
 
 type SearchInputProps = {
-    placeholder: string;
-}
+  children?: React.ReactNode;
+  placeholder: string;
+};
 
-const SearchInput = ({placeholder} : SearchInputProps) => {
-  return <StyledSearchInput placeholder={placeholder}/>;
+const SearchInput = ({ placeholder, children }: SearchInputProps) => {
+  return (
+    <StyledSearchInput placeholder={placeholder}>{children}</StyledSearchInput>
+  );
 };
 
 export default SearchInput;
