@@ -5,27 +5,37 @@ import {
     faArrowRight,
     faChevronUp,
     faChevronDown,
+    faPowerOff,
+    faPlus
 } from "@fortawesome/free-solid-svg-icons";
 import {
     ButtonWrapper,
     FilterButton,
     FiltersContainer,
     InputButton,
+    AddButton,
     InputContainer,
     MainContainer,
+    PowerModeButton,
 } from "./styles.js";
 import SearchInput from "../../components/SearchInput";
 import SortingList from "../../components/SortingList";
 import TagsList from "../../components/TagsList";
+import ToDo from "../../components/Todo/index";
 
 const Home = (props) => {
     const [showSortingFilters, setShowSortingFilters] = useState(false);
     const [showTagsFilters, setShowTagsFilters] = useState(false);
-    const ref = useRef(null);
+    const refSorting = useRef(null);
+    const refFilters = useRef(null);
 
     const clickOutside = (e) => {
-        if (ref.current && !ref.current.contains(e.target)) {
+        console.log("clicking")
+        if (refSorting.current && !refSorting.current.contains(e.target)) {
             setShowSortingFilters(false);
+        }
+
+        if (refFilters.current && !refFilters.current.contains(e.target)) {
             setShowTagsFilters(false);
         }
     }
@@ -39,7 +49,7 @@ const Home = (props) => {
         return () => {
             document.removeEventListener('mousedown', clickOutside);
         }
-    }, [ref])
+    }, [refSorting, refFilters])
 
     return (
         <MainContainer>
@@ -49,8 +59,12 @@ const Home = (props) => {
                     <FontAwesomeIcon icon={faArrowRight} />
                 </InputButton>
             </InputContainer>
+            <PowerModeButton>
+                <FontAwesomeIcon icon={faPowerOff} />
+                Power Mode On
+            </PowerModeButton>
             <FiltersContainer>
-                <ButtonWrapper ref={ref}>
+                <ButtonWrapper ref={refSorting}>
                     <FilterButton onClick={() => setShowSortingFilters(!showSortingFilters)}>
                         Sort
                         {showSortingFilters ? (
@@ -61,8 +75,8 @@ const Home = (props) => {
                     </FilterButton>
                     {showSortingFilters && (<SortingList></SortingList>)}
                 </ButtonWrapper>
-                <ButtonWrapper ref={ref}>
-                <FilterButton onClick={() => setShowTagsFilters(!showTagsFilters)}>
+                <ButtonWrapper ref={refFilters}>
+                    <FilterButton onClick={() => setShowTagsFilters(!showTagsFilters)}>
                         Category
                         {showTagsFilters ? (
                             <FontAwesomeIcon icon={faChevronUp} />
@@ -72,9 +86,16 @@ const Home = (props) => {
                     </FilterButton>
                     {showTagsFilters && (<TagsList></TagsList>)}
                 </ButtonWrapper>
+
             </FiltersContainer>
-            <FontAwesomeIcon icon={faArrowLeft} />
-            Hi
+
+            <ToDo></ToDo>
+
+            <AddButton>
+                <FontAwesomeIcon icon={faPlus} />
+                Add New Task
+            </AddButton>
+
         </MainContainer>
     );
 };

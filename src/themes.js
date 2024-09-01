@@ -28,7 +28,7 @@ export const darkTheme = {
     navTextMain: "#E8E8E8",
     navBackgroundSecondary: "#00261e",
     navBackgroundMain: "#ebf5ee",
-    hoverSecondary: "#101418",
+    hoverSecondary: "#484F6D",
     hoverMain: "#FCFCFC",
     inputSecondary: "#050f32cc",
     inputMain: "#F6F6F6",

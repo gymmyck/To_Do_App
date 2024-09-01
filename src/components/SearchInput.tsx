@@ -10,10 +10,10 @@ const StyledSearchInput = styled.input`
   outline: none;
   text-indent: 42px;
     position: relative;
-  font-size: 14px;
+  font-size: 16px;
 
   &::placeholder {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 100;
     color: ${(props) => props.theme.inputSecondary};
   }

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const MainContainer = styled.div`
 margin:0;
-width: 100vw;
+width: 50vw;
 height: 100vh;
 border: 1px solid red;
 display: flex;
@@ -15,7 +15,7 @@ align-items:center;
 export const InputContainer = styled.div`
 width: 398px;
 height: 60px;
-border: 1px solid red;
+// border: 1px solid red;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -41,10 +41,50 @@ background-color: #0D99FF1A;
   }
 `;
 
+export const AddButton = styled.button`
+width: 192px;
+height: 60px;
+display:flex;
+justify-content: space-around;
+align-items: center;
+border-radius:60px;
+border: none;
+padding-inline: 12px;
+right: 14px;
+background-color: #0D99FF;
+margin-top: 40px;
+font-size:18px;
+color: #FFFFFF;
+
+&:hover {
+    background-color: ${(props) => props.theme.hoverSecondary};
+  }
+`;
+
+export const PowerModeButton = styled.button`
+width: 208px;
+height: 60px;
+display:flex;
+justify-content: space-around;
+align-items: center;
+border-radius:60px;
+border: none;
+padding-inline: 12px;
+right: 14px;
+background-color: #0D99FF;
+margin-top: 40px;
+font-size:18px;
+color: #FFFFFF;
+
+&:hover {
+    background-color: ${(props) => props.theme.hoverSecondary};
+  }
+`;
+
 export const FiltersContainer = styled.div`
 width: 398px;
 height: 60px;
-border: 1px solid green;
+// border: 1px solid green;
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -55,7 +95,7 @@ margin-top:80px;
 export const ButtonWrapper = styled.div`
 width: 184px;
 height: 44px;
-border: 1px solid orange;
+// border: 1px solid orange;
 display: flex;
 justify-content: center;
 align-items: start;
@@ -72,7 +112,7 @@ padding: 0 30px;
 border-radius:60px;
 border: none;
 position:absolute;
-background-color: #0D99FF1A;
+background-color: #FFFFFF;
 
 &:hover {
     background-color: ${(props) => props.theme.hoverSecondary};
