@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledSearchInput = styled.input`
+const StyledFormInput = styled.input`
   width: 100%;
-  height: 100%;
+  height: 60px;
   border-radius: 60px;
     // border: 1px solid #e2e2e2;
   border: none;
@@ -29,17 +29,17 @@ const StyledSearchInput = styled.input`
   }
 `;
 
-type SearchInputProps = {
+type FormInputProps = {
     type: string;
     value?: string;
     placeholder: string;
     children?: React.ReactNode;
 };
 
-const SearchInput = ({ type, value, placeholder, children }: SearchInputProps) => {
-    return (
-        <StyledSearchInput type={type} value={value} placeholder={placeholder}>{children}</StyledSearchInput>
-    );
+const FormInput = ({ type, value, placeholder, children }: FormInputProps) => {
+  return (
+    <StyledFormInput type={type} value={value} placeholder={placeholder}>{children}</StyledFormInput>
+  );
 };
 
-export default SearchInput;
+export default FormInput;

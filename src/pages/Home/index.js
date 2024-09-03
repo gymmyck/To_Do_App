@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faArrowLeft,
@@ -54,7 +55,7 @@ const Home = (props) => {
     return (
         <MainContainer>
             <InputContainer>
-                <SearchInput placeholder="Search..." {...props}></SearchInput>
+                <SearchInput type='text' value= {undefined} placeholder="Search..." {...props}></SearchInput>
                 <InputButton>
                     <FontAwesomeIcon icon={faArrowRight} />
                 </InputButton>
@@ -91,10 +92,12 @@ const Home = (props) => {
 
             <ToDo></ToDo>
 
-            <AddButton>
-                <FontAwesomeIcon icon={faPlus} />
-                Add New Task
-            </AddButton>
+            <Link to='/newTask'>
+                <AddButton>
+                    <FontAwesomeIcon icon={faPlus} />
+                    Add New Task
+                </AddButton>
+            </Link>
 
         </MainContainer>
     );

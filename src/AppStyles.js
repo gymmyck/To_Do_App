@@ -7,9 +7,9 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
-    display: flex;
     background:${(props) => props.theme.main};
     overflow: hidden;
+    display: flex;
     justify-content: center;
   }
 
