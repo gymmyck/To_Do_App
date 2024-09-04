@@ -14,7 +14,7 @@ const AddTask = () => {
             <HeaderContainer>
                 <Link to='/'>
                     <BackButton>
-                        <FontAwesomeIcon icon={faArrowLeft} style={{color: '#FFFFFF'}}/>
+                        <FontAwesomeIcon icon={faArrowLeft} style={{ color: '#FFFFFF' }} />
                     </BackButton>
                 </Link>
                 Add New Task
@@ -24,15 +24,23 @@ const AddTask = () => {
                     Task Name
                 </SectionTitle>
                 <SectionContent>
-                    <FormInput/>
+                    <FormInput />
                 </SectionContent>
             </FormSection>
             <FormSection>
                 <SectionTitle>
-                    Set priority
+                    Select priority level
                 </SectionTitle>
                 <SectionContent>
-                    <FormButtons/>
+                    <FormButtons name='priority' id="task-priority"/>
+                </SectionContent>
+            </FormSection>
+            <FormSection>
+                <SectionTitle>
+                    Select complexity level
+                </SectionTitle>
+                <SectionContent>
+                    <FormButtons name='complexity' id="task-complexity"/>
                 </SectionContent>
             </FormSection>
             <SaveTaskButton>Save Task</SaveTaskButton>

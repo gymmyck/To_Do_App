@@ -61,6 +61,26 @@ color: #FFFFFF;
   }
 `;
 
+export const DeleteAllButton = styled.button`
+width: 158px;
+height: 60px;
+display:flex;
+justify-content: space-around;
+align-items: center;
+border-radius:60px;
+border: none;
+padding-inline: 12px;
+right: 14px;
+background-color: #f67e7d;
+margin-top: 40px;
+font-size:18px;
+color: #FFFFFF;
+
+&:hover {
+    background-color: ${(props) => props.theme.hoverSecondary};
+  }
+`;
+
 export const PowerModeButton = styled.button`
 width: 208px;
 height: 60px;

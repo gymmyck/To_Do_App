@@ -7,7 +7,8 @@ import {
     faChevronUp,
     faChevronDown,
     faPowerOff,
-    faPlus
+    faPlus,
+    faTrash
 } from "@fortawesome/free-solid-svg-icons";
 import {
     ButtonWrapper,
@@ -15,6 +16,7 @@ import {
     FiltersContainer,
     InputButton,
     AddButton,
+    DeleteAllButton,
     InputContainer,
     MainContainer,
     PowerModeButton,
@@ -55,7 +57,7 @@ const Home = (props) => {
     return (
         <MainContainer>
             <InputContainer>
-                <SearchInput type='text' value= {undefined} placeholder="Search..." {...props}></SearchInput>
+                <SearchInput type='text' value={undefined} placeholder="Search..." {...props}></SearchInput>
                 <InputButton>
                     <FontAwesomeIcon icon={faArrowRight} />
                 </InputButton>
@@ -98,6 +100,11 @@ const Home = (props) => {
                     Add New Task
                 </AddButton>
             </Link>
+
+            <DeleteAllButton>
+                <FontAwesomeIcon icon={faTrash} />
+                Delete All
+            </DeleteAllButton>
 
         </MainContainer>
     );

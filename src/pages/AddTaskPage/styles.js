@@ -71,16 +71,16 @@ color: #FFFFFF;
 
 export const FormSection = styled.div `
 width: 60%;
-height: 100px;
+// height: 100px;
 // border: 1px solid blue;
-padding-top:16px;
+padding-top:8px;
 `;
 
 export const SectionTitle = styled.div `
 width: 100%;
 // border: 1px solid blue;
 
-padding-bottom:12px;
+padding-bottom:4px;
 color: #FFFFFF;
 `;
 
@@ -89,4 +89,5 @@ width: 100%;
 // border: 1px solid blue;
 display:flex;
 justify-content:center;
+padding-bottom:12px;
 `;
