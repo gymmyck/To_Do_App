@@ -42,7 +42,9 @@ const ToDo = () => {
             <ToDoLeft>
                 <TaskTitleLine>
                     <TaskBullet style={{ marginLeft: '1px' }} />
+                    <Link to='/taskDetail'>
                     <TaskTitle> Prepare for job interview</TaskTitle>
+                    </Link>
                 </TaskTitleLine>
                 <TaskInfoLine>
                     <FontAwesomeIcon icon={faCalendarDays} style={{ fontSize: '20px', paddingLeft: '2px' }} />

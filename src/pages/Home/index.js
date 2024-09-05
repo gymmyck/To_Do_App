@@ -103,7 +103,7 @@ const Home = (props) => {
 
             <DeleteAllButton>
                 <FontAwesomeIcon icon={faTrash} />
-                Delete All
+                Delete All Tasks
             </DeleteAllButton>
 
         </MainContainer>

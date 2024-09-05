@@ -62,7 +62,7 @@ color: #FFFFFF;
 `;
 
 export const DeleteAllButton = styled.button`
-width: 158px;
+width: 192px;
 height: 60px;
 display:flex;
 justify-content: space-around;
