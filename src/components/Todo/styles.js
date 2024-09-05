@@ -100,22 +100,14 @@ margin-top:12px;
 `;
 
 export const TaskButtons = styled.div`
-width: 100%;
+max-width: 100%;
 // height: auto;
 // border: 1px solid red;
 display: flex;
+flex-wrap:wrap;
+gap:1px;
 justify-content: space-around;
-padding-bottom:150px;
+padding-bottom:104px;
+padding-left:16px;
 `;
 
-export const TaskEditButton = styled.button`
-width: 32px;
-height: 32px;
-display:flex;
-justify-content: center;
-align-items: center;
-border: none;
-border-radius: 50%;
-background-color:#0D99FF1A;
-color: #717171;
-`;

@@ -1,11 +1,11 @@
 import "react-datepicker/dist/react-datepicker.css";
 import ToDoForm from "../../components/TodoForm";
 
-const AddTask = () => {
+const EditTask = () => {
     return (
         <ToDoForm></ToDoForm>
     )
 }
 
 
-export default AddTask;
+export default EditTask;

@@ -1,29 +1,34 @@
-import {CircularProgressbar, buildStyles} from 'react-circular-progressbar';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import styled from "styled-components";
 
 const ProgressCircleContainer = styled.div`
 width: 60px;
 height: 60px;
 position: absolute;
-right:20px;
-top: 100px;
+right:25px;
+top: 108px;
 `;
 
 const ProgressCircle = () => {
+    const value = 45;
+
     return (
-        <ProgressCircleContainer>
-            
+        <>
+            <ProgressCircleContainer>
             <CircularProgressbar
-            value = {30}
-            text={`30`}
-            styles={buildStyles({
-              textColor: `#F96762`,
-              pathColor: "#56CBF9",
-              trailColor: "#DD475B"
-            })}
-       
+                value={value}
+                text={`${value}%`}
+                styles={buildStyles({
+                    textColor: "#F96762",
+                    pathColor: "#56CBF9",
+                    trailColor: "#DD475B",
+                    textSize: `24px`,
+                })}
+
             />
         </ProgressCircleContainer>
+
+        </>
     )
 
 }
