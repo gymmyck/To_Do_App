@@ -4,8 +4,8 @@ import styled from "styled-components";
 export const MainContainer = styled.div`
 margin:0;
 width: 50vw;
-height: 100vh;
-// border: 1px solid red;
+min-height: 100vh;
+border: 1px solid red;
 display: flex;
 flex-direction: column;
 justify-content: start;
@@ -20,7 +20,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 position: relative;
-margin-top:80px;
+margin-top:72px;
 `;
 
 
@@ -92,7 +92,7 @@ border: none;
 padding-inline: 12px;
 right: 14px;
 background-color: #0D99FF;
-margin-top: 40px;
+margin-top: 20px;
 font-size:18px;
 color: #FFFFFF;
 
@@ -109,7 +109,7 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 position: relative;
-margin-top:80px;
+margin-top:20px;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -137,4 +137,14 @@ background-color: #FFFFFF;
 &:hover {
     background-color: ${(props) => props.theme.hoverSecondary};
   }
+`;
+
+export const ToDosContainer = styled.div`
+width:400px;
+min-height:500px;
+// border: 1px solid red;
+display: flex;
+flex-direction:column;
+justify-content: center;
+align-items:center;
 `;

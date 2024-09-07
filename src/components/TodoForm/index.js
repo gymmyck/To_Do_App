@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from 'react-router-dom';
 import { BackButton, FormSection, HeaderContainer, MainContainer, SaveTaskButton, SectionContent, SectionTitle, TimeSection, TimeSubSection } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +12,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const ToDoForm = () => {
+const [name, setName] = useState();
+const [priority, setPriority] = useState();
+const [complexity, setComplexity] = useState();
+const [dueDate, setDueDate] = useState();
+const [dueTime, setDueTime] = useState();
+const [subtasks, setSubtasks] = useState();
+const [tags, setTags] = useState();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
+
     return (
         <MainContainer>
             <HeaderContainer>
@@ -23,76 +35,78 @@ const ToDoForm = () => {
                 Add New Task
             </HeaderContainer>
 
-            <FormSection>
-                <SectionTitle>
-                    Task Name
-                </SectionTitle>
-                <SectionContent>
-                    <FormInput type='text' placeholder="Prepare for job interview" />
-                </SectionContent>
-            </FormSection>
-
-            <FormSection>
-                <SectionTitle>
-                    Select priority level
-                </SectionTitle>
-                <SectionContent>
-                    <FormButtons name='priority' id="task-priority" />
-                </SectionContent>
-            </FormSection>
-
-            <FormSection>
-                <SectionTitle>
-                    Select complexity level
-                </SectionTitle>
-                <SectionContent>
-                    <FormButtons name='complexity' id="task-complexity" />
-                </SectionContent>
-            </FormSection>
-
-            <TimeSection>
-                <TimeSubSection>
+            <form onSubmit={handleSubmit}>
+                <FormSection>
                     <SectionTitle>
-                        Select Due Date
+                        Task Name
                     </SectionTitle>
-                    <SectionContent justifyType='date'>
-                        <TimeInput type='date' placeholder="Prepare for job interview" />
-                        {/* <DatePicker
+                    <SectionContent>
+                        <FormInput type='text' placeholder="Prepare for job interview" />
+                    </SectionContent>
+                </FormSection>
+
+                <FormSection>
+                    <SectionTitle>
+                        Select priority level
+                    </SectionTitle>
+                    <SectionContent>
+                        <FormButtons name='priority' id="task-priority" />
+                    </SectionContent>
+                </FormSection>
+
+                <FormSection>
+                    <SectionTitle>
+                        Select complexity level
+                    </SectionTitle>
+                    <SectionContent>
+                        <FormButtons name='complexity' id="task-complexity" />
+                    </SectionContent>
+                </FormSection>
+
+                <TimeSection>
+                    <TimeSubSection>
+                        <SectionTitle>
+                            Select Due Date
+                        </SectionTitle>
+                        <SectionContent justifyType='date'>
+                            <TimeInput type='date' placeholder="Prepare for job interview" />
+                            {/* <DatePicker
                         selected={date}
                         onSelect={handleDateSelect} //when day is clicked
                     //   onChange={handleDateChange} //only when value has changed
                     /> */}
-                    </SectionContent>
-                </TimeSubSection>
-                <TimeSubSection>
+                        </SectionContent>
+                    </TimeSubSection>
+                    <TimeSubSection>
+                        <SectionTitle>
+                            Select Time
+                        </SectionTitle>
+                        <SectionContent justifyType='time'>
+                            <TimeInput type='time' placeholder="Prepare for job interview" />
+                        </SectionContent>
+                    </TimeSubSection>
+                </TimeSection>
+
+                <FormSection>
                     <SectionTitle>
-                        Select Time
+                        Checklist for subtasks
                     </SectionTitle>
-                    <SectionContent justifyType='time'>
-                        <TimeInput type='time' placeholder="Prepare for job interview" />
+                    <SectionContent>
+                        <FormInput type='text' placeholder="Prepare for job interview" />
                     </SectionContent>
-                </TimeSubSection>
-            </TimeSection>
+                </FormSection>
 
-            <FormSection>
-                <SectionTitle>
-                    Checklist for subtasks
-                </SectionTitle>
-                <SectionContent>
-                    <FormInput type='text' placeholder="Prepare for job interview" />
-                </SectionContent>
-            </FormSection>
+                <FormSection>
+                    <SectionTitle>
+                        Add Tags
+                    </SectionTitle>
+                    <SectionContent>
+                        <FormInput type='text' placeholder="Prepare for job interview" />
+                    </SectionContent>
+                </FormSection>
 
-            <FormSection>
-                <SectionTitle>
-                    Add Tags
-                </SectionTitle>
-                <SectionContent>
-                    <FormInput type='text' placeholder="Prepare for job interview" />
-                </SectionContent>
-            </FormSection>
-
-            <SaveTaskButton>Save Task</SaveTaskButton>
+                <SaveTaskButton>Save Task</SaveTaskButton>
+            </form>
         </MainContainer>
 
     )

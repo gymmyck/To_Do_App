@@ -20,6 +20,7 @@ import {
     InputContainer,
     MainContainer,
     PowerModeButton,
+    ToDosContainer,
 } from "./styles.js";
 import SearchInput from "../../components/SearchInput";
 import SortingList from "../../components/SortingList";
@@ -91,9 +92,12 @@ const Home = (props) => {
                 </ButtonWrapper>
 
             </FiltersContainer>
-
-            <ToDo></ToDo>
-
+            <ToDosContainer>
+                <ToDo></ToDo>
+                <ToDo></ToDo>
+                <ToDo></ToDo>
+                <ToDo></ToDo>
+            </ToDosContainer>
             <Link to='/newTask'>
                 <AddButton>
                     <FontAwesomeIcon icon={faPlus} />
