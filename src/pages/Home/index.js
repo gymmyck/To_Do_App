@@ -95,8 +95,6 @@ const Home = (props) => {
             <ToDosContainer>
                 <ToDo></ToDo>
                 <ToDo></ToDo>
-                <ToDo></ToDo>
-                <ToDo></ToDo>
             </ToDosContainer>
             <Link to='/newTask'>
                 <AddButton>
