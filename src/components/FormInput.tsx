@@ -33,12 +33,13 @@ type FormInputProps = {
     type: string;
     value?: string;
     placeholder: string;
+    onChange:(event: React.ChangeEvent<HTMLInputElement>) => void;
     children?: React.ReactNode;
 };
 
-const FormInput = ({ type, value, placeholder, children }: FormInputProps) => {
+const FormInput = ({ type, value, placeholder,onChange, children }: FormInputProps) => {
   return (
-    <StyledFormInput type={type} value={value} placeholder={placeholder}>{children}</StyledFormInput>
+    <StyledFormInput type={type} value={value} placeholder={placeholder} onChange={onChange}>{children}</StyledFormInput>
   );
 };
 

@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import { BackButton, FormSection, HeaderContainer, MainContainer, SaveTaskButton, SectionContent, SectionTitle, TimeSection, TimeSubSection } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,17 +11,36 @@ import TimeInput from "../TimeInput";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const ToDoForm = () => {
-const [name, setName] = useState();
-const [priority, setPriority] = useState();
-const [complexity, setComplexity] = useState();
-const [dueDate, setDueDate] = useState();
-const [dueTime, setDueTime] = useState();
-const [subtasks, setSubtasks] = useState();
-const [tags, setTags] = useState();
+const ToDoForm = ({ handleSubmitHook }) => {
+    const [name, setName] = useState();
+    const [priority, setPriority] = useState();
+    const [complexity, setComplexity] = useState();
+    const [dueDate, setDueDate] = useState();
+    const [dueTime, setDueTime] = useState();
+    const [subtasks, setSubtasks] = useState();
+    const [tags, setTags] = useState();
+
+    const navigate = useNavigate();
+
+    const currentDate = new Date().toISOString().split('T')[0];
+    const currentTime = new Date().toISOString().split('T')[1].slice(0, 5);
+
+    console.log(dueDate, dueTime);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const task = {
+            name,
+            priority,
+            complexity,
+            dueDate,
+            dueTime,
+            subtasks,
+            tags
+        }
+        handleSubmitHook(task);
+        console.log(task);
+        navigate('/');
     }
 
     return (
@@ -41,7 +60,7 @@ const [tags, setTags] = useState();
                         Task Name
                     </SectionTitle>
                     <SectionContent>
-                        <FormInput type='text' placeholder="Prepare for job interview" />
+                        <FormInput type='text' placeholder="Prepare for job interview" value={name} onChange={(e) => setName(e.target.value)} />
                     </SectionContent>
                 </FormSection>
 
@@ -50,7 +69,7 @@ const [tags, setTags] = useState();
                         Select priority level
                     </SectionTitle>
                     <SectionContent>
-                        <FormButtons name='priority' id="task-priority" />
+                        <FormButtons name='priority' id="task-priority" value={priority} handleChange={(e) => setPriority(Number(e.target.value))} />
                     </SectionContent>
                 </FormSection>
 
@@ -59,7 +78,7 @@ const [tags, setTags] = useState();
                         Select complexity level
                     </SectionTitle>
                     <SectionContent>
-                        <FormButtons name='complexity' id="task-complexity" />
+                        <FormButtons name='complexity' id="task-complexity" value={complexity} handleChange={(e) => setComplexity(Number(e.target.value))} />
                     </SectionContent>
                 </FormSection>
 
@@ -69,7 +88,7 @@ const [tags, setTags] = useState();
                             Select Due Date
                         </SectionTitle>
                         <SectionContent justifyType='date'>
-                            <TimeInput type='date' placeholder="Prepare for job interview" />
+                            <TimeInput type='date' value={dueDate} min={currentDate} onChange={(e) => setDueDate(e.target.value)} />
                             {/* <DatePicker
                         selected={date}
                         onSelect={handleDateSelect} //when day is clicked
@@ -81,8 +100,8 @@ const [tags, setTags] = useState();
                         <SectionTitle>
                             Select Time
                         </SectionTitle>
-                        <SectionContent justifyType='time'>
-                            <TimeInput type='time' placeholder="Prepare for job interview" />
+                        <SectionContent justifyType='time' >
+                            <TimeInput type='time' value={dueTime} min={currentTime} onChange={(e) => setDueTime(e.target.value)}/>
                         </SectionContent>
                     </TimeSubSection>
                 </TimeSection>
@@ -105,7 +124,7 @@ const [tags, setTags] = useState();
                     </SectionContent>
                 </FormSection>
 
-                <SaveTaskButton>Save Task</SaveTaskButton>
+                <SaveTaskButton onClick={handleSubmit}>Save Task</SaveTaskButton>
             </form>
         </MainContainer>
 

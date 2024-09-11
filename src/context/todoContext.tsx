@@ -1,10 +1,9 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext,useContext, useState, ReactNode, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { uid } from "uid";
 
 type Todo = {
   id: string;
-  text: string;
   isCompleted: boolean;
 };
 
@@ -24,13 +23,18 @@ export const TodoContext = createContext<TodoContextType | undefined>(
   undefined
 );
 
+export function useTodo() {
+return useContext(TodoContext);
+}
+
 const TodoProvider = ({ children }: TodoProviderProps) => {
   const { id } = useParams();
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const addTodo = (text: string) => {
-    const newTodos = [...todos, { id: uid(), text: text, isCompleted: false }];
-    setTodos(newTodos);
+  const addTodo = (item: any) => {
+    const newTodo = {...item, id: uid(), isCompleted: false};
+    setTodos([newTodo, ...todos]);
+    console.log(todos);
   };
 
   const completeTodo = (todo: Todo) => {
@@ -48,6 +52,10 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
   const getTodo = (id: string) => {
     return todos.find((el) => el.id === id);
   };
+
+  useEffect(() => {
+    console.log("Updated todos:", todos);
+  }, [todos]);
 
   return (
     <TodoContext.Provider

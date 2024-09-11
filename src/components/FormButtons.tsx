@@ -77,16 +77,18 @@ const numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 type FormButtonsProps = {
     name: string;
-    id: string;
+    value: number;
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    id?: string;
 };
 
-const FormButtons = ({name, id}: FormButtonsProps) => {
+const FormButtons = ({name, value, handleChange}: FormButtonsProps) => {
     return (
         <ButtonsContainer>
             {numberArray.map((number) =>
             (<ButtonWrapper key={`${name}-${number}`}>
                 <label>
-                    <input name={`${name}`} type="radio" value={number} />
+                    <input name={`${name}`} type="radio" checked={number === value} value={number} onChange={handleChange}/>
                     <div>{number}</div>
                 </label>
             </ButtonWrapper>

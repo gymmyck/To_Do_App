@@ -34,13 +34,14 @@ const StyledTimeInput = styled.input`
 type TimeInputProps = {
     type: string;
     value?: string;
-    placeholder: string;
+    min?: string;
+    onChange?:any;
     children?: React.ReactNode;
 };
 
-const TimeInput = ({ type, value, placeholder, children }: TimeInputProps) => {
+const TimeInput = ({ type, value, min, onChange, children }: TimeInputProps) => {
     return (
-        <StyledTimeInput type={type} value={value} placeholder={placeholder}>{children}</StyledTimeInput>
+        <StyledTimeInput type={type} value={value} min={min} onChange={onChange}>{children}</StyledTimeInput>
     );
 };
 
