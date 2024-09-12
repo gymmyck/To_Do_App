@@ -11,14 +11,14 @@ import TimeInput from "../TimeInput";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const ToDoForm = ({ handleSubmitHook }) => {
-    const [name, setName] = useState();
-    const [priority, setPriority] = useState();
-    const [complexity, setComplexity] = useState();
-    const [dueDate, setDueDate] = useState();
-    const [dueTime, setDueTime] = useState();
-    const [subtasks, setSubtasks] = useState();
-    const [tags, setTags] = useState();
+const ToDoForm = ({ todo, title, handleSubmitHook }) => {
+    const [name, setName] = useState(todo ? todo.name : '');
+    const [priority, setPriority] = useState(todo ? todo.priority : '');
+    const [complexity, setComplexity] = useState(todo ? todo.complexity : '');
+    const [dueDate, setDueDate] = useState(todo ? todo.dueDate : '');
+    const [dueTime, setDueTime] = useState(todo ? todo.dueTime : '');
+    const [subtasks, setSubtasks] = useState(todo ? todo.subtasks : '');
+    const [tags, setTags] = useState(todo ? todo.tags : '');
 
     const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ const ToDoForm = ({ handleSubmitHook }) => {
                         <FontAwesomeIcon icon={faArrowLeft} style={{ color: '#FFFFFF' }} />
                     </BackButton>
                 </Link>
-                Add New Task
+                {title}
             </HeaderContainer>
 
             <form onSubmit={handleSubmit}>

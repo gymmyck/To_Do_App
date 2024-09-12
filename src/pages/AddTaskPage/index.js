@@ -6,7 +6,7 @@ const AddTask = () => {
     const { addTodo } = useTodo();
 
     return (
-        <ToDoForm handleSubmitHook={addTodo}></ToDoForm>
+        <ToDoForm title={'Add new task'} handleSubmitHook={addTodo}></ToDoForm>
     )
 }
 

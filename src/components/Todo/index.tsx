@@ -37,11 +37,11 @@ margin-bottom:8px;
 }
 `;
 
-type ToDoProps ={
-todo:any;
+type ToDoProps = {
+    todo: any;
 }
 
-const ToDo = ({todo}: ToDoProps) => {
+const ToDo = ({ todo }: ToDoProps) => {
 
     return (
         <MainContainer>
@@ -49,7 +49,7 @@ const ToDo = ({todo}: ToDoProps) => {
                 <TaskTitleLine>
                     <TaskBullet style={{ marginLeft: '1px' }} />
                     <Link to={`/taskDetail/${todo.id}`}>
-                    <TaskTitle>{todo.name}</TaskTitle>
+                        <TaskTitle>{todo.name}</TaskTitle>
                     </Link>
                 </TaskTitleLine>
                 <TaskInfoLine>
@@ -73,7 +73,7 @@ const ToDo = ({todo}: ToDoProps) => {
             </ToDoLeft>
             <ToDoRight>
                 <TaskButtons>
-                    <Link to='/editTask'>
+                    <Link to={`/editTask/${todo.id}`}>
                         <TaskEditButton>
                             <FontAwesomeIcon icon={faPen} style={{ fontSize: '14px' }} />
                         </TaskEditButton>
