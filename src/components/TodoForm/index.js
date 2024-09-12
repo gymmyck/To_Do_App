@@ -25,7 +25,7 @@ const ToDoForm = ({ handleSubmitHook }) => {
     const currentDate = new Date().toISOString().split('T')[0];
     const currentTime = new Date().toISOString().split('T')[1].slice(0, 5);
 
-    console.log(dueDate, dueTime);
+    // console.log(dueDate, dueTime);
 
     const handleSubmit = (e) => {
         e.preventDefault();

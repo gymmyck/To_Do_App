@@ -23,8 +23,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/newTask" element={<AddTask />}></Route>
-            <Route path="/editTask" element={<EditTask />}></Route>
-            <Route path="/taskDetail" element={<DetailTask />}></Route>
+            <Route path="/editTask/:id" element={<EditTask />}></Route>
+            <Route path="/taskDetail/:id" element={<DetailTask />}></Route>
           </Routes>
         </TodoProvider>
       </ThemeProvider>

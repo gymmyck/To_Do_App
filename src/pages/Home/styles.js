@@ -141,7 +141,7 @@ background-color: #FFFFFF;
 
 export const ToDosContainer = styled.div`
 width:400px;
-min-height:500px;
+min-height:100px;
 // border: 1px solid red;
 display: flex;
 flex-direction:column;

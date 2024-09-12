@@ -13,6 +13,7 @@ import {
 import { MainContainer, TaskBullet, TaskTitleLine, TaskInfoLine, TaskTitle, ToDoLeft, ToDoRight, TaskInfo, DueDate, TaskData, TaskTag, TaskButtons } from "./styles";
 import ProgressCircle from "../ProgressCircle";
 import styled from "styled-components";
+import { levelDescription } from "../../utils";
 
 type TaskEditButtonProps = {
     deleteButton?: boolean;
@@ -36,30 +37,35 @@ margin-bottom:8px;
 }
 `;
 
-const ToDo = () => {
+type ToDoProps ={
+todo:any;
+}
+
+const ToDo = ({todo}: ToDoProps) => {
+
     return (
         <MainContainer>
             <ToDoLeft>
                 <TaskTitleLine>
                     <TaskBullet style={{ marginLeft: '1px' }} />
-                    <Link to='/taskDetail'>
-                    <TaskTitle> Prepare for job interview</TaskTitle>
+                    <Link to={`/taskDetail/${todo.id}`}>
+                    <TaskTitle>{todo.name}</TaskTitle>
                     </Link>
                 </TaskTitleLine>
                 <TaskInfoLine>
                     <FontAwesomeIcon icon={faCalendarDays} style={{ fontSize: '20px', paddingLeft: '2px' }} />
                     <TaskInfo style={{ paddingLeft: '11px' }}>Due Date:</TaskInfo>
-                    <DueDate style={{ paddingLeft: '8px' }}>Sep 30</DueDate>
+                    <DueDate style={{ paddingLeft: '8px' }}>{`${todo.dueDate} ${todo.dueTime}`}</DueDate>
                 </TaskInfoLine>
                 <TaskInfoLine>
                     <FontAwesomeIcon icon={faArrowUp} style={{ fontSize: '20px', paddingLeft: '3px' }} />
                     <TaskInfo style={{ paddingLeft: '13px' }}>Priority:</TaskInfo>
-                    <TaskData style={{ paddingLeft: '8px' }}>Medium (5/10)</TaskData>
+                    <TaskData style={{ paddingLeft: '8px' }}>{levelDescription(todo.priority)}</TaskData>
                 </TaskInfoLine>
                 <TaskInfoLine>
                     <FontAwesomeIcon icon={faArrowsUpDownLeftRight} style={{ fontSize: '20px' }} />
                     <TaskInfo>Complexity:</TaskInfo>
-                    <TaskData style={{ paddingLeft: '8px' }}>High (8/10)</TaskData>
+                    <TaskData style={{ paddingLeft: '8px' }}>{levelDescription(todo.complexity)}</TaskData>
                 </TaskInfoLine>
                 <TaskTag>
                     Job Interview

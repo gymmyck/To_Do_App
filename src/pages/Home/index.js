@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext,createContext } from "react";
+import React, { useState, useEffect, useRef, useContext, createContext } from "react";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -34,13 +34,13 @@ const Home = (props) => {
     const refSorting = useRef(null);
     const refFilters = useRef(null);
 
-    const {todos} = useTodo();
+    const { todos } = useTodo();
 
-const TodoContext = createContext();
+    const TodoContext = createContext();
 
-const logHook = () => {
-    console.log(TodoContext);
-}
+    // const logHook = () => {
+    //     console.log(TodoContext);
+    // }
 
     const clickOutside = (e) => {
         console.log("clicking")
@@ -102,11 +102,14 @@ const logHook = () => {
 
             </FiltersContainer>
             <ToDosContainer>
-                <ToDo></ToDo>
-                <ToDo></ToDo>
-                {todos.map((todo) => (<ToDo></ToDo>))}
+
+                {todos.length === 0 ? 'no todos' :
+                    todos.map((todo) => (<ToDo key={todo.id} todo={todo}></ToDo>))}
             </ToDosContainer>
-            <Link to='/newTask' onClick={logHook}>
+            <Link
+                to='/newTask'
+                // onClick={logHook}
+            >
                 <AddButton>
                     <FontAwesomeIcon icon={faPlus} />
                     Add New Task
