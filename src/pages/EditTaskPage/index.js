@@ -5,17 +5,16 @@ import { useTodo } from "../../context/todoContext";
 
 const EditTask = () => {
     const { id } = useParams();
-    const {getTodo, editTodo} = useTodo();
+    const { getTodo, editTodo } = useTodo();
     const todo = getTodo(id);
 
-const handleSubmit = (task) => {
-    editTodo(id,task);
-}
+    const handleSubmit = (task) => {
+        editTodo(id, task);
+    }
 
     return (
         <ToDoForm title={'Edit task'} todo={todo} handleSubmitHook={handleSubmit}></ToDoForm>
     )
 }
-
 
 export default EditTask;

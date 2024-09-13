@@ -60,13 +60,7 @@ background-color: #FF4034;
 display:inline-block;
 `;
 
-export const TaskTitle = styled.p`
-color: #000000;
-font-weight:600;
-font-size: 18px;
-margin: 0px;
-padding-left:10px;
-`;
+
 
 export const TaskInfo = styled.p`
 color: #616161;

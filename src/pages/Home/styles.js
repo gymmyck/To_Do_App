@@ -109,7 +109,7 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 position: relative;
-margin-top:20px;
+margin-top:10px;
 `;
 
 export const ButtonWrapper = styled.div`

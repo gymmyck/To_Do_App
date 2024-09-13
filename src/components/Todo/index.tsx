@@ -10,10 +10,11 @@ import {
     faTrash,
     faCheck
 } from "@fortawesome/free-solid-svg-icons";
-import { MainContainer, TaskBullet, TaskTitleLine, TaskInfoLine, TaskTitle, ToDoLeft, ToDoRight, TaskInfo, DueDate, TaskData, TaskTag, TaskButtons } from "./styles";
+import { MainContainer, TaskBullet, TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, DueDate, TaskData, TaskTag, TaskButtons } from "./styles";
 import ProgressCircle from "../ProgressCircle";
 import styled from "styled-components";
 import { levelDescription } from "../../utils";
+import { useTodo } from "../../context/todoContext";
 
 type TaskEditButtonProps = {
     deleteButton?: boolean;
@@ -37,11 +38,26 @@ margin-bottom:8px;
 }
 `;
 
+type TaskTitleProps = {
+    completed:boolean;
+}
+
+const TaskTitle = styled.p<TaskTitleProps>`
+color: #000000;
+font-weight:600;
+font-size: 18px;
+margin: 0px;
+padding-left:10px;
+text-decoration:${(props) => props.completed ? `line-through` : `none`};
+`;
+
 type ToDoProps = {
     todo: any;
 }
 
 const ToDo = ({ todo }: ToDoProps) => {
+
+const {completeTodo} = useTodo() ?? {};
 
     return (
         <MainContainer>
@@ -49,7 +65,7 @@ const ToDo = ({ todo }: ToDoProps) => {
                 <TaskTitleLine>
                     <TaskBullet style={{ marginLeft: '1px' }} />
                     <Link to={`/taskDetail/${todo.id}`}>
-                        <TaskTitle>{todo.name}</TaskTitle>
+                        <TaskTitle completed={todo.isCompleted}>{todo.name}</TaskTitle>
                     </Link>
                 </TaskTitleLine>
                 <TaskInfoLine>
@@ -79,7 +95,7 @@ const ToDo = ({ todo }: ToDoProps) => {
                         </TaskEditButton>
                     </Link >
 
-                    <TaskEditButton>
+                    <TaskEditButton onClick={() => completeTodo && completeTodo(todo)}>
                         <FontAwesomeIcon icon={faCheck} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
 

@@ -14,6 +14,7 @@ type TodoContextType = {
   completeTodo: (todo: Todo) => void;
   removeTodo: (todo: Todo) => void;
   getTodo: (id: string) => Todo | undefined;
+  updateStorage: any;
 };
 
 type TodoProviderProps = {
@@ -29,8 +30,13 @@ export function useTodo() {
 }
 
 const TodoProvider = ({ children }: TodoProviderProps) => {
+  function getStoredTasks () {
+    const tasks = localStorage.getItem('tasks');
+    return tasks ? JSON.parse(tasks) : [];
+  }
+
   const { id } = useParams();
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(() => getStoredTasks());
 
   const addTodo = (item: any) => {
     const newTodo = { ...item, id: uid(), isCompleted: false };
@@ -43,15 +49,14 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
       todo.id === id ? { id, ...item } : todo
     )
     setTodos(newTodos);
-
   }
 
-  const completeTodo = (todo: Todo) => {
-    setTodos((todos) =>
-      todos.map((el) =>
-        el.id === todo.id ? { ...el, isCompleted: !el.isCompleted } : el
-      )
-    );
+  const completeTodo = (item: any) => {
+    const newTodos = todos.map((todo) =>
+    todo.id === item.id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+    )
+    console.log('checked:', item.name);
+    setTodos(newTodos);
   };
 
   const removeTodo = (todo: Todo) => {
@@ -62,13 +67,18 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
     return todos.find((el) => el.id === id);
   };
 
+  const updateStorage = (tasks: any) => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
   useEffect(() => {
+    updateStorage(todos);
     console.log("Updated todos:", todos);
   }, [todos]);
 
   return (
     <TodoContext.Provider
-      value={{ todos, addTodo,editTodo, completeTodo, removeTodo, getTodo }}
+      value={{ todos, addTodo,editTodo, completeTodo, removeTodo, getTodo, updateStorage }}
     >
       {children}
     </TodoContext.Provider>
@@ -76,3 +86,5 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
 };
 
 export default TodoProvider;
+
+

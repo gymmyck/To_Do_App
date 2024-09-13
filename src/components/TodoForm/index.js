@@ -11,7 +11,7 @@ import TimeInput from "../TimeInput";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const ToDoForm = ({ todo, title, handleSubmitHook }) => {
+const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
     const [name, setName] = useState(todo ? todo.name : '');
     const [priority, setPriority] = useState(todo ? todo.priority : '');
     const [complexity, setComplexity] = useState(todo ? todo.complexity : '');
