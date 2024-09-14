@@ -56,6 +56,27 @@ color: #FFFFFF;
   }
 `;
 
+export const AddSubtaskButton = styled.button`
+width: 32px;
+height: 32px;
+display:flex;
+justify-content: center;
+align-items: center;
+border: none;
+border-radius: 50%;
+background-color:#32d0f9;
+color: #717171;
+margin-bottom:8px;
+position: absolute;
+right:16px;
+top: 15px;
+
+&:hover {
+    background-color:#0D99FF9A;
+    color: #717171;
+}
+`;
+
 export const HeaderContainer = styled.div`
 width:90%;
 // border: 1px solid green;
@@ -98,7 +119,7 @@ justify-content:center;
 export const SectionTitle = styled.div `
 width: 100%;
 // border: 1px solid blue;
-
+position: relative;
 padding-bottom:6px;
 color: #FFFFFF;
 `;
@@ -109,4 +130,5 @@ width: 100%;
 display:flex;
 justify-content:${(props) => props.justifyType === 'date' ? 'start' : props.justifyType === 'time' ? 'end' : 'center'};
 padding-bottom:6px;
+position:relative;
 `;

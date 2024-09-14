@@ -10,11 +10,29 @@ import {
     faTrash,
     faCheck
 } from "@fortawesome/free-solid-svg-icons";
-import { MainContainer, TaskBullet, TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, DueDate, TaskData, TaskTag, TaskButtons } from "./styles";
+import { TaskBullet, TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, DueDate, TaskData, TaskTag, TaskButtons } from "./styles";
 import ProgressCircle from "../ProgressCircle";
 import styled from "styled-components";
 import { levelDescription } from "../../utils";
 import { useTodo } from "../../context/todoContext";
+
+type MainContainerProps = {
+    completed: boolean;
+}
+
+const MainContainer = styled.div<MainContainerProps>`
+width: 398px;
+height: 200px;
+// border: 1px solid red;
+border-radius: 18px;
+background-color:${(props) => props.completed ? `#DCFCE7` : `#FFFFFF`};
+display: flex;
+justify-content: center;
+align-items: center;
+position: relative;
+margin-top:20px;
+padding:12px;
+`;
 
 type TaskEditButtonProps = {
     deleteButton?: boolean;
@@ -39,7 +57,7 @@ margin-bottom:8px;
 `;
 
 type TaskTitleProps = {
-    completed:boolean;
+    completed: boolean;
 }
 
 const TaskTitle = styled.p<TaskTitleProps>`
@@ -57,10 +75,10 @@ type ToDoProps = {
 
 const ToDo = ({ todo }: ToDoProps) => {
 
-const {completeTodo} = useTodo() ?? {};
+    const { completeTodo } = useTodo() ?? {};
 
     return (
-        <MainContainer>
+        <MainContainer completed={todo.isCompleted}>
             <ToDoLeft>
                 <TaskTitleLine>
                     <TaskBullet style={{ marginLeft: '1px' }} />

@@ -1,20 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
-export const MainContainer = styled.div`
-width: 398px;
-height: 200px;
-// border: 1px solid red;
-border-radius: 18px;
-background-color:#FFFFFF;
-display: flex;
-justify-content: center;
-align-items: center;
-position: relative;
-margin-top:20px;
-padding:12px;
-`;
-
 export const ToDoLeft = styled.div`
 height: 100%;
 width:100%;

@@ -45,7 +45,7 @@ type SortingListProps = {
 };
 
 const SortingList = ({ placeholder, children }: SortingListProps) => {
-    const sortingArray = ["Default", "Ascending Date", "Descending Date", "Ascending Complexity", "Descending Complexity", "Ascending Priority", "Descending Priority"];
+    const sortingArray = ["Default", "Ascending Date", "Descending Date", "Ascending Priority", "Descending Priority", "Ascending Complexity", "Descending Complexity"];
 
     return (
         <StyledList>

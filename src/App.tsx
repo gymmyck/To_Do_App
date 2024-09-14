@@ -35,4 +35,35 @@ function App() {
 export default App;
 
 
-// Local Storage!
+// --v-- Local Storage
+// --v-- change the task background color when task completed
+// make circular bar 100% when task completed
+
+// Add Subtasks
+// Add Tags
+// Add Tags to the list
+
+// Remove Task
+// Remove All Tasks
+
+//  Label Color depending on the due date (3 days - orange, 1 day - red)
+
+// Toggle done/undone -> show full progress bar
+
+// Search Tasks
+
+// Sort default (current Date)
+// Date - Ascending
+// Date - Descending
+// Priority - Ascending
+// Priority - Descending
+// Complexity - Ascending
+// Complexity - Descending
+
+// Duplicate task
+
+// Power Mode On
+
+// Add Modals
+
+// Add messages 'this should be completed'

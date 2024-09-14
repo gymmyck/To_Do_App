@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { BackButton, FormSection, HeaderContainer, MainContainer, SaveTaskButton, SectionContent, SectionTitle, TimeSection, TimeSubSection } from "./styles";
+import { BackButton, AddSubtaskButton, FormSection, HeaderContainer, MainContainer, SaveTaskButton, SectionContent, SectionTitle, TimeSection, TimeSubSection } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faArrowLeft
+    faArrowLeft,
+    faPlus
 } from "@fortawesome/free-solid-svg-icons";
 import FormInput from "../FormInput";
 import FormButtons from "../FormButtons";
@@ -101,7 +102,7 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                             Select Time
                         </SectionTitle>
                         <SectionContent justifyType='time' >
-                            <TimeInput type='time' value={dueTime} min={currentTime} onChange={(e) => setDueTime(e.target.value)}/>
+                            <TimeInput type='time' value={dueTime} min={currentTime} onChange={(e) => setDueTime(e.target.value)} />
                         </SectionContent>
                     </TimeSubSection>
                 </TimeSection>
@@ -111,7 +112,10 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                         Checklist for subtasks
                     </SectionTitle>
                     <SectionContent>
-                        <FormInput type='text' placeholder="Prepare for job interview" />
+                        <FormInput type='text' placeholder="Add subtasks..." />
+                        <AddSubtaskButton type='button'>
+                            <FontAwesomeIcon icon={faPlus} style={{ fontSize: '14px' }} />
+                        </AddSubtaskButton>
                     </SectionContent>
                 </FormSection>
 
@@ -120,7 +124,7 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                         Add Tags
                     </SectionTitle>
                     <SectionContent>
-                        <FormInput type='text' placeholder="Prepare for job interview" />
+                        <FormInput type='text' placeholder="Add tags..." />
                     </SectionContent>
                 </FormSection>
 

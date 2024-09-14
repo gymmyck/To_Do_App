@@ -10,7 +10,7 @@ type Todo = {
 type TodoContextType = {
   todos: Todo[];
   addTodo: (text: string) => void;
-  editTodo: (id: string, item: Partial<Todo>) => void; 
+  editTodo: (id: string, item: Partial<Todo>) => void;
   completeTodo: (todo: Todo) => void;
   removeTodo: (todo: Todo) => void;
   getTodo: (id: string) => Todo | undefined;
@@ -30,7 +30,7 @@ export function useTodo() {
 }
 
 const TodoProvider = ({ children }: TodoProviderProps) => {
-  function getStoredTasks () {
+  function getStoredTasks() {
     const tasks = localStorage.getItem('tasks');
     return tasks ? JSON.parse(tasks) : [];
   }
@@ -39,7 +39,11 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
   const [todos, setTodos] = useState<Todo[]>(() => getStoredTasks());
 
   const addTodo = (item: any) => {
-    const newTodo = { ...item, id: uid(), isCompleted: false };
+    const newTodo = {
+      id: uid(),
+      isCompleted: false,
+      ...item
+    };
     setTodos([newTodo, ...todos]);
     console.log(todos);
   };
@@ -53,7 +57,7 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
 
   const completeTodo = (item: any) => {
     const newTodos = todos.map((todo) =>
-    todo.id === item.id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+      todo.id === item.id ? { ...todo, isCompleted: !todo.isCompleted } : todo
     )
     console.log('checked:', item.name);
     setTodos(newTodos);
@@ -71,6 +75,10 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 
+  const submitSubtask = () => {
+    
+  }
+
   useEffect(() => {
     updateStorage(todos);
     console.log("Updated todos:", todos);
@@ -78,7 +86,7 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
 
   return (
     <TodoContext.Provider
-      value={{ todos, addTodo,editTodo, completeTodo, removeTodo, getTodo, updateStorage }}
+      value={{ todos, addTodo, editTodo, completeTodo, removeTodo, getTodo, updateStorage }}
     >
       {children}
     </TodoContext.Provider>
