@@ -43,8 +43,8 @@ export default App;
 // Add Tags
 // Add Tags to the list
 
-// Remove Task
-// Remove All Tasks
+// --v-- Remove Task
+// --v-- Remove All Tasks
 
 //  Label Color depending on the due date (3 days - orange, 1 day - red)
 

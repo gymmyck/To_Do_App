@@ -34,7 +34,7 @@ const Home = (props) => {
     const refSorting = useRef(null);
     const refFilters = useRef(null);
 
-    const { todos } = useTodo();
+    const { todos, removeAllTodos } = useTodo();
 
     const TodoContext = createContext();
 
@@ -116,7 +116,7 @@ const Home = (props) => {
                 </AddButton>
             </Link>
 
-            <DeleteAllButton>
+            <DeleteAllButton onClick={removeAllTodos}>
                 <FontAwesomeIcon icon={faTrash} />
                 Delete All Tasks
             </DeleteAllButton>

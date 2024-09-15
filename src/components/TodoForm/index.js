@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { BackButton, AddSubtaskButton, FormSection, HeaderContainer, MainContainer, SaveTaskButton, SectionContent, SectionTitle, TimeSection, TimeSubSection } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +11,8 @@ import FormButtons from "../FormButtons";
 import TimeInput from "../TimeInput";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { uid } from "uid";
+import SubtaskList from "../SubtasksList";
 
 const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
     const [name, setName] = useState(todo ? todo.name : '');
@@ -18,8 +20,10 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
     const [complexity, setComplexity] = useState(todo ? todo.complexity : '');
     const [dueDate, setDueDate] = useState(todo ? todo.dueDate : '');
     const [dueTime, setDueTime] = useState(todo ? todo.dueTime : '');
-    const [subtasks, setSubtasks] = useState(todo ? todo.subtasks : '');
-    const [tags, setTags] = useState(todo ? todo.tags : '');
+    const [subtasks, setSubtasks] = useState(todo ? todo.subtasks : []);
+    const [tags, setTags] = useState(todo ? todo.tags : []);
+
+    const [subtaskInput, setSubtaskInput] = useState('');
 
     const navigate = useNavigate();
 
@@ -40,9 +44,39 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
             tags
         }
         handleSubmitHook(task);
-        console.log(task);
+        // console.log(task);
         navigate('/');
     }
+
+    const submitSubtask = () => {
+        const subtask = {
+            id: uid(),
+            name: subtaskInput,
+            isCompleted: false,
+        }
+        setSubtasks([...subtasks, subtask])
+        setSubtaskInput('');
+    }
+
+    const completeSubtask = (id) => {
+        const newSubtasks = subtasks.map((subtask) => {
+            if (id = subtask.id) {
+                subtask.isCompleted = !subtask.isCompleted;
+            }
+            return subtask;
+        }
+        )
+        setSubtasks(newSubtasks);
+    }
+
+    const removeSubtask = (id) => {
+        const newSubtasks = subtasks.filter((subtask) => subtask.id !== id)
+        setSubtasks(newSubtasks);
+    }
+
+    useEffect(() => {
+        console.log(subtasks);
+    }, [subtasks])
 
     return (
         <MainContainer>
@@ -109,16 +143,18 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
 
                 <FormSection>
                     <SectionTitle>
-                        Checklist for subtasks
+                        Add subtasks
                     </SectionTitle>
                     <SectionContent>
-                        <FormInput type='text' placeholder="Add subtasks..." />
-                        <AddSubtaskButton type='button'>
+                        <FormInput type='text' placeholder="Add subtasks..." value={subtaskInput} onChange={(e) => setSubtaskInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && submitSubtask} />
+                        <AddSubtaskButton type='button' onClick={submitSubtask}>
                             <FontAwesomeIcon icon={faPlus} style={{ fontSize: '14px' }} />
                         </AddSubtaskButton>
                     </SectionContent>
                 </FormSection>
-
+                <FormSection>
+                    {subtasks ? <SubtaskList subtasks={subtasks} completeSubtask={completeSubtask} removeSubtask={removeSubtask} ></SubtaskList> : null}
+                </FormSection>
                 <FormSection>
                     <SectionTitle>
                         Add Tags

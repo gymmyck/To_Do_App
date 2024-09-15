@@ -2,9 +2,16 @@ import { createContext, useContext, useState, ReactNode, useEffect } from "react
 import { useParams } from "react-router-dom";
 import { uid } from "uid";
 
+type Subtask = {
+  id: string,
+  name: string,
+  isCompleted: boolean,
+}
+
 type Todo = {
   id: string;
   isCompleted: boolean;
+  subtasks: Subtask[];
 };
 
 type TodoContextType = {
@@ -13,7 +20,9 @@ type TodoContextType = {
   editTodo: (id: string, item: Partial<Todo>) => void;
   completeTodo: (todo: Todo) => void;
   removeTodo: (todo: Todo) => void;
+  removeAllTodos: (todo: Todo) => void;
   getTodo: (id: string) => Todo | undefined;
+  completeSubtask: (todoId: any, subtaskId: any) => void;
   updateStorage: any;
 };
 
@@ -45,7 +54,7 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
       ...item
     };
     setTodos([newTodo, ...todos]);
-    console.log(todos);
+    // console.log(todos);
   };
 
   const editTodo = (id: any, item: any) => {
@@ -59,12 +68,31 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
     const newTodos = todos.map((todo) =>
       todo.id === item.id ? { ...todo, isCompleted: !todo.isCompleted } : todo
     )
-    console.log('checked:', item.name);
+    // console.log('checked:', item.name);
     setTodos(newTodos);
   };
 
   const removeTodo = (todo: Todo) => {
     setTodos((todos) => todos.filter((el) => el.id !== todo.id));
+  };
+
+  const removeAllTodos = () => {
+    setTodos([]);
+  }
+
+  const completeSubtask = (todoId: any, subtaskId: any) => {
+    const newTodos = [...todos].map((todo) => {
+      if (todoId === todo.id) {
+        todo.subtasks.map((subtask) => {
+          if (subtaskId === subtask.id) {
+            subtask.isCompleted = !subtask.isCompleted;
+          }
+          return subtask;
+        });
+      }
+      return todo;
+    });
+    setTodos(newTodos);
   };
 
   const getTodo = (id: string) => {
@@ -75,10 +103,6 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 
-  const submitSubtask = () => {
-    
-  }
-
   useEffect(() => {
     updateStorage(todos);
     console.log("Updated todos:", todos);
@@ -86,7 +110,7 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
 
   return (
     <TodoContext.Provider
-      value={{ todos, addTodo, editTodo, completeTodo, removeTodo, getTodo, updateStorage }}
+      value={{ todos, addTodo, editTodo, completeTodo, removeTodo, removeAllTodos, getTodo, updateStorage, completeSubtask }}
     >
       {children}
     </TodoContext.Provider>

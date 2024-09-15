@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const MainContainer = styled.div`
 margin:0;
 width: 44vw;
-height: 90vh;
+min-height: 90vh;
 position:relative;
 background-color: #0D99FF1A;
 border: 1px solid red;
@@ -47,7 +47,8 @@ border: none;
 padding-inline: 12px;
 right: 14px;
 background-color: #0D99FF;
-margin-top: 40px;
+margin-top: 10px;
+margin-bottom: 10px;
 font-size:18px;
 color: #FFFFFF;
 

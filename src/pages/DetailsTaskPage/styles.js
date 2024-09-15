@@ -209,6 +209,7 @@ export const SectionContent = styled.div `
 width: 100%;
 // border: 1px solid blue;
 display:flex;
+flex-direction:column;
 justify-content:${(props) => props.justifyType === 'date' ? 'start' : props.justifyType === 'time' ? 'end' : 'center'};
 padding-bottom:6px;
 `;

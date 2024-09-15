@@ -16,13 +16,15 @@ import { Line, Circle } from 'rc-progress';
 import FormInput from "../../components/FormInput";
 import { useTodo } from "../../context/todoContext";
 import { levelDescription } from "../../utils.js";
+import SubtaskList from "../../components/SubtasksList";
 
 const DetailTask = () => {
     const { id } = useParams();
-    const { getTodo } = useTodo();
+    const { getTodo, completeSubtask } = useTodo();
     const todo = getTodo(id);
+    const subtasks = todo.subtasks;
 
-if (!todo) return null;
+    if (!todo) return null;
 
     return (
         <MainContainer>
@@ -72,10 +74,10 @@ if (!todo) return null;
 
             <FormSection>
                 <SectionTitle>
-                    Task Name
+                    Checklist for subtasks
                 </SectionTitle>
                 <SectionContent>
-                    <FormInput type='text' placeholder="Prepare for job interview" />
+                    {subtasks ? <SubtaskList subtasks={subtasks} detailsPage completeSubtask={completeSubtask} ></SubtaskList> : null}
                 </SectionContent>
             </FormSection>
 

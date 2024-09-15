@@ -75,7 +75,7 @@ type ToDoProps = {
 
 const ToDo = ({ todo }: ToDoProps) => {
 
-    const { completeTodo } = useTodo() ?? {};
+    const { completeTodo, removeTodo } = useTodo() ?? {};
 
     return (
         <MainContainer completed={todo.isCompleted}>
@@ -121,7 +121,7 @@ const ToDo = ({ todo }: ToDoProps) => {
                         <FontAwesomeIcon icon={faCopy} style={{ fontSize: '14px' }} />
                     </TaskEditButton>
 
-                    <TaskEditButton deleteButton={true}>
+                    <TaskEditButton deleteButton={true} onClick={() => removeTodo && removeTodo(todo)}>
                         <FontAwesomeIcon icon={faTrash} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
                 </TaskButtons>
