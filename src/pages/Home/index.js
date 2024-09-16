@@ -27,6 +27,13 @@ import SortingList from "../../components/SortingList";
 import TagsList from "../../components/TagsList";
 import ToDo from "../../components/Todo/index";
 import { useTodo } from "../../context/todoContext";
+import styled from "styled-components";
+import NoTodoLogo from "../../components/Logos/NoTodosLogo.js";
+
+const NoTodosLogo = styled.div`
+
+`;
+
 
 const Home = (props) => {
     const [showSortingFilters, setShowSortingFilters] = useState(false);
@@ -102,13 +109,13 @@ const Home = (props) => {
 
             </FiltersContainer>
             <ToDosContainer>
-
-                {todos.length === 0 ? 'no todos' :
-                    todos.map((todo) => (<ToDo key={todo.id} todo={todo}></ToDo>))}
+                {todos.length === 0 ?
+                    <NoTodoLogo></NoTodoLogo> :
+                    todos.map((todo, index) => (<ToDo key={index} todo={todo}></ToDo>))}
             </ToDosContainer>
             <Link
                 to='/newTask'
-                // onClick={logHook}
+            // onClick={logHook}
             >
                 <AddButton>
                     <FontAwesomeIcon icon={faPlus} />

@@ -39,7 +39,7 @@ export default App;
 // --v-- change the task background color when task completed
 // make circular bar 100% when task completed
 
-// Add Subtasks
+// --v-- Add Subtasks
 // Add Tags
 // Add Tags to the list
 

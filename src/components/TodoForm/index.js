@@ -95,7 +95,7 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                         Task Name
                     </SectionTitle>
                     <SectionContent>
-                        <FormInput type='text' placeholder="Prepare for job interview" value={name} onChange={(e) => setName(e.target.value)} />
+                        <FormInput type='text' placeholder="Add task name..." value={name} onChange={(e) => setName(e.target.value)} />
                     </SectionContent>
                 </FormSection>
 

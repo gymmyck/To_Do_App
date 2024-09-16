@@ -42,9 +42,7 @@ const DetailTask = () => {
                 <ToDoLeft>
                     <TaskTitleLine>
                         <TaskBullet style={{ marginLeft: '1px' }} />
-                        <Link to='/taskDetail'>
                             <TaskTitle>{todo.name}</TaskTitle>
-                        </Link>
                     </TaskTitleLine>
                     <TaskInfoLine>
                         <FontAwesomeIcon icon={faCalendarDays} style={{ fontSize: '20px', paddingLeft: '2px' }} />

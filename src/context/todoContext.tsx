@@ -53,7 +53,7 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
       isCompleted: false,
       ...item
     };
-    setTodos([newTodo, ...todos]);
+    setTodos([...todos, newTodo]);
     // console.log(todos);
   };
 
