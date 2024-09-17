@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { BackButton, AddSubtaskButton, FormSection, HeaderContainer, MainContainer, SaveTaskButton, SectionContent, SectionTitle, TimeSection, TimeSubSection } from "./styles";
+import { BackButton, AddSubtaskButton, FormSection, HeaderContainer, MainContainer, SaveTaskButton, SectionContent, SectionTitle, TimeSection, TimeSubSection, TagsSection } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faArrowLeft,
@@ -13,6 +13,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { uid } from "uid";
 import SubtaskList from "../SubtasksList";
+import TagsList from "../TagsList";
 
 const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
     const [name, setName] = useState(todo ? todo.name : '');
@@ -22,9 +23,8 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
     const [dueTime, setDueTime] = useState(todo ? todo.dueTime : '');
     const [subtasks, setSubtasks] = useState(todo ? todo.subtasks : []);
     const [tags, setTags] = useState(todo ? todo.tags : '');
-
+    const [tagsArray, setTagsArray] = useState(todo && todo.tagsArray ? todo.tagsArray : []);
     const [subtaskInput, setSubtaskInput] = useState('');
-    const [tagInput, setTagInput] = useState('');
 
     const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
             dueDate,
             dueTime,
             subtasks,
-            tags
+            tagsArray
         }
         handleSubmitHook(task);
         // console.log(task);
@@ -57,10 +57,6 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
         }
         setSubtasks([...subtasks, subtask])
         setSubtaskInput('');
-    }
-
-    const submitTags = () => {
-        
     }
 
     const completeSubtask = (id) => {
@@ -79,8 +75,24 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
         setSubtasks(newSubtasks);
     }
 
+    const tagsToArray = () => {
+        const arrayTags = tags.split(' ').join('').split(',');
+        const newTagsArray = arrayTags.map((item) => (
+            {
+                id: uid(),
+                name: item
+            }));
+        setTagsArray([...tagsArray, ...newTagsArray]);
+        setTags('');
+    }
+
+    const removeTag = (id) => {
+        const newTags = tagsArray.filter((tag) => id !== tag.id)
+        setTagsArray(newTags);
+    }
+
     useEffect(() => {
-        console.log(tags);
+        // console.log(tagsArray)
     }, [tags])
 
     return (
@@ -165,15 +177,15 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                         Add Tags
                     </SectionTitle>
                     <SectionContent>
-                        <FormInput type='text' placeholder="Add tags..." value={tags} onChange={(e) => setTags(e.target.value)} onKeyDown = {(e) => e.key === 'Enter' && submitTags}/>
-                        <AddSubtaskButton type='button' onClick={submitTags}>
+                        <FormInput type='text' placeholder="Add tags..." value={tags} onChange={(e) => setTags(e.target.value)} />
+                        <AddSubtaskButton type='button' onClick={tagsToArray}>
                             <FontAwesomeIcon icon={faPlus} style={{ fontSize: '14px' }} />
                         </AddSubtaskButton>
                     </SectionContent>
                 </FormSection>
-                <FormSection>
-                    {tags ? tags : null}
-                </FormSection>
+                <TagsSection>
+                    {tagsArray ? <TagsList tags={tagsArray} removeTag={removeTag} edit></TagsList> : null}
+                </TagsSection>
 
                 <SaveTaskButton onClick={handleSubmit}>Save Task</SaveTaskButton>
             </form>

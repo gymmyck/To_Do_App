@@ -4,9 +4,10 @@ import styled from "styled-components";
 const ProgressCircleContainer = styled.div`
 width: 60px;
 height: 60px;
-position: absolute;
-right:25px;
-top: 108px;
+// position: absolute;
+// right:30px;
+// top: 104px;
+padding-top:2px;
 `;
 
 const ProgressCircle = () => {

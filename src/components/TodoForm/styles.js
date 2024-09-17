@@ -98,6 +98,17 @@ width: 60%;
 padding-top:8px;
 `;
 
+export const TagsSection = styled.div `
+width: 60%;
+min-height: 20px;
+// border: 1px solid yellow;
+padding-top:0px;
+display:flex;
+flex-wrap:wrap;
+justify-content:start;
+align-items: center;
+`;
+
 export const TimeSection = styled.div `
 width: 60%;
 // height: 100px;

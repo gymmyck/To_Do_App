@@ -105,7 +105,7 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
 
   useEffect(() => {
     updateStorage(todos);
-    // console.log("Updated todos:", todos);
+    console.log("Updated todos:", todos);
   }, [todos]);
 
   return (

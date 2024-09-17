@@ -6,20 +6,20 @@ import {
     faX
 } from "@fortawesome/free-solid-svg-icons";
 
-const SubtaskContainer = styled.div`
-width: 100%;
-height: 60px;
-border-radius: 60px;
-border: 1px solid #e2e2e2;
-// border: none;
-outline: none;
-text-indent: 42px;
-  position: relative;
-font-size: 16px;
-display:flex;
-justify-content:start;
-align-items:center;
-color: #FFFFFF;
+const TagContainer = styled.div`
+min-width:50px;
+height:27px;
+background-color:#FFF6E8;
+border-radius:60px;
+font-size:12px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top:12px;
+margin-right:12px;
+text-indent:10px;
+padding-right:8px;
+position:relative;
 
 &::placeholder {
   font-size: 16px;
@@ -39,55 +39,40 @@ color: #FFFFFF;
 }
 `;
 
-const SubtaskButton = styled.button`
-width: 32px;
-height: 32px;
-display:flex;
-justify-content: center;
-align-items: center;
-border: none;
+export const RemoveButton = styled.div`
+width: 16px;
+height: 16px;
+border: 1px solid red;
 border-radius: 50%;
-background-color:#b24029;
-color: #717171;
-margin-bottom:8px;
-position: absolute;
-right:16px;
-top: 15px;
-
-&:hover {
-    background-color:#0D99FF9A;
-    color: #717171;
-}
+background-color: #FF4034;
+display:inline-block;
+margin-left:8px;
+position:relative;
 `;
 
-type Subtask = {
+type Tags = {
     id: string,
     name: string,
-    isCompleted: boolean,
 }
 
-const SubtaskList = ({ detailsPage, subtasks, completeSubtask, removeSubtask }: { subtasks: Subtask[], completeSubtask?: any, removeSubtask?: any, detailsPage: boolean }) => {
-
+const TagsList = ({ tags, removeTag, edit }: { tags: Tags[], removeTag?: any, edit?:boolean }) => {
+    // const tagss = ['school', 'cooking', 'job']
 
     return (
         <>
-            {subtasks && subtasks.map((item, index) => (
-                <SubtaskContainer key={item.id}>
+            {tags && tags.map((item, index) => (
+                <TagContainer key={item.id}>
                     {`${index + 1}. ${item.name}`}
-                    {detailsPage ?
-                        <SubtaskButton onClick={() => completeSubtask(item.id)}>
-                            <FontAwesomeIcon icon={faCheck} style={{ color: '#FFFFFF' }} />
-                        </SubtaskButton> :
-                        <SubtaskButton onClick={() => removeSubtask(item.id)}>
-                            <FontAwesomeIcon icon={faX} style={{ color: '#FFFFFF' }} />
-                        </SubtaskButton>
-
+                    { edit ? (
+                        <RemoveButton onClick={() => removeTag(item.id)}>
+                           <FontAwesomeIcon  icon={faX} style={{ color: '#000000', marginLeft: '0px', position:'absolute', right:'3px', top: '2px'}} /> 
+                        </RemoveButton> ) : null
                     }
-                </SubtaskContainer>))}
+                </TagContainer>))}
         </>
     )
 
 
 }
 
-export default SubtaskList;
+export default TagsList;

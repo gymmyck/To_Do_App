@@ -10,11 +10,12 @@ import {
     faTrash,
     faCheck
 } from "@fortawesome/free-solid-svg-icons";
-import { TaskBullet, TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, DueDate, TaskData, TaskTag, TaskButtons } from "./styles";
+import { TaskBullet, TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, DueDate, TaskData, TaskTag, TaskButtons, TagsSection } from "./styles";
 import ProgressCircle from "../ProgressCircle";
 import styled from "styled-components";
 import { levelDescription } from "../../utils";
 import { useTodo } from "../../context/todoContext";
+import TagsList from "../TagsList";
 
 type MainContainerProps = {
     completed: boolean;
@@ -22,7 +23,7 @@ type MainContainerProps = {
 
 const MainContainer = styled.div<MainContainerProps>`
 width: 398px;
-height: 200px;
+min-height: 200px;
 // border: 1px solid red;
 border-radius: 18px;
 background-color:${(props) => props.completed ? `#DCFCE7` : `#FFFFFF`};
@@ -30,8 +31,8 @@ display: flex;
 justify-content: center;
 align-items: center;
 position: relative;
-margin-top:20px;
-padding:12px;
+margin-top:12px;
+padding:10px;
 `;
 
 type TaskEditButtonProps = {
@@ -101,9 +102,10 @@ const ToDo = ({ todo }: ToDoProps) => {
                     <TaskInfo>Complexity:</TaskInfo>
                     <TaskData style={{ paddingLeft: '8px' }}>{levelDescription(todo.complexity)}</TaskData>
                 </TaskInfoLine>
-                <TaskTag>
-                    Job Interview
-                </TaskTag>
+                <TagsSection>
+                    {todo.tagsArray ? <TagsList tags={todo.tagsArray}></TagsList> : null}
+                </TagsSection>
+
             </ToDoLeft>
             <ToDoRight>
                 <TaskButtons>
@@ -124,8 +126,10 @@ const ToDo = ({ todo }: ToDoProps) => {
                     <TaskEditButton deleteButton={true} onClick={() => removeTodo && removeTodo(todo)}>
                         <FontAwesomeIcon icon={faTrash} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
+
+                    <ProgressCircle></ProgressCircle>
                 </TaskButtons>
-                <ProgressCircle></ProgressCircle>
+               
             </ToDoRight>
         </MainContainer>)
 }

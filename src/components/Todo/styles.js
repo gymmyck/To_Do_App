@@ -8,6 +8,8 @@ width:100%;
 flex: 3;
 display: flex;
 flex-direction:column;
+align-items:start;
+justify-content:start;
 `;
 
 export const ToDoRight = styled.div`
@@ -46,7 +48,16 @@ background-color: #FF4034;
 display:inline-block;
 `;
 
-
+export const TagsSection = styled.div `
+min-width: 60%;
+min-height: 20px;
+// border: 1px solid yellow;
+padding-top:0px;
+display:flex;
+flex-wrap:wrap;
+justify-content:start;
+align-items: center;
+`;
 
 export const TaskInfo = styled.p`
 color: #616161;
@@ -87,7 +98,7 @@ display: flex;
 flex-wrap:wrap;
 gap:1px;
 justify-content: space-around;
-padding-bottom:104px;
+padding-bottom:84px;
 padding-left:16px;
 `;
 
