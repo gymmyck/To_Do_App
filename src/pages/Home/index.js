@@ -23,8 +23,8 @@ import {
     ToDosContainer,
 } from "./styles.js";
 import SearchInput from "../../components/SearchInput";
-import SortingList from "../../components/SortingList";
-import TagsList from "../../components/TagsList";
+import SortingDropList from "../../components/SortingDropList";
+import TagsDropList from "../../components/TagsDropList";
 import ToDo from "../../components/Todo/index";
 import { useTodo } from "../../context/todoContext";
 import styled from "styled-components";
@@ -50,7 +50,7 @@ const Home = (props) => {
     // }
 
     const clickOutside = (e) => {
-        console.log("clicking")
+        // console.log("clicking")
         if (refSorting.current && !refSorting.current.contains(e.target)) {
             setShowSortingFilters(false);
         }
@@ -61,7 +61,7 @@ const Home = (props) => {
     }
 
     const clickObject = (e) => {
-        console.log(e.target);
+        // console.log(e.target);
     }
 
     useEffect(() => {
@@ -93,7 +93,7 @@ const Home = (props) => {
                             <FontAwesomeIcon icon={faChevronDown} />
                         )}
                     </FilterButton>
-                    {showSortingFilters && (<SortingList></SortingList>)}
+                    {showSortingFilters && (<SortingDropList></SortingDropList>)}
                 </ButtonWrapper>
                 <ButtonWrapper ref={refFilters}>
                     <FilterButton onClick={() => setShowTagsFilters(!showTagsFilters)}>
@@ -104,7 +104,7 @@ const Home = (props) => {
                             <FontAwesomeIcon icon={faChevronDown} />
                         )}
                     </FilterButton>
-                    {showTagsFilters && (<TagsList></TagsList>)}
+                    {showTagsFilters && (<TagsDropList></TagsDropList>)}
                 </ButtonWrapper>
 
             </FiltersContainer>

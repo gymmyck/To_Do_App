@@ -9,14 +9,16 @@ import {
     faCopy,
     faTrash,
     faCheck,
-    faArrowLeft
+    faArrowLeft,
+    faPen
 } from "@fortawesome/free-solid-svg-icons";
-import { MainContainer, ToDoContainer, TaskBullet, TaskTitleLine, TaskInfoLine, TaskTitle, ToDoLeft, TaskInfo, DueDate, TaskData, TaskTag, TaskProgress, HeaderContainer, BackButton, RepeatButton, DeleteAllButton, FormSection, SectionTitle, SectionContent } from "./styles.js";
+import { MainContainer, ToDoContainer, TaskBullet, TaskTitleLine, TaskInfoLine, TaskTitle, ToDoLeft, TaskInfo, DueDate, TaskData, TaskTag, TaskProgress, HeaderContainer, BackButton, RepeatButton, DeleteAllButton, FormSection, SectionTitle, SectionContent, TaskEditButton } from "./styles.js";
 import { Line, Circle } from 'rc-progress';
 import FormInput from "../../components/FormInput";
 import { useTodo } from "../../context/todoContext";
 import { levelDescription } from "../../utils.js";
 import SubtaskList from "../../components/SubtasksList";
+import styled from "styled-components";
 
 const DetailTask = () => {
     const { id } = useParams();
@@ -36,13 +38,18 @@ const DetailTask = () => {
                     </BackButton>
                 </Link>
                 Task Details
+                <Link to={`/editTask/${todo.id}`}>
+                    <TaskEditButton>
+                        <FontAwesomeIcon icon={faPen} style={{  color: '#FFFFFF'  }} />
+                    </TaskEditButton>
+                </Link >
             </HeaderContainer>
 
             <ToDoContainer>
                 <ToDoLeft>
                     <TaskTitleLine>
                         <TaskBullet style={{ marginLeft: '1px' }} />
-                            <TaskTitle>{todo.name}</TaskTitle>
+                        <TaskTitle>{todo.name}</TaskTitle>
                     </TaskTitleLine>
                     <TaskInfoLine>
                         <FontAwesomeIcon icon={faCalendarDays} style={{ fontSize: '20px', paddingLeft: '2px' }} />

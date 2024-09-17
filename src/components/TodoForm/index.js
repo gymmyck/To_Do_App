@@ -21,9 +21,10 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
     const [dueDate, setDueDate] = useState(todo ? todo.dueDate : '');
     const [dueTime, setDueTime] = useState(todo ? todo.dueTime : '');
     const [subtasks, setSubtasks] = useState(todo ? todo.subtasks : []);
-    const [tags, setTags] = useState(todo ? todo.tags : []);
+    const [tags, setTags] = useState(todo ? todo.tags : '');
 
     const [subtaskInput, setSubtaskInput] = useState('');
+    const [tagInput, setTagInput] = useState('');
 
     const navigate = useNavigate();
 
@@ -58,6 +59,10 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
         setSubtaskInput('');
     }
 
+    const submitTags = () => {
+        
+    }
+
     const completeSubtask = (id) => {
         const newSubtasks = subtasks.map((subtask) => {
             if (id = subtask.id) {
@@ -75,8 +80,8 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
     }
 
     useEffect(() => {
-        console.log(subtasks);
-    }, [subtasks])
+        console.log(tags);
+    }, [tags])
 
     return (
         <MainContainer>
@@ -160,8 +165,14 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                         Add Tags
                     </SectionTitle>
                     <SectionContent>
-                        <FormInput type='text' placeholder="Add tags..." />
+                        <FormInput type='text' placeholder="Add tags..." value={tags} onChange={(e) => setTags(e.target.value)} onKeyDown = {(e) => e.key === 'Enter' && submitTags}/>
+                        <AddSubtaskButton type='button' onClick={submitTags}>
+                            <FontAwesomeIcon icon={faPlus} style={{ fontSize: '14px' }} />
+                        </AddSubtaskButton>
                     </SectionContent>
+                </FormSection>
+                <FormSection>
+                    {tags ? tags : null}
                 </FormSection>
 
                 <SaveTaskButton onClick={handleSubmit}>Save Task</SaveTaskButton>

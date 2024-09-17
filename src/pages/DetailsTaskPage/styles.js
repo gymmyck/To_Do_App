@@ -49,7 +49,26 @@ background-color: #0D99FF1A;
   }
 `;
 
+export const TaskEditButton = styled.button`
+width: 36px;
+height: 36px;
+display:flex;
+justify-content: center;
+align-items: center;
+border: none;
+border-radius: 50%;
+background-color:${(props) => props.deleteButton ? '#f67e7d' : '#0D99FF1A'};
+color: #717171;
+margin-bottom:8px;
+position: absolute;
+right:-10px;
+top:-8px;
 
+&:hover {
+    background-color:#0D99FF9A;
+    color: #717171;
+}
+`;
 
 
 export const ToDoContainer = styled.div`
@@ -169,24 +188,6 @@ gap:1px;
 justify-content: space-around;
 padding-bottom:104px;
 padding-left:16px;
-`;
-
-export const TaskEditButton = styled.button`
-width: 32px;
-height: 32px;
-display:flex;
-justify-content: center;
-align-items: center;
-border: none;
-border-radius: 50%;
-background-color:${(props) => props.deleteButton ? '#f67e7d' : '#0D99FF1A'};
-color: #717171;
-margin-bottom:8px;
-
-&:hover {
-    background-color:#0D99FF9A;
-    color: #717171;
-}
 `;
 
 
