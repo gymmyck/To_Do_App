@@ -40,17 +40,17 @@ export default App;
 // make circular bar 100% when task completed
 
 // --v-- Add Subtasks
-// Add Tags
-// Add Tags to the list
+// --v-- Add Tags
+// --v-- Add Tags to the list
 
 // --v-- Remove Task
 // --v-- Remove All Tasks
 
-//  Label Color depending on the due date (3 days - orange, 1 day - red)
+// Label Color depending on the due date (3 days - orange, 1 day - red)
 
 // Toggle done/undone -> show full progress bar
 
-// Search Tasks
+// --v-- Search Tasks
 
 // Sort default (current Date)
 // Date - Ascending

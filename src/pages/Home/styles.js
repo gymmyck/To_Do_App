@@ -20,7 +20,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 position: relative;
-margin-top:72px;
+margin-top:40px;
 `;
 
 
@@ -52,7 +52,7 @@ border: none;
 padding-inline: 12px;
 right: 14px;
 background-color: #0D99FF;
-margin-top: 40px;
+margin-top: 20px;
 font-size:18px;
 color: #FFFFFF;
 
@@ -72,7 +72,7 @@ border: none;
 padding-inline: 12px;
 right: 14px;
 background-color: #f67e7d;
-margin-top: 40px;
+margin-top: 20px;
 font-size:18px;
 color: #FFFFFF;
 

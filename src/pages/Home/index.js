@@ -36,18 +36,23 @@ const NoTodosLogo = styled.div`
 
 
 const Home = (props) => {
+    const { todos, removeAllTodos } = useTodo();
+    const [searchValue, setSearchValue] = useState('');
+    const [filteredTodos, setFilteredTodos] = useState(todos);
     const [showSortingFilters, setShowSortingFilters] = useState(false);
     const [showTagsFilters, setShowTagsFilters] = useState(false);
     const refSorting = useRef(null);
     const refFilters = useRef(null);
-
-    const { todos, removeAllTodos } = useTodo();
 
     const TodoContext = createContext();
 
     // const logHook = () => {
     //     console.log(TodoContext);
     // }
+
+    const handleSearch = (e) => {
+        setSearchValue(e.target.value.trim());
+    }
 
     const clickOutside = (e) => {
         // console.log("clicking")
@@ -69,12 +74,17 @@ const Home = (props) => {
         return () => {
             document.removeEventListener('mousedown', clickOutside);
         }
-    }, [refSorting, refFilters])
+    }, [refSorting, refFilters, searchValue])
+
+    useEffect(() => {
+        console.log("Search value updated:", searchValue);
+        setFilteredTodos(todos.filter((todo) => todo.name.toLowerCase().includes(searchValue.toLowerCase())));
+    }, [searchValue]);
 
     return (
         <MainContainer>
             <InputContainer>
-                <SearchInput type='text' value={undefined} placeholder="Search..." {...props}></SearchInput>
+                <SearchInput type='text' placeholder="Search..." value={searchValue} onChange={handleSearch} {...props}></SearchInput>
                 <InputButton>
                     <FontAwesomeIcon icon={faArrowRight} />
                 </InputButton>
@@ -111,7 +121,7 @@ const Home = (props) => {
             <ToDosContainer>
                 {todos.length === 0 ?
                     <NoTodoLogo></NoTodoLogo> :
-                    todos.map((todo, index) => (<ToDo key={index} todo={todo}></ToDo>))}
+                    filteredTodos.map((todo, index) => (<ToDo key={index} todo={todo}></ToDo>))}
             </ToDosContainer>
             <Link
                 to='/newTask'

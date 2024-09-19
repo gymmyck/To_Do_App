@@ -62,7 +62,7 @@ const TagsList = ({ tags, removeTag, edit }: { tags: Tags[], removeTag?: any, ed
         <>
             {tags && tags.map((item, index) => (
                 <TagContainer key={item.id}>
-                    {`${index + 1}. ${item.name}`}
+                    {`${item.name}`}
                     { edit ? (
                         <RemoveButton onClick={() => removeTag(item.id)}>
                            <FontAwesomeIcon  icon={faX} style={{ color: '#000000', marginLeft: '0px', position:'absolute', right:'3px', top: '2px'}} /> 

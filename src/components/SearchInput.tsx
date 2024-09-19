@@ -33,12 +33,13 @@ type SearchInputProps = {
     type: string;
     value?: string;
     placeholder: string;
+    onChange:any;
     children?: React.ReactNode;
 };
 
-const SearchInput = ({ type, value, placeholder, children }: SearchInputProps) => {
+const SearchInput = ({ type, value, onChange, placeholder, children }: SearchInputProps) => {
     return (
-        <StyledSearchInput type={type} value={value} placeholder={placeholder}>{children}</StyledSearchInput>
+        <StyledSearchInput type={type} placeholder={placeholder} value={value} onChange={onChange}>{children}</StyledSearchInput>
     );
 };
 

@@ -16,6 +16,7 @@ type Todo = {
 
 type TodoContextType = {
   todos: Todo[];
+  // filteredTodos: Todo[];
   addTodo: (text: string) => void;
   editTodo: (id: string, item: Partial<Todo>) => void;
   completeTodo: (todo: Todo) => void;
@@ -46,6 +47,7 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
 
   const { id } = useParams();
   const [todos, setTodos] = useState<Todo[]>(() => getStoredTasks());
+
 
   const addTodo = (item: any) => {
     const newTodo = {
