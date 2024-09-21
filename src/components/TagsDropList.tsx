@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
 const StyledList = styled.ul`
@@ -16,15 +16,56 @@ width: 100%;
   align-items: center;
 `;
 
+const StyledListItem = styled.li`
+width:90%;
+height:34px;
+font-size:12px;
+border-bottom: 1px solid #D9D9D9;
+display:flex;
+&:last-child {
+    border:none;
+}
+`;
+
+const StyledLabel = styled.label`
+width:100%;
+display:flex;
+justify-content:space-between;
+// border:1px solid orange;
+padding-right:2px;
+`;
+
+const StyledLabelText = styled.p`
+color: #717171;
+`;
+
 type TagsListProps = {
-  children?: React.ReactNode;
-  placeholder?: string;
+  tagsList?: any[];
+  checkedTags:any;
+  handleCheckboxChange: any;
 };
 
-const TagsList = ({ placeholder, children }: TagsListProps) => {
+const TagsList = ({ tagsList = [], checkedTags, handleCheckboxChange }: TagsListProps) => {
+
+
+
   return (
-    <StyledList>ABC</StyledList>
+    <StyledList>
+      {tagsList.map((el) =>
+        <StyledListItem key={el.id}>
+          <StyledLabel>
+            <StyledLabelText>{el.name}</StyledLabelText>
+            <input type='checkbox' value={el.name} checked={!!checkedTags[el.id]} onChange={(e) => handleCheckboxChange (e, el.id)} />
+          </StyledLabel>
+        </StyledListItem>)}
+    </StyledList>
   );
 };
 
 export default TagsList;
+
+
+// selectedTags: any[];
+// setSelectedTags: (tags: any[]) => void;
+
+// selectedTags, setSelectedTags

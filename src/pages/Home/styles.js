@@ -148,3 +148,5 @@ flex-direction:column;
 justify-content: center;
 align-items:center;
 `;
+
+// const tagsList  = todos.flatMap((todo) => todo.tagsArray)
