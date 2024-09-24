@@ -16,7 +16,7 @@ import { MainContainer, ToDoContainer, TaskBullet, TaskTitleLine, TaskInfoLine, 
 import { Line, Circle } from 'rc-progress';
 import FormInput from "../../components/FormInput";
 import { useTodo } from "../../context/todoContext";
-import { levelDescription } from "../../utils.js";
+import { levelDescription, percentageCalculator } from "../../utils.js";
 import SubtaskList from "../../components/SubtasksList";
 import styled from "styled-components";
 import TagsList from "../../components/TagsList";
@@ -26,6 +26,7 @@ const DetailTask = () => {
     const { getTodo, completeSubtask } = useTodo();
     const todo = getTodo(id);
     const subtasks = todo.subtasks;
+    const percentage = percentageCalculator(todo);
 
     if (!todo) return null;
 
@@ -73,9 +74,9 @@ const DetailTask = () => {
                     <TaskProgress>
                         <div>
                             <p>Task Completed</p>
-                            <p>70%</p>
+                            <p>{`${percentage}`}%</p>
                         </div>
-                        <Line percent={70} strokeWidth={4} strokeColor="#0D99FF" trailWidth={4} trailColor="#D3D3D3" />
+                        <Line percent={percentage} strokeWidth={4} strokeColor="#0D99FF" trailWidth={4} trailColor="#D3D3D3" />
                     </TaskProgress>
                 </ToDoLeft>
             </ToDoContainer>

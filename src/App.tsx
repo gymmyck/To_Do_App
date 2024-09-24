@@ -55,11 +55,12 @@ export default App;
 // --v-- Complexity - Ascending
 // --v-- Complexity - Descending
 
-// make circular bar 100% when task completed
+// --v-- make circular progress line 100% when task completed
+// --v-- make straight progress line
+
+// --v-- Toggle done/undone -> show full progress bar
 
 // Label Color depending on the due date (3 days - orange, 1 day - red)
-
-// Toggle done/undone -> show full progress bar
 
 // Duplicate task
 

@@ -88,7 +88,7 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
         todo.subtasks.map((subtask) => {
           if (subtaskId === subtask.id) {
             subtask.isCompleted = !subtask.isCompleted;
-            console.log('subtask checked:',subtask.name, subtask.isCompleted)
+            console.log('subtask checked:', subtask.name, subtask.isCompleted)
           }
           return subtask;
         });
@@ -98,25 +98,18 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
     setTodos(newTodos);
   };
 
-  const percentageCalculator = () => {
+ 
 
-
-    const booleans = [true, true, false, true];
-    const done = booleans.filter((b) => b);
-
-    console.log((done.length / booleans.length) * 100);
-  }
-
-      // const completeSubtask = (id) => {
-    //     const newSubtasks = subtasks.map((subtask) => {
-    //         if (id = subtask.id) {
-    //             subtask.isCompleted = !subtask.isCompleted;
-    //         }
-    //         return subtask;
-    //     }
-    //     )
-    //     setSubtasks(newSubtasks);
-    // }
+  // const completeSubtask = (id) => {
+  //     const newSubtasks = subtasks.map((subtask) => {
+  //         if (id = subtask.id) {
+  //             subtask.isCompleted = !subtask.isCompleted;
+  //         }
+  //         return subtask;
+  //     }
+  //     )
+  //     setSubtasks(newSubtasks);
+  // }
 
   const getTodo = (id: string) => {
     return todos.find((el) => el.id === id);
@@ -141,5 +134,6 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
 };
 
 export default TodoProvider;
+
 
 

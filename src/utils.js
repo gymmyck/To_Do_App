@@ -16,3 +16,35 @@ export function levelDescription(item) {
             return `High (${item}/10)`;
     }
 }
+
+export function percentageCalculator (todo, id) {
+
+    if (Array.isArray(todo.subtasks)) {
+        const completedSubtasks = todo.subtasks.filter((subtask) => subtask.isCompleted);
+
+        const incompleteSubtasks = todo.subtasks.filter((subtask) => !subtask.isCompleted);
+
+        const percentage = Math.floor((completedSubtasks.length / todo.subtasks.length) * 100);
+
+        if (todo.isCompleted) {
+            if (todo.subtasks.length === 0) {
+                return 100;
+            } else {
+                if (incompleteSubtasks.length > 0) {
+                    incompleteSubtasks.map((subtask) => {
+                        if (subtask.id === id) {
+                            subtask.isCompleted = !subtask.isCompleted;
+                        }
+                    });
+                }
+                return 100;
+            }
+        } else {
+            if (todo.subtasks.length) {
+                return percentage;
+            }
+            return 0;
+        }
+    }
+    return 100;
+}

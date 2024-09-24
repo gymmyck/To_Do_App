@@ -1,6 +1,7 @@
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { Line, Circle } from 'rc-progress';
 import styled from "styled-components";
+import { percentageCalculator } from '../utils';
 
 const ProgressCircleContainer = styled.div`
 width: 60px;
@@ -20,19 +21,23 @@ p {width:100%;
 }
 `;
 
-const ProgressCircle = () => {
-    const value = 45;
+type progressCircleProps = {
+    todo: any;
+    completed: boolean;
+}
+
+const ProgressCircle = ({ todo, completed }: progressCircleProps) => {
+    const percentage = percentageCalculator(todo);
 
     return (
         <>
             <ProgressCircleContainer>
-                <Circle percent={70} trailWidth={8} trailColor='#D3D3D3' strokeWidth={8} strokeColor="#0D99FF" />
-                <p>0%</p>
+                <Circle percent={percentage} trailWidth={8} trailColor='#D3D3D3' strokeWidth={8} strokeColor="#0D99FF" />
+                <p>{`${percentage}`}%</p>
             </ProgressCircleContainer>
 
         </>
     )
-
 }
 
 export default ProgressCircle;
