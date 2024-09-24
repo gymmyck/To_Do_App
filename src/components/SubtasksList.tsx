@@ -6,7 +6,7 @@ import {
     faX
 } from "@fortawesome/free-solid-svg-icons";
 
-const SubtaskContainer = styled.div`
+const SubtaskContainer = styled.div<{ isCompleted?: boolean }>`
 width: 100%;
 height: 60px;
 border-radius: 60px;
@@ -14,12 +14,15 @@ border: 1px solid #e2e2e2;
 // border: none;
 outline: none;
 text-indent: 42px;
-  position: relative;
+position: relative;
 font-size: 16px;
 display:flex;
 justify-content:start;
 align-items:center;
 color: #FFFFFF;
+margin-top:4px;
+margin-bottom:4px;
+text-decoration: ${(props) => props.isCompleted ? 'line-through' : null};
 
 &::placeholder {
   font-size: 16px;
@@ -39,7 +42,7 @@ color: #FFFFFF;
 }
 `;
 
-const SubtaskButton = styled.button`
+const SubtaskButton = styled.button<{ isCompleted?: boolean }>`
 width: 32px;
 height: 32px;
 display:flex;
@@ -47,7 +50,7 @@ justify-content: center;
 align-items: center;
 border: none;
 border-radius: 50%;
-background-color:#b24029;
+background-color: ${(props) => props.isCompleted ? '#0D99FF9A' : '#b24029'};
 color: #717171;
 margin-bottom:8px;
 position: absolute;
@@ -58,6 +61,8 @@ top: 15px;
     background-color:#0D99FF9A;
     color: #717171;
 }
+
+
 `;
 
 type Subtask = {
@@ -66,16 +71,16 @@ type Subtask = {
     isCompleted: boolean,
 }
 
-const SubtaskList = ({ detailsPage, subtasks, completeSubtask, removeSubtask }: { subtasks: Subtask[], completeSubtask?: any, removeSubtask?: any, detailsPage: boolean }) => {
+const SubtaskList = ({ detailsPage, subtasks, completeSubtask, removeSubtask, todoId }: { subtasks: Subtask[], completeSubtask?: any, removeSubtask?: any, detailsPage: boolean, todoId: any }) => {
 
 
     return (
         <>
             {subtasks && subtasks.map((item, index) => (
-                <SubtaskContainer key={item.id}>
+                <SubtaskContainer isCompleted={item.isCompleted} key={item.id}>
                     {`${index + 1}. ${item.name}`}
                     {detailsPage ?
-                        <SubtaskButton onClick={() => completeSubtask(item.id)}>
+                        <SubtaskButton isCompleted={item.isCompleted} onClick={() => completeSubtask(todoId, item.id)}>
                             <FontAwesomeIcon icon={faCheck} style={{ color: '#FFFFFF' }} />
                         </SubtaskButton> :
                         <SubtaskButton onClick={() => removeSubtask(item.id)}>
@@ -86,8 +91,6 @@ const SubtaskList = ({ detailsPage, subtasks, completeSubtask, removeSubtask }: 
                 </SubtaskContainer>))}
         </>
     )
-
-
 }
 
 export default SubtaskList;

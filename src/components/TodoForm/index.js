@@ -59,16 +59,16 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
         setSubtaskInput('');
     }
 
-    const completeSubtask = (id) => {
-        const newSubtasks = subtasks.map((subtask) => {
-            if (id = subtask.id) {
-                subtask.isCompleted = !subtask.isCompleted;
-            }
-            return subtask;
-        }
-        )
-        setSubtasks(newSubtasks);
-    }
+    // const completeSubtask = (id) => {
+    //     const newSubtasks = subtasks.map((subtask) => {
+    //         if (id = subtask.id) {
+    //             subtask.isCompleted = !subtask.isCompleted;
+    //         }
+    //         return subtask;
+    //     }
+    //     )
+    //     setSubtasks(newSubtasks);
+    // }
 
     const removeSubtask = (id) => {
         const newSubtasks = subtasks.filter((subtask) => subtask.id !== id)
@@ -170,7 +170,7 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                     </SectionContent>
                 </FormSection>
                 <FormSection>
-                    {subtasks ? <SubtaskList subtasks={subtasks} completeSubtask={completeSubtask} removeSubtask={removeSubtask} ></SubtaskList> : null}
+                    {subtasks ? <SubtaskList subtasks={subtasks} removeSubtask={removeSubtask} ></SubtaskList> : null}
                 </FormSection>
                 <FormSection>
                     <SectionTitle>

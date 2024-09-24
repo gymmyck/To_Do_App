@@ -12,13 +12,14 @@ import {
     faArrowLeft,
     faPen
 } from "@fortawesome/free-solid-svg-icons";
-import { MainContainer, ToDoContainer, TaskBullet, TaskTitleLine, TaskInfoLine, TaskTitle, ToDoLeft, TaskInfo, DueDate, TaskData, TaskTag, TaskProgress, HeaderContainer, BackButton, RepeatButton, DeleteAllButton, FormSection, SectionTitle, SectionContent, TaskEditButton } from "./styles.js";
+import { MainContainer, ToDoContainer, TaskBullet, TaskTitleLine, TaskInfoLine, TaskTitle, ToDoLeft, TaskInfo, DueDate, TaskData, TaskTag, TaskProgress, HeaderContainer, BackButton, RepeatButton, DeleteTaskButton, FormSection, SectionTitle, SectionContent, TaskEditButton, TagsSection } from "./styles.js";
 import { Line, Circle } from 'rc-progress';
 import FormInput from "../../components/FormInput";
 import { useTodo } from "../../context/todoContext";
 import { levelDescription } from "../../utils.js";
 import SubtaskList from "../../components/SubtasksList";
 import styled from "styled-components";
+import TagsList from "../../components/TagsList";
 
 const DetailTask = () => {
     const { id } = useParams();
@@ -40,7 +41,7 @@ const DetailTask = () => {
                 Task Details
                 <Link to={`/editTask/${todo.id}`}>
                     <TaskEditButton>
-                        <FontAwesomeIcon icon={faPen} style={{  color: '#FFFFFF'  }} />
+                        <FontAwesomeIcon icon={faPen} style={{ color: '#FFFFFF' }} />
                     </TaskEditButton>
                 </Link >
             </HeaderContainer>
@@ -66,13 +67,15 @@ const DetailTask = () => {
                         <TaskInfo>Complexity:</TaskInfo>
                         <TaskData style={{ paddingLeft: '8px' }}>{levelDescription(todo.complexity)}</TaskData>
                     </TaskInfoLine>
-                    <div>
-                        <TaskTag>
-                            Job Interview
-                        </TaskTag>
-                    </div>
+                    <TagsSection>
+                        {todo.tagsArray ? <TagsList tags={todo.tagsArray}></TagsList> : null}
+                    </TagsSection>
                     <TaskProgress>
-                        <Line percent={70} strokeWidth={4} strokeColor="#0D99FF" trailWidth={4} trailColor="#616161" />
+                        <div>
+                            <p>Task Completed</p>
+                            <p>70%</p>
+                        </div>
+                        <Line percent={70} strokeWidth={4} strokeColor="#0D99FF" trailWidth={4} trailColor="#D3D3D3" />
                     </TaskProgress>
                 </ToDoLeft>
             </ToDoContainer>
@@ -82,7 +85,7 @@ const DetailTask = () => {
                     Checklist for subtasks
                 </SectionTitle>
                 <SectionContent>
-                    {subtasks ? <SubtaskList subtasks={subtasks} detailsPage completeSubtask={completeSubtask} ></SubtaskList> : null}
+                    {subtasks ? <SubtaskList subtasks={subtasks} detailsPage completeSubtask={completeSubtask} todoId={id}></SubtaskList> : null}
                 </SectionContent>
             </FormSection>
 
@@ -92,10 +95,10 @@ const DetailTask = () => {
                 Repeat Task
             </RepeatButton>
 
-            <DeleteAllButton>
+            <DeleteTaskButton>
                 <FontAwesomeIcon icon={faTrash} />
                 Delete Task
-            </DeleteAllButton>
+            </DeleteTaskButton>
 
         </MainContainer>
     )

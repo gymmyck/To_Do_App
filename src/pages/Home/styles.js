@@ -73,6 +73,7 @@ padding-inline: 12px;
 right: 14px;
 background-color: #f67e7d;
 margin-top: 20px;
+margin-bottom: 20px;
 font-size:18px;
 color: #FFFFFF;
 

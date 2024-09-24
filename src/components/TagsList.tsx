@@ -71,8 +71,6 @@ const TagsList = ({ tags, removeTag, edit }: { tags: Tags[], removeTag?: any, ed
                 </TagContainer>))}
         </>
     )
-
-
 }
 
 export default TagsList;

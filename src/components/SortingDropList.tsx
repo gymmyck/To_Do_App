@@ -40,20 +40,20 @@ color: #717171;
 `;
 
 type SortingListProps = {
-    children?: React.ReactNode;
-    placeholder?: string;
+    sort: any;
+    handleSortChoice: any;
 };
 
-const SortingList = ({ placeholder, children }: SortingListProps) => {
+const SortingList = ({ sort, handleSortChoice }: SortingListProps) => {
     const sortingArray = ["Default", "Ascending Date", "Descending Date", "Ascending Priority", "Descending Priority", "Ascending Complexity", "Descending Complexity"];
 
     return (
         <StyledList>
             {sortingArray.map((el) =>
                 <StyledListItem key={el}>
-                    <StyledLabel>
+                    <StyledLabel htmlFor={el}>
                         <StyledLabelText>{el}</StyledLabelText>
-                        <input type='radio' name='sorting-list' />
+                        <input type='radio' name='sorting-list' value={el} id={el} checked={el===sort} onChange={handleSortChoice} />
                     </StyledLabel>
                 </StyledListItem>)}
         </StyledList>

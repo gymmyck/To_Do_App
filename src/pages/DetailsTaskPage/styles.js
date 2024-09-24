@@ -70,10 +70,20 @@ top:-8px;
 }
 `;
 
+export const TagsSection = styled.div`
+min-width: 100%;
+min-height: 20px;
+// border: 1px solid yellow;
+padding-top:0px;
+display:flex;
+flex-wrap:wrap;
+justify-content:start;
+align-items: center;
+`;
 
 export const ToDoContainer = styled.div`
 width: 398px;
-height: 234px;
+min-height: 234px;
 // border: 1px solid red;
 border-radius: 18px;
 background-color:#FFFFFF;
@@ -141,7 +151,7 @@ margin: 0px;
 padding-left:10px;
 `;
 
-export const DueDate=styled.p`
+export const DueDate = styled.p`
 color: blue;
 margin: 0px;
 padding-left:10px;
@@ -167,15 +177,29 @@ margin-top:12px;
 
 export const TaskProgress = styled.div`
 width:98%;
-height:0px;
+// height:60px;
 // border: 1px solid red;
 // background-color:#0D99FF;
-border-radius:60px;
 font-size:12px;
 display: flex;
+flex-direction:column;
 justify-content: center;
 align-items: center;
-margin-top:20px;
+margin-bottom:6px;
+
+div {
+  width:100%;
+  // border:1px solid red;
+  display:flex;
+  justify-content:space-between;
+  align-items:start;
+
+  p {
+  color:black;
+  font-weight:600;
+  padding-inline:10px;
+  }
+}
 `;
 
 export const TaskButtons = styled.div`
@@ -191,22 +215,22 @@ padding-left:16px;
 `;
 
 
-export const FormSection = styled.div `
+export const FormSection = styled.div`
 width: 60%;
 // height: 100px;
 // border: 1px solid blue;
 padding-top:8px;
 `;
 
-export const SectionTitle = styled.div `
+export const SectionTitle = styled.div`
 width: 100%;
 // border: 1px solid blue;
-
+margin-top:12px;
 padding-bottom:6px;
 color: #FFFFFF;
 `;
 
-export const SectionContent = styled.div `
+export const SectionContent = styled.div`
 width: 100%;
 // border: 1px solid blue;
 display:flex;
@@ -214,8 +238,6 @@ flex-direction:column;
 justify-content:${(props) => props.justifyType === 'date' ? 'start' : props.justifyType === 'time' ? 'end' : 'center'};
 padding-bottom:6px;
 `;
-
-
 
 export const RepeatButton = styled.button`
 width: 192px;
@@ -228,7 +250,7 @@ border: none;
 padding-inline: 12px;
 right: 14px;
 background-color: #0D99FF;
-margin-top: 40px;
+margin-top: 20px;
 font-size:18px;
 color: #FFFFFF;
 
@@ -237,7 +259,7 @@ color: #FFFFFF;
   }
 `;
 
-export const DeleteAllButton = styled.button`
+export const DeleteTaskButton = styled.button`
 width: 192px;
 height: 60px;
 display:flex;
@@ -248,7 +270,8 @@ border: none;
 padding-inline: 12px;
 right: 14px;
 background-color: #f67e7d;
-margin-top: 40px;
+margin-top: 20px;
+margin-bottom: 20px;
 font-size:18px;
 color: #FFFFFF;
 

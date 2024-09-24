@@ -37,7 +37,6 @@ export default App;
 
 // --v-- Local Storage
 // --v-- change the task background color when task completed
-// make circular bar 100% when task completed
 
 // --v-- Add Subtasks
 // --v-- Add Tags
@@ -46,19 +45,21 @@ export default App;
 // --v-- Remove Task
 // --v-- Remove All Tasks
 
+// --v-- Search Tasks
+
+// --v-- Sort default (current Date)
+// --v-- Date - Ascending
+// --v-- Date - Descending
+// --v-- Priority - Ascending
+// --v-- Priority - Descending
+// --v-- Complexity - Ascending
+// --v-- Complexity - Descending
+
+// make circular bar 100% when task completed
+
 // Label Color depending on the due date (3 days - orange, 1 day - red)
 
 // Toggle done/undone -> show full progress bar
-
-// --v-- Search Tasks
-
-// Sort default (current Date)
-// Date - Ascending
-// Date - Descending
-// Priority - Ascending
-// Priority - Descending
-// Complexity - Ascending
-// Complexity - Descending
 
 // Duplicate task
 
