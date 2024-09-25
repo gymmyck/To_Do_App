@@ -5,6 +5,7 @@ import {
     faCheck,
     faX
 } from "@fortawesome/free-solid-svg-icons";
+import { percentageCalculator } from '../utils';
 
 const SubtaskContainer = styled.div<{ isCompleted?: boolean }>`
 width: 100%;
@@ -71,7 +72,7 @@ type Subtask = {
     isCompleted: boolean,
 }
 
-const SubtaskList = ({ detailsPage, subtasks, completeSubtask, removeSubtask, todoId }: { subtasks: Subtask[], completeSubtask?: any, removeSubtask?: any, detailsPage: boolean, todoId: any }) => {
+const SubtaskList = ({ detailsPage, subtasks, completeSubtask, removeSubtask, todoId, todo }: { subtasks: Subtask[], completeSubtask?: any, removeSubtask?: any, detailsPage: boolean, todoId: any, todo:any }) => {
 
 
     return (
@@ -80,7 +81,7 @@ const SubtaskList = ({ detailsPage, subtasks, completeSubtask, removeSubtask, to
                 <SubtaskContainer isCompleted={item.isCompleted} key={item.id}>
                     {`${index + 1}. ${item.name}`}
                     {detailsPage ?
-                        <SubtaskButton isCompleted={item.isCompleted} onClick={() => completeSubtask(todoId, item.id)}>
+                        <SubtaskButton isCompleted={item.isCompleted} onClick={() => {completeSubtask(todoId, item.id); percentageCalculator(todo, item.id)}}>
                             <FontAwesomeIcon icon={faCheck} style={{ color: '#FFFFFF' }} />
                         </SubtaskButton> :
                         <SubtaskButton onClick={() => removeSubtask(item.id)}>

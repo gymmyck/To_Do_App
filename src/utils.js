@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+
 export function levelDescription(item) {
 
     switch (true) {
@@ -17,29 +18,29 @@ export function levelDescription(item) {
     }
 }
 
-export function percentageCalculator (todo, id) {
+export function percentageCalculator(todo, id) {
 
     if (Array.isArray(todo.subtasks)) {
         const completedSubtasks = todo.subtasks.filter((subtask) => subtask.isCompleted);
-
         const incompleteSubtasks = todo.subtasks.filter((subtask) => !subtask.isCompleted);
-
         const percentage = Math.floor((completedSubtasks.length / todo.subtasks.length) * 100);
+
+        if (completedSubtasks.length === todo.subtasks.length) {
+            todo.isCompleted = !todo.isCompleted;
+        } 
 
         if (todo.isCompleted) {
             if (todo.subtasks.length === 0) {
                 return 100;
             } else {
                 if (incompleteSubtasks.length > 0) {
-                    incompleteSubtasks.map((subtask) => {
-                        if (subtask.id === id) {
-                            subtask.isCompleted = !subtask.isCompleted;
-                        }
-                    });
+                    todo.isCompleted = !todo.isCompleted;
+                    return percentage;
                 }
                 return 100;
             }
-        } else {
+        }
+        else {
             if (todo.subtasks.length) {
                 return percentage;
             }
@@ -48,3 +49,37 @@ export function percentageCalculator (todo, id) {
     }
     return 100;
 }
+
+export function completeAllSubtasks(todo) {
+    todo.isCompleted = !todo.isCompleted;
+    if (todo.subtasks.length) {
+        todo.subtasks.map((subtask) => 
+        subtask.isCompleted=!subtask.isCompleted
+        )
+    }
+}
+
+
+
+// if (todo.isCompleted) {
+//     subtask.isCompleted = false;
+// } else {
+//     if (!todo.isCompleted) {
+//         subtask.isCompleted = true;
+//     }}
+
+// incompleteSubtasks.map((subtask) => {
+//     if (subtask.id === id) {
+//         subtask.isCompleted = !subtask.isCompleted;
+//     }
+// });
+// // if (incompleteSubtasks.length === 0) {
+// //     todo.isCompleted = !todo.isCompleted;
+// // }
+
+
+// if (todo.isCompleted) {
+//     todo.subtasks.map((subtask) => {
+//         subtask.isCompleted = true;
+//     })
+// }

@@ -13,7 +13,7 @@ import {
 import { TaskBullet, TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, DueDate, TaskData, TaskTag, TaskButtons, TagsSection } from "./styles";
 import ProgressCircle from "../ProgressCircle";
 import styled from "styled-components";
-import { levelDescription, percentageCalculator } from "../../utils";
+import { levelDescription, percentageCalculator, completeAllSubtasks } from "../../utils";
 import { useTodo } from "../../context/todoContext";
 import TagsList from "../TagsList";
 
@@ -115,7 +115,7 @@ const ToDo = ({ todo }: ToDoProps) => {
                         </TaskEditButton>
                     </Link >
 
-                    <TaskEditButton onClick={() => {completeTodo && completeTodo(todo); percentageCalculator(todo);}}>
+                    <TaskEditButton onClick={() => {completeTodo && completeTodo(todo); percentageCalculator(todo); completeAllSubtasks(todo)}}>
                         <FontAwesomeIcon icon={faCheck} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
 

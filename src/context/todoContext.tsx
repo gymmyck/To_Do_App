@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { completeAllSubtasks } from "../utils";
 import { useParams } from "react-router-dom";
 import { uid } from "uid";
 
@@ -66,11 +67,32 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
     setTodos(newTodos);
   }
 
+  // const completeTodo = (item: any) => {
+  //   const newTodos = todos.map((todo) =>
+  //     todo.id === item.id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+  //   )
+  //   // console.log('checked:', item.name);
+
+
+  //   setTodos(newTodos);
+  // };
+
   const completeTodo = (item: any) => {
-    const newTodos = todos.map((todo) =>
-      todo.id === item.id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+    const newTodos = todos.map((todo) => {
+      if (todo.id === item.id) {
+        const isTodoCompleted = !todo.isCompleted;
+
+        const updatedSubtasks = todo.subtasks.map((subtask) => ({ ...subtask, isCompleted: isTodoCompleted ? true : false, }));
+        return {
+          ...todo, isCompleted: isTodoCompleted, subtasks: updatedSubtasks,
+        };
+      }
+      return todo;
+    }
     )
     // console.log('checked:', item.name);
+
+
     setTodos(newTodos);
   };
 
@@ -92,13 +114,14 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
           }
           return subtask;
         });
+        // if (subtasks = all true){
+        //   todo.isComplete=!todo.isComplete
+        // }
       }
       return todo;
     });
     setTodos(newTodos);
   };
-
- 
 
   // const completeSubtask = (id) => {
   //     const newSubtasks = subtasks.map((subtask) => {
