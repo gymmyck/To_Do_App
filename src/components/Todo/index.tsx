@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCalendarDays,
@@ -75,8 +75,8 @@ type ToDoProps = {
 }
 
 const ToDo = ({ todo }: ToDoProps) => {
-
-    const { completeTodo, removeTodo } = useTodo() ?? {};
+    const navigate = useNavigate();
+    const { completeTodo, removeTodo, duplicateTodo } = useTodo() ?? {};
 
     return (
         <MainContainer completed={todo.isCompleted}>
@@ -115,11 +115,11 @@ const ToDo = ({ todo }: ToDoProps) => {
                         </TaskEditButton>
                     </Link >
 
-                    <TaskEditButton onClick={() => {completeTodo && completeTodo(todo); percentageCalculator(todo); completeAllSubtasks(todo)}}>
+                    <TaskEditButton onClick={() => { completeTodo && completeTodo(todo); percentageCalculator(todo); completeAllSubtasks(todo) }}>
                         <FontAwesomeIcon icon={faCheck} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
 
-                    <TaskEditButton>
+                    <TaskEditButton onClick={() => { duplicateTodo && duplicateTodo(todo); navigate('/') }}>
                         <FontAwesomeIcon icon={faCopy} style={{ fontSize: '14px' }} />
                     </TaskEditButton>
 
@@ -127,9 +127,9 @@ const ToDo = ({ todo }: ToDoProps) => {
                         <FontAwesomeIcon icon={faTrash} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
 
-                    <ProgressCircle todo={todo} completed={todo.isCompleted}/>
+                    <ProgressCircle todo={todo} completed={todo.isCompleted} />
                 </TaskButtons>
-               
+
             </ToDoRight>
         </MainContainer>)
 }

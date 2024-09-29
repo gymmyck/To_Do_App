@@ -31,7 +31,7 @@ import styled from "styled-components";
 import NoTodoLogo from "../../components/Logos/NoTodosLogo.js";
 
 const Home = (props) => {
-    const { todos, removeAllTodos } = useTodo();
+    const { todos, removeAllTodos } = useTodo(); 
     const [searchValue, setSearchValue] = useState('');
     const [showSortingFilters, setShowSortingFilters] = useState(false);
     const [showTagsFilters, setShowTagsFilters] = useState(false);
@@ -123,8 +123,7 @@ const Home = (props) => {
             }, new Map()).values()
         );
 
-
-        console.log('s',uniqueTags);
+        // console.log('s',uniqueTags);
         return uniqueTags;
     }
 

@@ -58,14 +58,19 @@ export default App;
 // --v-- make circular progress line 100% when task completed
 // --v-- make straight progress line
 
-// --v-- Toggle done/undone -> show full progress bar
+// --v-- Toggle done/undone -> show full progress bar`
+
+// --v-- Duplicate task
+
+
+// Add messages 'this should be completed'
 
 // Label Color depending on the due date (3 days - orange, 1 day - red)
 
-// Duplicate task
+// Add Modal 'you sure you wanna delete this task?'
 
 // Power Mode On
 
-// Add Modals
 
-// Add messages 'this should be completed'
+
+

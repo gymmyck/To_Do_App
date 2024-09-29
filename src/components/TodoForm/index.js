@@ -81,7 +81,7 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
     }
 
     useEffect(() => {
-        console.log(tags)
+        // console.log(tags)
     }, [tags])
 
     return (

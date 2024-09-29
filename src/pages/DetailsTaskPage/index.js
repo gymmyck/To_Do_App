@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCalendarDays,
@@ -22,13 +22,15 @@ import styled from "styled-components";
 import TagsList from "../../components/TagsList";
 
 const DetailTask = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
-    const { getTodo, completeSubtask } = useTodo();
+    const { getTodo, completeSubtask, removeTodo, duplicateTodo } = useTodo();
     const todo = getTodo(id);
+    if (!todo) return null;
     const subtasks = todo.subtasks;
     const percentage = percentageCalculator(todo);
 
-    if (!todo) return null;
+
 
     return (
         <MainContainer>
@@ -91,12 +93,12 @@ const DetailTask = () => {
             </FormSection>
 
 
-            <RepeatButton>
+            <RepeatButton onClick={() => {duplicateTodo(todo); navigate ('/')}}>
                 <FontAwesomeIcon icon={faRotate} />
                 Repeat Task
             </RepeatButton>
 
-            <DeleteTaskButton>
+            <DeleteTaskButton onClick={() => {removeTodo(todo); navigate('/')}}>
                 <FontAwesomeIcon icon={faTrash} />
                 Delete Task
             </DeleteTaskButton>

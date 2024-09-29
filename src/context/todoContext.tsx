@@ -25,7 +25,9 @@ type TodoContextType = {
   removeAllTodos: (todo: Todo) => void;
   getTodo: (id: string) => Todo | undefined;
   completeSubtask: (todoId: any, subtaskId: any) => void;
+  duplicateTodo: (item: any) => void;
   updateStorage: any;
+
 };
 
 type TodoProviderProps = {
@@ -41,6 +43,7 @@ export function useTodo() {
 }
 
 const TodoProvider = ({ children }: TodoProviderProps) => {
+
   function getStoredTasks() {
     const tasks = localStorage.getItem('tasks');
     return tasks ? JSON.parse(tasks) : [];
@@ -67,15 +70,16 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
     setTodos(newTodos);
   }
 
-  // const completeTodo = (item: any) => {
-  //   const newTodos = todos.map((todo) =>
-  //     todo.id === item.id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-  //   )
-  //   // console.log('checked:', item.name);
-
-
-  //   setTodos(newTodos);
-  // };
+  const duplicateTodo = (item: any) => {
+    const duplicatedTodo = {
+      ...item,
+      id: uid(),
+      isCompleted: false,
+      subtasks: item.subtasks.map((subtask: Subtask) => ({...subtask, id:uid(), isCompleted: false,})),
+    }
+    setTodos([...todos,duplicatedTodo]);
+    console.log([...todos,duplicatedTodo])
+  }
 
   const completeTodo = (item: any) => {
     const newTodos = todos.map((todo) => {
@@ -83,16 +87,12 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
         const isTodoCompleted = !todo.isCompleted;
 
         const updatedSubtasks = todo.subtasks.map((subtask) => ({ ...subtask, isCompleted: isTodoCompleted ? true : false, }));
-        return {
-          ...todo, isCompleted: isTodoCompleted, subtasks: updatedSubtasks,
-        };
+        return { ...todo, isCompleted: isTodoCompleted, subtasks: updatedSubtasks, };
       }
       return todo;
     }
     )
     // console.log('checked:', item.name);
-
-
     setTodos(newTodos);
   };
 
@@ -110,29 +110,15 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
         todo.subtasks.map((subtask) => {
           if (subtaskId === subtask.id) {
             subtask.isCompleted = !subtask.isCompleted;
-            console.log('subtask checked:', subtask.name, subtask.isCompleted)
+            // console.log('subtask checked:', subtask.name, subtask.isCompleted)
           }
           return subtask;
         });
-        // if (subtasks = all true){
-        //   todo.isComplete=!todo.isComplete
-        // }
       }
       return todo;
     });
     setTodos(newTodos);
   };
-
-  // const completeSubtask = (id) => {
-  //     const newSubtasks = subtasks.map((subtask) => {
-  //         if (id = subtask.id) {
-  //             subtask.isCompleted = !subtask.isCompleted;
-  //         }
-  //         return subtask;
-  //     }
-  //     )
-  //     setSubtasks(newSubtasks);
-  // }
 
   const getTodo = (id: string) => {
     return todos.find((el) => el.id === id);
@@ -144,12 +130,12 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
 
   useEffect(() => {
     updateStorage(todos);
-    console.log("Updated todos:", todos);
+    // console.log("Updated todos:", todos);
   }, [todos]);
 
   return (
     <TodoContext.Provider
-      value={{ todos, addTodo, editTodo, completeTodo, removeTodo, removeAllTodos, getTodo, updateStorage, completeSubtask }}
+      value={{ todos, addTodo, editTodo, completeTodo, removeTodo, removeAllTodos, getTodo, updateStorage, completeSubtask, duplicateTodo }}
     >
       {children}
     </TodoContext.Provider>
@@ -160,3 +146,20 @@ export default TodoProvider;
 
 
 
+// const completeSubtask = (id) => {
+//     const newSubtasks = subtasks.map((subtask) => {
+//         if (id = subtask.id) {
+//             subtask.isCompleted = !subtask.isCompleted;
+//         }
+//         return subtask;
+//     }
+//     )
+//     setSubtasks(newSubtasks);
+// }
+
+// const completeTodo = (item: any) => {
+//   const newTodos = todos.map((todo) =>
+//     todo.id === item.id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+//   )
+//   setTodos(newTodos);
+// };
