@@ -39,14 +39,7 @@ padding-top:8px;
 padding-bottom:6px;
 `;
 
-export const TaskBullet = styled.div`
-width: 18px;
-height: 18px;
-border: 1px solid red;
-border-radius: 50%;
-background-color: #FF4034;
-display:inline-block;
-`;
+
 
 export const TagsSection = styled.div `
 min-width: 60%;
@@ -81,7 +74,8 @@ padding-left:10px;
 export const TaskTag = styled.div`
 width:93px;
 height:27px;
-background-color:#FFF6E8;
+// border: 1px solid red;
+background-color: #FFF6E8;
 border-radius:60px;
 font-size:12px;
 display: flex;

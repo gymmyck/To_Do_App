@@ -62,14 +62,16 @@ export default App;
 
 // --v-- Duplicate task
 
+// --v-- Label Color depending on the due date (3 days - orange, 1 day - red)
+
 
 // Add messages 'this should be completed'
-
-// Label Color depending on the due date (3 days - orange, 1 day - red)
 
 // Add Modal 'you sure you wanna delete this task?'
 
 // Power Mode On
+
+// Add motion animations
 
 
 

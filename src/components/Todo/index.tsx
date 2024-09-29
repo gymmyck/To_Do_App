@@ -10,10 +10,10 @@ import {
     faTrash,
     faCheck
 } from "@fortawesome/free-solid-svg-icons";
-import { TaskBullet, TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, DueDate, TaskData, TaskTag, TaskButtons, TagsSection } from "./styles";
+import { TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, DueDate, TaskData, TaskTag, TaskButtons, TagsSection } from "./styles";
 import ProgressCircle from "../ProgressCircle";
 import styled from "styled-components";
-import { levelDescription, percentageCalculator, completeAllSubtasks } from "../../utils";
+import { levelDescription, percentageCalculator, completeAllSubtasks, calculateDueDays, setDueDaysColor } from "../../utils";
 import { useTodo } from "../../context/todoContext";
 import TagsList from "../TagsList";
 
@@ -70,6 +70,15 @@ padding-left:10px;
 text-decoration:${(props) => props.completed ? `line-through` : `none`};
 `;
 
+const TaskBullet = styled.div<{ dueDaysColor: string }>`
+width: 20px;
+height: 20px;
+// border: 1px solid red;
+border-radius: 50%;
+background-color: ${(props) => props.dueDaysColor};
+display:inline-block;
+`;
+
 type ToDoProps = {
     todo: any;
 }
@@ -78,11 +87,15 @@ const ToDo = ({ todo }: ToDoProps) => {
     const navigate = useNavigate();
     const { completeTodo, removeTodo, duplicateTodo } = useTodo() ?? {};
 
+const dueDays = calculateDueDays (todo.dueDate);
+
+const dueDaysColor = setDueDaysColor (todo.isCompleted, dueDays);
+
     return (
         <MainContainer completed={todo.isCompleted}>
             <ToDoLeft>
                 <TaskTitleLine>
-                    <TaskBullet style={{ marginLeft: '1px' }} />
+                    <TaskBullet style={{ marginLeft: '1px' }} dueDaysColor={dueDaysColor}/>
                     <Link to={`/taskDetail/${todo.id}`}>
                         <TaskTitle completed={todo.isCompleted}>{todo.name}</TaskTitle>
                     </Link>
