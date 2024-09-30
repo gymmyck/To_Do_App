@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledFormInput = styled.input`
+const StyledFormInput = styled.input<{nameError?: any}>`
   width: 100%;
   height: 60px;
   border-radius: 60px;
     // border: 1px solid #e2e2e2;
-  border: none;
+  border: ${(props) => props.nameError ? '1px solid red' : 'none'};
   outline: none;
   text-indent: 42px;
     position: relative;
@@ -19,27 +19,28 @@ const StyledFormInput = styled.input`
   }
 
   &:hover {
-    border: none;
+    border:  ${(props) => props.nameError ? '1px solid red' : 'none'};
     outline: none;
   }
 
   &:focus {
-    border: none;
+    border:  ${(props) => props.nameError ? '1px solid red' : 'none'};
     outline: none;
   }
 `;
 
 type FormInputProps = {
-    type: string;
-    value?: string;
-    placeholder: string;
-    onChange:(event: React.ChangeEvent<HTMLInputElement>) => void;
-    children?: React.ReactNode;
+  nameError: any;
+  type: string;
+  value?: string;
+  placeholder: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  children?: React.ReactNode;
 };
 
-const FormInput = ({ type, value, placeholder,onChange, children }: FormInputProps) => {
+const FormInput = ({ nameError, type, value, placeholder, onChange, children }: FormInputProps) => {
   return (
-    <StyledFormInput type={type} value={value} placeholder={placeholder} onChange={onChange}>{children}</StyledFormInput>
+    <StyledFormInput nameError={nameError} type={type} value={value} placeholder={placeholder} onChange={onChange}>{children}</StyledFormInput>
   );
 };
 

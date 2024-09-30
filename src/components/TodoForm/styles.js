@@ -144,3 +144,20 @@ justify-content:${(props) => props.justifyType === 'date' ? 'start' : props.just
 padding-bottom:6px;
 position:relative;
 `;
+
+export const ErrorDiv = styled.div `
+// height: 16px;
+width:60%;
+display:flex;
+color:red;
+justify-content:start;
+align-items:start;
+// border: 1px solid yellow;
+`;
+
+export const ErrorMessage = styled.div `
+// height: 16px;
+// width:100%;
+color:red;
+// border: 1px solid yellow;
+`;

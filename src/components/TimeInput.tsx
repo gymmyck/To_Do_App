@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledTimeInput = styled.input`
+const StyledTimeInput = styled.input<{nameError?:any}>`
   width: 90%;
   min-height: 44px;
   border-radius: 60px;
-// border: 1px solid #e2e;
-  border: none;
+  border: ${(props) => props.nameError ? '1px solid red' : 'none'};
+  // border: none;
   outline: none;
   text-indent: 42px;
   position: relative;
@@ -21,17 +21,18 @@ const StyledTimeInput = styled.input`
   }
 
   &:hover {
-    border: none;
+    border: ${(props) => props.nameError ? '1px solid red' : 'none'};
     outline: none;
   }
 
   &:focus {
-    border: none;
+    border: ${(props) => props.nameError ? '1px solid red' : 'none'};
     outline: none;
   }
 `;
 
 type TimeInputProps = {
+  nameError:any;
     type: string;
     value?: string;
     min?: string;
@@ -39,9 +40,9 @@ type TimeInputProps = {
     children?: React.ReactNode;
 };
 
-const TimeInput = ({ type, value, min, onChange, children }: TimeInputProps) => {
+const TimeInput = ({nameError, type, value, min, onChange, children }: TimeInputProps) => {
     return (
-        <StyledTimeInput type={type} value={value} min={min} onChange={onChange}>{children}</StyledTimeInput>
+        <StyledTimeInput nameError={nameError} type={type} value={value} min={min} onChange={onChange}>{children}</StyledTimeInput>
     );
 };
 

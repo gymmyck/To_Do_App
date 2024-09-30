@@ -29,6 +29,7 @@ import ToDo from "../../components/Todo/index";
 import { useTodo } from "../../context/todoContext";
 import styled from "styled-components";
 import NoTodoLogo from "../../components/Logos/NoTodosLogo.js";
+import DeleteTaskModal from "../../components/DeleteTaskModal";
 
 const Home = (props) => {
     const { todos, removeAllTodos } = useTodo(); 
@@ -38,6 +39,7 @@ const Home = (props) => {
     const [tagsList, setTagsList] = useState([])
     const [checkedTags, setCheckedTags] = useState({});
     const [sort, setSort] = useState('');
+    const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
     const refSorting = useRef(null);
     const refFilters = useRef(null);
 
@@ -159,6 +161,7 @@ const Home = (props) => {
 
     return (
         <MainContainer>
+            <DeleteTaskModal></DeleteTaskModal>
             <InputContainer>
                 <SearchInput type='text' placeholder="Search..." value={searchValue} onChange={handleSearch} {...props}></SearchInput>
                 <InputButton>

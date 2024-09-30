@@ -1,13 +1,14 @@
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import styled from "styled-components";
 
-const ButtonsContainer = styled.div`
+const ButtonsContainer = styled.div<{nameError? : any}>`
 width:100%;
 display: flex;
 flex-wrap: wrap;
 justify-content: space-around;
 // margin-top: 16px;
-// border: 1px solid red;
+border: ${(props) => props.nameError ? '1px solid red' : 'none'};
+border-radius: 20px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -76,15 +77,16 @@ input:hover ~ div {
 const numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 type FormButtonsProps = {
+    nameError:any;
     name: string;
     value: number;
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     id?: string;
 };
 
-const FormButtons = ({name, value, handleChange}: FormButtonsProps) => {
+const FormButtons = ({nameError, name, value, handleChange}: FormButtonsProps) => {
     return (
-        <ButtonsContainer>
+        <ButtonsContainer nameError={nameError} >
             {numberArray.map((number) =>
             (<ButtonWrapper key={`${name}-${number}`}>
                 <label>

@@ -64,14 +64,16 @@ export default App;
 
 // --v-- Label Color depending on the due date (3 days - orange, 1 day - red)
 
+// --v-- Add messages 'this should be completed'
 
-// Add messages 'this should be completed'
 
 // Add Modal 'you sure you wanna delete this task?'
 
 // Power Mode On
 
 // Add motion animations
+
+// add light/dark themes
 
 
 

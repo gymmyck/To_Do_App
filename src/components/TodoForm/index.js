@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { BackButton, AddSubtaskButton, FormSection, HeaderContainer, MainContainer, SaveTaskButton, SectionContent, SectionTitle, TimeSection, TimeSubSection, TagsSection } from "./styles";
+import { BackButton, AddSubtaskButton, FormSection, HeaderContainer, MainContainer, SaveTaskButton, SectionContent, SectionTitle, TimeSection, TimeSubSection, TagsSection, ErrorDiv, ErrorMessage } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faArrowLeft,
@@ -25,6 +25,7 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
     const [tags, setTags] = useState(todo ? todo.tags : '');
     const [tagsArray, setTagsArray] = useState(todo && todo.tagsArray ? todo.tagsArray : []);
     const [subtaskInput, setSubtaskInput] = useState('');
+    const [errorMessage, setErrorMessage] = useState({});
 
     const navigate = useNavigate();
 
@@ -35,18 +36,53 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const task = {
-            name,
-            priority,
-            complexity,
-            dueDate,
-            dueTime,
-            subtasks,
-            tagsArray
+
+        let errors = {};
+
+        if (name === '') errors.name = 'Task name is required';
+        if (priority === '') errors.priority = 'Priority is required';
+        if (complexity === '') errors.complexity = 'Complexity is required';
+        if (dueDate === '') errors.dueDate = 'Due date is required';
+        console.log(errors)
+        if (Object.keys(errors).length > 0) {
+            setErrorMessage(errors);
+        } else {
+            const task = {
+                name,
+                priority,
+                complexity,
+                dueDate,
+                dueTime,
+                subtasks,
+                tagsArray
+            }
+            handleSubmitHook(task);
+            // console.log(task);
+            navigate('/');
         }
-        handleSubmitHook(task);
-        // console.log(task);
-        navigate('/');
+    }
+
+    const checkInputChange = (field, value) => {
+
+        const errorTexts = {
+            name: 'Task name is required',
+            priority: 'Priority is required',
+            complexity: 'Complexity is required',
+            dueDate: 'Due date is required',
+        }
+
+        let updatedErrors = { ...errorMessage }
+
+        if (value.trim() === '') {
+            updatedErrors[field] = errorTexts[field]
+        } else {
+            delete updatedErrors[field];
+        }
+
+        if (Object.keys(errorMessage).length !== Object.keys(updatedErrors).length) {
+            setErrorMessage(updatedErrors);
+        }
+        console.log(updatedErrors);
     }
 
     const submitSubtask = () => {
@@ -101,8 +137,9 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                         Task Name
                     </SectionTitle>
                     <SectionContent>
-                        <FormInput type='text' placeholder="Add task name..." value={name} onChange={(e) => setName(e.target.value)} />
+                        <FormInput nameError={errorMessage.name} type='text' placeholder="Add task name..." value={name} onChange={(e) => { setName(e.target.value); checkInputChange('name', e.target.value) }} />
                     </SectionContent>
+                    <ErrorMessage>{errorMessage.name}</ErrorMessage>
                 </FormSection>
 
                 <FormSection>
@@ -110,8 +147,9 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                         Select priority level
                     </SectionTitle>
                     <SectionContent>
-                        <FormButtons name='priority' id="task-priority" value={priority} handleChange={(e) => setPriority(Number(e.target.value))} />
+                        <FormButtons nameError={errorMessage.priority} name='priority' id="task-priority" value={priority} handleChange={(e) => { setPriority(Number(e.target.value)); checkInputChange('priority', e.target.value) }} />
                     </SectionContent>
+                    <ErrorMessage>{errorMessage.priority}</ErrorMessage>
                 </FormSection>
 
                 <FormSection>
@@ -119,8 +157,9 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                         Select complexity level
                     </SectionTitle>
                     <SectionContent>
-                        <FormButtons name='complexity' id="task-complexity" value={complexity} handleChange={(e) => setComplexity(Number(e.target.value))} />
+                        <FormButtons nameError={errorMessage.complexity} name='complexity' id="task-complexity" value={complexity} handleChange={(e) => { setComplexity(Number(e.target.value)); checkInputChange('complexity', e.target.value) }} />
                     </SectionContent>
+                    <ErrorMessage>{errorMessage.complexity}</ErrorMessage>
                 </FormSection>
 
                 <TimeSection>
@@ -129,13 +168,14 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                             Select Due Date
                         </SectionTitle>
                         <SectionContent justifyType='date'>
-                            <TimeInput type='date' value={dueDate} min={currentDate} onChange={(e) => setDueDate(e.target.value)} />
+                            <TimeInput nameError={errorMessage.dueDate} type='date' value={dueDate} min={currentDate} onChange={(e) => { setDueDate(e.target.value); checkInputChange('dueDate', e.target.value) }} />
                             {/* <DatePicker
                         selected={date}
                         onSelect={handleDateSelect} //when day is clicked
                     //   onChange={handleDateChange} //only when value has changed
                     /> */}
                         </SectionContent>
+
                     </TimeSubSection>
                     <TimeSubSection>
                         <SectionTitle>
@@ -146,6 +186,8 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                         </SectionContent>
                     </TimeSubSection>
                 </TimeSection>
+                <ErrorDiv><ErrorMessage>{errorMessage.dueDate}</ErrorMessage></ErrorDiv>
+
 
                 <FormSection>
                     <SectionTitle>
@@ -184,3 +226,39 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
 }
 
 export default ToDoForm;
+
+
+// const checkInputChange = (field, value) => {
+
+//     let updatedErrors = { ...errorMessage }
+
+//     if (field === 'name' && value.trim() === '') {
+//         updatedErrors[field] = 'Task name is required';
+//     } else {
+//         delete updatedErrors[field];
+//     };
+
+//     if (field === 'priority' && value === '') {
+//         updatedErrors[field] = 'Priority is required';
+
+//     } else {
+//         delete updatedErrors[field];
+//     }
+//     if (field === 'complexity' && value === '') {
+//         updatedErrors[field] = 'Complexity is required';
+
+//     } else {
+//         delete updatedErrors[field];
+//     }
+//     if (field === 'dueDate' && value === '') {
+//         updatedErrors[field] = 'Due date is required';
+
+//     } else {
+//         delete updatedErrors[field];
+//     }
+
+//     if (Object.keys(errorMessage).length !== Object.keys(updatedErrors).length) {
+//     setErrorMessage(updatedErrors);
+//     }
+//     console.log(updatedErrors);
+// }
