@@ -39,8 +39,6 @@ padding-top:8px;
 padding-bottom:6px;
 `;
 
-
-
 export const TagsSection = styled.div `
 min-width: 60%;
 min-height: 20px;
@@ -59,11 +57,7 @@ margin: 0px;
 padding-left:10px;
 `;
 
-export const DueDate=styled.p`
-color: blue;
-margin: 0px;
-padding-left:10px;
-`;
+
 
 export const TaskData = styled.p`
 color: black;

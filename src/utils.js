@@ -27,18 +27,18 @@ export function calculateDueDays(date) {
 }
 
 export function setDueDaysColor(isCompleted, days) {
-    const colors = ["#ff9f1c", "#ffffc7", "#97dffc", '#74c69d']
+    const colors = ["#f02d3a", "#ff9f1c", "#97dffc", '#74c69d']
     if (!isCompleted) {
         switch (true) {
             case days >= 0 && days <= 1:
                 return colors[0];
-            case days >= 0 && days <= 3:
+            case days > 1 && days <= 3:
                 return colors[1];
             case days > 3:
                 return colors[2];
         }
     } else { return colors[3]; }
-    return '#d90429';
+    return '#640d14';
 }
 
 export function percentageCalculator(todo, id) {

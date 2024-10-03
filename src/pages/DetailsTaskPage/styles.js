@@ -15,6 +15,7 @@ flex-direction: column;
 justify-content: start;
 align-items:center;
 margin-top:50px;
+filter: ${(props) => props.showDeleteTaskModal ? 'blur(4px)' : 'none'};
 `;
 
 export const HeaderContainer = styled.div`
@@ -128,11 +129,11 @@ padding-bottom:6px;
 `;
 
 export const TaskBullet = styled.div`
-width: 18px;
-height: 18px;
-border: 1px solid red;
+width: 20px;
+height: 20px;
+// border: 1px solid red;
 border-radius: 50%;
-background-color: #FF4034;
+background-color: ${(props) => props.dueDaysColor};
 display:inline-block;
 `;
 
@@ -142,6 +143,7 @@ font-weight:600;
 font-size: 18px;
 margin: 0px;
 padding-left:10px;
+text-decoration:${(props) => props.completed ? `line-through` : `none`};
 `;
 
 export const TaskInfo = styled.p`

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { useTodo } from "../context/todoContext";
 
@@ -17,8 +18,10 @@ flex-direction:column;
 justify-content: center;
 align-items: center;
 position: fixed;
-top:33vh;
+top:45%;
+left:50%;
 z-index:100;
+transform: translate(-50%, -50%)
 `;
 
 const ModalButtonsContainer = styled.div`
@@ -33,23 +36,31 @@ width:80px;
 height:40px;
 border: 1px solid blue;
 border-radius:30px;
+
+&:hover {
+    background-color: ${(props) => props.theme.hoverMain};
+  }
 `;
 
 
 
 
 type ToDoProps = {
-    todo: any;
+    todoToDelete: any;
+    removeTodo: any;
+    closeModal: any;
 }
 
-const DeleteTaskModal = ({ todo }: ToDoProps) => {
+const DeleteTaskModal = ({ todoToDelete, removeTodo, closeModal }: ToDoProps) => {
+    const navigate = useNavigate();
+
 
     return (
         <MainContainer>
             You sure you want to delete this task?
             <ModalButtonsContainer>
-                <ModalButton>No</ModalButton>
-                <ModalButton>Yes</ModalButton>
+                <ModalButton onClick={() => closeModal()}>No</ModalButton>
+                <ModalButton onClick={() => { removeTodo && removeTodo(todoToDelete); closeModal(); navigate('/') }}>Yes</ModalButton>
             </ModalButtonsContainer>
 
         </MainContainer>)

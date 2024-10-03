@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,7 +10,7 @@ import {
     faTrash,
     faCheck
 } from "@fortawesome/free-solid-svg-icons";
-import { TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, DueDate, TaskData, TaskTag, TaskButtons, TagsSection } from "./styles";
+import { TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, TaskData, TaskTag, TaskButtons, TagsSection } from "./styles";
 import ProgressCircle from "../ProgressCircle";
 import styled from "styled-components";
 import { levelDescription, percentageCalculator, completeAllSubtasks, calculateDueDays, setDueDaysColor } from "../../utils";
@@ -19,6 +19,7 @@ import TagsList from "../TagsList";
 
 type MainContainerProps = {
     completed: boolean;
+    dueDays:number;
 }
 
 const MainContainer = styled.div<MainContainerProps>`
@@ -26,7 +27,7 @@ width: 398px;
 min-height: 200px;
 // border: 1px solid red;
 border-radius: 18px;
-background-color:${(props) => props.completed ? `#DCFCE7` : `#FFFFFF`};
+background-color:${(props) => props.completed ? `#DCFCE7` : props.dueDays < 0 ? `#bfb49fb1` : `#FFFFFF`};
 display: flex;
 justify-content: center;
 align-items: center;
@@ -79,23 +80,45 @@ background-color: ${(props) => props.dueDaysColor};
 display:inline-block;
 `;
 
+const DueDate=styled.p<{ dueDaysColor: string }>`
+color: ${(props) => props.dueDaysColor};
+margin: 0px;
+padding-left:10px;
+`;
+
 type ToDoProps = {
     todo: any;
+    openModal: any;
 }
 
-const ToDo = ({ todo }: ToDoProps) => {
+const ToDo = ({ todo, openModal }: ToDoProps) => {
     const navigate = useNavigate();
     const { completeTodo, removeTodo, duplicateTodo } = useTodo() ?? {};
+    const [dateDescription, setDateDescription] = useState('');
 
-const dueDays = calculateDueDays (todo.dueDate);
+    const dueDays = calculateDueDays(todo.dueDate);
+    console.log(todo.dueDate);
 
-const dueDaysColor = setDueDaysColor (todo.isCompleted, dueDays);
+    const dueDaysColor = setDueDaysColor(todo.isCompleted, dueDays);
+
+    const getDateDescription = (todo:any, dueDays: any) => {
+        console.log(todo.dueTime);
+        if (dueDays === 2) {
+            return 'Tomorrow';
+        } else if (dueDays === 0 || dueDays === 1 ) {
+            return 'Today';
+        } else if (dueDays < 0) {
+            return 'Overdue';
+        } else {
+            return `${todo.dueDate} at ${todo.dueTime || 'n/a'}`;
+        }
+    };
 
     return (
-        <MainContainer completed={todo.isCompleted}>
+        <MainContainer completed={todo.isCompleted} dueDays={dueDays}>
             <ToDoLeft>
                 <TaskTitleLine>
-                    <TaskBullet style={{ marginLeft: '1px' }} dueDaysColor={dueDaysColor}/>
+                    <TaskBullet style={{ marginLeft: '1px' }} dueDaysColor={dueDaysColor} />
                     <Link to={`/taskDetail/${todo.id}`}>
                         <TaskTitle completed={todo.isCompleted}>{todo.name}</TaskTitle>
                     </Link>
@@ -103,7 +126,7 @@ const dueDaysColor = setDueDaysColor (todo.isCompleted, dueDays);
                 <TaskInfoLine>
                     <FontAwesomeIcon icon={faCalendarDays} style={{ fontSize: '20px', paddingLeft: '2px' }} />
                     <TaskInfo style={{ paddingLeft: '11px' }}>Due Date:</TaskInfo>
-                    <DueDate style={{ paddingLeft: '8px' }}>{`${todo.dueDate} ${todo.dueTime}`}</DueDate>
+                    <DueDate style={{ paddingLeft: '8px' }} dueDaysColor={dueDaysColor}>{todo.isCompleted ? `Completed` : `${ getDateDescription(todo, dueDays)}`}</DueDate>
                 </TaskInfoLine>
                 <TaskInfoLine>
                     <FontAwesomeIcon icon={faArrowUp} style={{ fontSize: '20px', paddingLeft: '3px' }} />
@@ -136,7 +159,7 @@ const dueDaysColor = setDueDaysColor (todo.isCompleted, dueDays);
                         <FontAwesomeIcon icon={faCopy} style={{ fontSize: '14px' }} />
                     </TaskEditButton>
 
-                    <TaskEditButton deleteButton={true} onClick={() => removeTodo && removeTodo(todo)}>
+                    <TaskEditButton deleteButton={true} onClick={() => openModal(todo)}>
                         <FontAwesomeIcon icon={faTrash} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
 
@@ -148,3 +171,7 @@ const dueDaysColor = setDueDaysColor (todo.isCompleted, dueDays);
 }
 
 export default ToDo;
+
+// () => removeTodo && removeTodo(todo)
+
+// ${todo.dueDate} ${todo.dueTime}

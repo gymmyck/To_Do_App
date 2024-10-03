@@ -66,8 +66,13 @@ export default App;
 
 // --v-- Add messages 'this should be completed'
 
+// --v-- Add Modal 'you sure you wanna delete this task?'
 
-// Add Modal 'you sure you wanna delete this task?'
+// --v-- update the bullet point color in the details page as well
+
+// --v-- write 'overdue, today, tomorrow, been completed' at the Due Date
+
+
 
 // Power Mode On
 

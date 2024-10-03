@@ -32,7 +32,7 @@ import NoTodoLogo from "../../components/Logos/NoTodosLogo.js";
 import DeleteTaskModal from "../../components/DeleteTaskModal";
 
 const Home = (props) => {
-    const { todos, removeAllTodos } = useTodo(); 
+    const { todos, removeAllTodos, removeTodo } = useTodo();
     const [searchValue, setSearchValue] = useState('');
     const [showSortingFilters, setShowSortingFilters] = useState(false);
     const [showTagsFilters, setShowTagsFilters] = useState(false);
@@ -40,6 +40,7 @@ const Home = (props) => {
     const [checkedTags, setCheckedTags] = useState({});
     const [sort, setSort] = useState('');
     const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
+    const [todoToDelete, setTodoToDelete] = useState(null);
     const refSorting = useRef(null);
     const refFilters = useRef(null);
 
@@ -117,8 +118,8 @@ const Home = (props) => {
             .map((todo) => todo.tagsArray)
             .flat();
         const uniqueTags = Array.from(
-            tagsList.reduce((acc,current) => {
-                if(!acc.has(current.name)){
+            tagsList.reduce((acc, current) => {
+                if (!acc.has(current.name)) {
                     acc.set(current.name, current);
                 }
                 return acc;
@@ -127,6 +128,15 @@ const Home = (props) => {
 
         // console.log('s',uniqueTags);
         return uniqueTags;
+    }
+
+    const openModal = (todo) => {
+        setShowDeleteTaskModal(true);
+        setTodoToDelete(todo)
+    }
+
+    const closeModal = () => {
+        setShowDeleteTaskModal(false);
     }
 
     const filteredTodos = todos
@@ -160,64 +170,66 @@ const Home = (props) => {
     }, [checkedTags])
 
     return (
-        <MainContainer>
-            <DeleteTaskModal></DeleteTaskModal>
-            <InputContainer>
-                <SearchInput type='text' placeholder="Search..." value={searchValue} onChange={handleSearch} {...props}></SearchInput>
-                <InputButton>
-                    <FontAwesomeIcon icon={faArrowRight} />
-                </InputButton>
-            </InputContainer>
-            <PowerModeButton>
-                <FontAwesomeIcon icon={faPowerOff} />
-                Power Mode On
-            </PowerModeButton>
-            <FiltersContainer>
-                <ButtonWrapper ref={refSorting}>
-                    <FilterButton onClick={() => setShowSortingFilters(!showSortingFilters)}>
-                        Sort
-                        {showSortingFilters ? (
-                            <FontAwesomeIcon icon={faChevronUp} />
-                        ) : (
-                            <FontAwesomeIcon icon={faChevronDown} />
-                        )}
-                    </FilterButton>
-                    {showSortingFilters && (<SortingDropList sort={sort} handleSortChoice={handleSortChoice}></SortingDropList>)}
-                </ButtonWrapper>
-                <ButtonWrapper ref={refFilters}>
-                    <FilterButton onClick={() => setShowTagsFilters(!showTagsFilters)}>
-                        Category
-                        {showTagsFilters ? (
-                            <FontAwesomeIcon icon={faChevronUp} />
-                        ) : (
-                            <FontAwesomeIcon icon={faChevronDown} />
-                        )}
-                    </FilterButton>
-                    {showTagsFilters && (<TagsDropList tagsList={tagsList} handleCheckboxChange={handleCheckboxChange} checkedTags={checkedTags} setCheckedTags={setCheckedTags}></TagsDropList>)}
-                </ButtonWrapper>
+        <div>
+            {showDeleteTaskModal && <DeleteTaskModal todoToDelete={todoToDelete} removeTodo={removeTodo} closeModal={closeModal}/>}
 
-            </FiltersContainer>
-            <ToDosContainer>
-                {todos.length === 0 ?
-                    <NoTodoLogo></NoTodoLogo> :
-                    sortedTodos.map((todo, index) => (<ToDo key={index} todo={todo}></ToDo>))}
-            </ToDosContainer>
-            <Link
-                to='/newTask'
-            // onClick={logHook}
-            >
-                <AddButton>
-                    <FontAwesomeIcon icon={faPlus} />
-                    Add New Task
-                </AddButton>
-            </Link>
+            <MainContainer showDeleteTaskModal={showDeleteTaskModal}>
+                <InputContainer>
+                    <SearchInput type='text' placeholder="Search..." value={searchValue} onChange={handleSearch} {...props}></SearchInput>
+                    <InputButton>
+                        <FontAwesomeIcon icon={faArrowRight} />
+                    </InputButton>
+                </InputContainer>
+                <PowerModeButton>
+                    <FontAwesomeIcon icon={faPowerOff} />
+                    Power Mode On
+                </PowerModeButton>
+                <FiltersContainer>
+                    <ButtonWrapper ref={refSorting}>
+                        <FilterButton onClick={() => setShowSortingFilters(!showSortingFilters)}>
+                            Sort
+                            {showSortingFilters ? (
+                                <FontAwesomeIcon icon={faChevronUp} />
+                            ) : (
+                                <FontAwesomeIcon icon={faChevronDown} />
+                            )}
+                        </FilterButton>
+                        {showSortingFilters && (<SortingDropList sort={sort} handleSortChoice={handleSortChoice}></SortingDropList>)}
+                    </ButtonWrapper>
+                    <ButtonWrapper ref={refFilters}>
+                        <FilterButton onClick={() => setShowTagsFilters(!showTagsFilters)}>
+                            Category
+                            {showTagsFilters ? (
+                                <FontAwesomeIcon icon={faChevronUp} />
+                            ) : (
+                                <FontAwesomeIcon icon={faChevronDown} />
+                            )}
+                        </FilterButton>
+                        {showTagsFilters && (<TagsDropList tagsList={tagsList} handleCheckboxChange={handleCheckboxChange} checkedTags={checkedTags} setCheckedTags={setCheckedTags}></TagsDropList>)}
+                    </ButtonWrapper>
 
-            <DeleteAllButton onClick={removeAllTodos}>
-                <FontAwesomeIcon icon={faTrash} />
-                Delete All Tasks
-            </DeleteAllButton>
+                </FiltersContainer>
+                <ToDosContainer>
+                    {todos.length === 0 ?
+                        <NoTodoLogo></NoTodoLogo> :
+                        sortedTodos.map((todo, index) => (<ToDo key={index} todo={todo} openModal={openModal}/>))}
+                </ToDosContainer>
+                <Link
+                    to='/newTask'
+                // onClick={logHook}
+                >
+                    <AddButton>
+                        <FontAwesomeIcon icon={faPlus} />
+                        Add New Task
+                    </AddButton>
+                </Link>
 
-        </MainContainer>
+                <DeleteAllButton onClick={removeAllTodos}>
+                    <FontAwesomeIcon icon={faTrash} />
+                    Delete All Tasks
+                </DeleteAllButton>
+            </MainContainer>
+        </div>
     );
 };
 
