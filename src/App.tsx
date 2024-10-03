@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -15,10 +15,25 @@ import "./styles.css";
 
 
 function App() {
+
+  const [isLightTheme, setIsLightTheme] = useState(false);
+
+  const handleSwitchTheme = () => {
+    setIsLightTheme(!isLightTheme);
+  };
+
   return (
     <Router>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
         <GlobalStyle />
+        <div className="mq-padding-r-10">
+            <label className="switch">
+              <input type="checkbox" onClick={handleSwitchTheme} />
+              <span className="slider round">
+                <span>{isLightTheme ? "Dark Mode" : "Light Mode"}</span>
+              </span>
+            </label>
+          </div>
         <TodoProvider>
           <Routes>
             <Route path="/" element={<Home />}></Route>
@@ -74,12 +89,8 @@ export default App;
 
 
 
+// add light/dark themes
+
 // Power Mode On
 
 // Add motion animations
-
-// add light/dark themes
-
-
-
-

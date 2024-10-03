@@ -134,10 +134,10 @@ padding: 0 30px;
 border-radius:60px;
 border: none;
 position:absolute;
-background-color: #FFFFFF;
+background-color: ${(props) => props.theme.inputPrimary};
 
 &:hover {
-    background-color: ${(props) => props.theme.hoverSecondary};
+    background-color: ${(props) => props.theme.hoverMain};
   }
 `;
 
