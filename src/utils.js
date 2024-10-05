@@ -27,7 +27,7 @@ export function calculateDueDays(date) {
 }
 
 export function setDueDaysColor(isCompleted, days) {
-    const colors = ["#f02d3a", "#ff9f1c", "#97dffc", '#74c69d']
+    const colors = ["#f02d3a", "#ff9f1c", "#20a4f3", '#74c69d']
     if (!isCompleted) {
         switch (true) {
             case days >= 0 && days <= 1:

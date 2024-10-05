@@ -7,7 +7,7 @@ display: flex;
 flex-wrap: wrap;
 justify-content: space-around;
 // margin-top: 16px;
-border: ${(props) => props.nameError ? '1px solid red' : 'none'};
+border: ${(props) => props.nameError ? '1px solid red' : 'transparent'};
 border-radius: 20px;
 `;
 

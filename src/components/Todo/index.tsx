@@ -22,18 +22,34 @@ type MainContainerProps = {
     dueDays:number;
 }
 
+const hexToRgba = (hex: string, alpha: number) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+
+    return `${r}, ${g}, ${b}, ${alpha}`; // Returns "r, g, b, a"
+};
+
 const MainContainer = styled.div<MainContainerProps>`
 width: 398px;
 min-height: 200px;
-// border: 1px solid red;
+border: 1px solid ${(props) => props.theme.borderColor};
 border-radius: 18px;
-background-color:${(props) => props.completed ? `#DCFCE7` : props.dueDays < 0 ? `#bfb49fb1` : `#FFFFFF`};
+background-color:${(props) => props.completed ? `#DCFCE7` : props.dueDays < 0 ? `#bfb49fb1` : props.theme.taskBackgroundColor};
 display: flex;
 justify-content: center;
 align-items: center;
 position: relative;
 margin-top:12px;
 padding:10px;
+
+&:hover {
+    background-color: ${(props) => {
+        const taskColor = props.completed ? `#DCFCE7` : props.dueDays < 0 ? `#bfb49fb1` : props.theme.taskBackgroundColor;
+        return `rgba(${hexToRgba(taskColor, 0.85)})`;  // Slightly reduced opacity (0.9)
+    }};
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
 `;
 
 type TaskEditButtonProps = {
@@ -48,8 +64,8 @@ justify-content: center;
 align-items: center;
 border: none;
 border-radius: 50%;
-background-color:${(props) => props.deleteButton ? '#f67e7d' : '#0D99FF1A'};
-color: #717171;
+background-color:${(props) => props.deleteButton ? '#f67e7d' : (props)=>props.theme.buttonColor};
+color: ${(props)=>props.theme.buttonIcon};
 margin-bottom:8px;
 
 &:hover {
@@ -97,12 +113,12 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
     const [dateDescription, setDateDescription] = useState('');
 
     const dueDays = calculateDueDays(todo.dueDate);
-    console.log(todo.dueDate);
+    // console.log(todo.dueDate);
 
     const dueDaysColor = setDueDaysColor(todo.isCompleted, dueDays);
 
     const getDateDescription = (todo:any, dueDays: any) => {
-        console.log(todo.dueTime);
+        // console.log(todo.dueTime);
         if (dueDays === 2) {
             return 'Tomorrow';
         } else if (dueDays === 0 || dueDays === 1 ) {

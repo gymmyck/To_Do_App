@@ -51,7 +51,7 @@ align-items: center;
 `;
 
 export const TaskInfo = styled.p`
-color: #616161;
+color: ${(props)=> props.theme.tasksInfo};
 font-size: 16px;
 margin: 0px;
 padding-left:10px;
@@ -60,7 +60,7 @@ padding-left:10px;
 
 
 export const TaskData = styled.p`
-color: black;
+color: ${(props)=> props.theme.textMain};
 margin: 0px;
 padding-left:10px;
 `;

@@ -26,16 +26,16 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body::-webkit-scrollbar {
-    width: 12px;
+    width: 8px;
   }
 
   body::-webkit-scrollbar-track {
-    background: grey;
+    background: #eef0f2;
     border-radius: 20px;
   }
 
   body::-webkit-scrollbar-thumb {
-    background-color: lightblue;
+    background-color: #454955;
     border-radius: 20px;
   }
 `;

@@ -87,9 +87,9 @@ export default App;
 
 // --v-- write 'overdue, today, tomorrow, been completed' at the Due Date
 
+// --v-- add light/dark themes - look for all the properties containing 'color' in every file and change it to props.
 
 
-// add light/dark themes
 
 // Power Mode On
 

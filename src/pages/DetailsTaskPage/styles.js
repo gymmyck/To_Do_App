@@ -6,8 +6,8 @@ margin:0;
 width: 44vw;
 height: 90vh;
 position:relative;
-background-color: #0D99FF1A;
-border: 1px solid red;
+background-color: ${(props) => props.theme.bgColor};
+// border: 1px solid red;
 border-radius:12px;
 border:none;
 display: flex;
@@ -31,6 +31,10 @@ font-size:24px;
 color: #FFFFFF;
 `;
 
+export const Title = styled.p`
+color: ${(props) => props.theme.textMain};
+`;
+
 export const BackButton = styled.button`
 width: 36px;
 height: 36px;
@@ -43,11 +47,13 @@ align-items: center;
 border-radius:50%;
 border: none;
 right: 14px;
-background-color: #0D99FF1A;
+background-color:${(props) => props.deleteButton ? '#f67e7d' : (props)=>props.theme.buttonColor};
+color: ${(props)=>props.theme.inputSecondary};
 
 &:hover {
-    background-color: ${(props) => props.theme.hoverSecondary};
-  }
+  background-color:#0D99FF9A;
+  color: #717171;
+}
 `;
 
 export const TaskEditButton = styled.button`
@@ -58,8 +64,8 @@ justify-content: center;
 align-items: center;
 border: none;
 border-radius: 50%;
-background-color:${(props) => props.deleteButton ? '#f67e7d' : '#0D99FF1A'};
-color: #717171;
+background-color:${(props) => props.deleteButton ? '#f67e7d' : (props)=>props.theme.buttonColor};
+color: ${(props)=>props.theme.inputSecondary};
 margin-bottom:8px;
 position: absolute;
 right:-10px;
@@ -86,8 +92,9 @@ export const ToDoContainer = styled.div`
 width: 398px;
 min-height: 234px;
 // border: 1px solid red;
+border: 1px solid ${(props) => props.theme.borderColor};
 border-radius: 18px;
-background-color:#FFFFFF;
+background-color:${(props) => props.completed ? `#DCFCE7` : props.dueDays < 0 ? `#bfb49fb1` : (props) => props.theme.taskBackgroundColor};
 display: flex;
 justify-content: center;
 align-items: center;
@@ -154,7 +161,7 @@ padding-left:10px;
 `;
 
 export const DueDate = styled.p`
-color: blue;
+color: ${(props) => props.dueDaysColor};
 margin: 0px;
 padding-left:10px;
 `;
@@ -229,7 +236,7 @@ width: 100%;
 // border: 1px solid blue;
 margin-top:12px;
 padding-bottom:6px;
-color: #FFFFFF;
+color: ${(props) => props.theme.textMain};
 `;
 
 export const SectionContent = styled.div`
@@ -251,13 +258,13 @@ border-radius:60px;
 border: none;
 padding-inline: 12px;
 right: 14px;
-background-color: #0D99FF;
+background-color: ${(props) => props.theme.bgAddButton};
 margin-top: 20px;
 font-size:18px;
-color: #FFFFFF;
+color: ${(props) => props.theme.textSecondary};
 
 &:hover {
-    background-color: ${(props) => props.theme.hoverSecondary};
+  background-color: ${(props) => props.theme.bgAddButtonHover};
   }
 `;
 
@@ -271,14 +278,14 @@ border-radius:60px;
 border: none;
 padding-inline: 12px;
 right: 14px;
-background-color: #f67e7d;
+background-color: ${(props) => props.theme.bgDeleteButton};
 margin-top: 20px;
 margin-bottom: 20px;
 font-size:18px;
-color: #FFFFFF;
+color: ${(props) => props.theme.textSecondary};
 
 &:hover {
-    background-color: ${(props) => props.theme.hoverSecondary};
+  background-color: ${(props) => props.theme.bgDeleteButtonHover};
   }
 `;
 

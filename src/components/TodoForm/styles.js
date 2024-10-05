@@ -6,7 +6,7 @@ margin:0;
 width: 44vw;
 min-height: 90vh;
 position:relative;
-background-color: #0D99FF1A;
+background-color: ${(props) => props.theme.bgColor};
 border: 1px solid red;
 border-radius:12px;
 border:none;
@@ -15,6 +15,10 @@ flex-direction: column;
 justify-content: start;
 align-items:center;
 margin-top:50px;
+`;
+
+export const Title = styled.p`
+color: ${(props) => props.theme.textMain};
 `;
 
 export const BackButton = styled.button`
@@ -29,11 +33,13 @@ align-items: center;
 border-radius:50%;
 border: none;
 right: 14px;
-background-color: #0D99FF1A;
+background-color:${(props) => props.deleteButton ? '#f67e7d' : (props)=>props.theme.buttonColor};
+color: ${(props)=>props.theme.inputSecondary};
 
 &:hover {
-    background-color: ${(props) => props.theme.hoverSecondary};
-  }
+  background-color:#0D99FF9A;
+  color: #717171;
+}
 `;
 
 export const SaveTaskButton = styled.button`
@@ -46,14 +52,14 @@ border-radius:60px;
 border: none;
 padding-inline: 12px;
 right: 14px;
-background-color: #0D99FF;
+background-color:  ${(props) => props.theme.bgAddButton};
 margin-top: 10px;
 margin-bottom: 10px;
 font-size:18px;
-color: #FFFFFF;
+color: ${(props) => props.theme.textSecondary};
 
 &:hover {
-    background-color: ${(props) => props.theme.hoverSecondary};
+  background-color: ${(props) => props.theme.bgAddButtonHover};
   }
 `;
 
@@ -133,7 +139,7 @@ width: 100%;
 // border: 1px solid blue;
 position: relative;
 padding-bottom:6px;
-color: #FFFFFF;
+color: ${(props) => props.theme.textMain};
 `;
 
 export const SectionContent = styled.div `

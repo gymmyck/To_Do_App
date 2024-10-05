@@ -56,22 +56,22 @@ border-radius:30px;
 
 type ToDoProps = {
     todoToDelete: any;
-    removeTodo: any;
+    removeAllTodos: any;
     closeModal: any;
 }
 
-const DeleteTaskModal = ({ todoToDelete, removeTodo, closeModal }: ToDoProps) => {
+const DeleteAllTasksModal = ({ todoToDelete, removeAllTodos, closeModal }: ToDoProps) => {
     const navigate = useNavigate();
 
     return (
         <MainContainer>
-            You sure you want to delete this task?
+            You sure you want to delete all tasks?
             <ModalButtonsContainer>
                 <ModalButtonNo onClick={() => closeModal()}>No</ModalButtonNo>
-                <ModalButtonYes onClick={() => { removeTodo && removeTodo(todoToDelete); closeModal(); navigate('/') }}>Yes</ModalButtonYes>
+                <ModalButtonYes onClick={() => { removeAllTodos && removeAllTodos(); closeModal(); navigate('/') }}>Yes</ModalButtonYes>
             </ModalButtonsContainer>
 
         </MainContainer>)
 }
 
-export default DeleteTaskModal;
+export default DeleteAllTasksModal;

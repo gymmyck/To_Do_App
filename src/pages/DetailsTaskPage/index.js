@@ -12,7 +12,7 @@ import {
     faArrowLeft,
     faPen
 } from "@fortawesome/free-solid-svg-icons";
-import { MainContainer, ToDoContainer, TaskBullet, TaskTitleLine, TaskInfoLine, TaskTitle, ToDoLeft, TaskInfo, DueDate, TaskData, TaskTag, TaskProgress, HeaderContainer, BackButton, RepeatButton, DeleteTaskButton, FormSection, SectionTitle, SectionContent, TaskEditButton, TagsSection } from "./styles.js";
+import { MainContainer, Title, ToDoContainer, TaskBullet, TaskTitleLine, TaskInfoLine, TaskTitle, ToDoLeft, TaskInfo, DueDate, TaskData, TaskTag, TaskProgress, HeaderContainer, BackButton, RepeatButton, DeleteTaskButton, FormSection, SectionTitle, SectionContent, TaskEditButton, TagsSection } from "./styles.js";
 import { Line, Circle } from 'rc-progress';
 import FormInput from "../../components/FormInput";
 import { useTodo } from "../../context/todoContext";
@@ -45,6 +45,17 @@ const DetailTask = () => {
 
     const dueDaysColor = setDueDaysColor(todo.isCompleted, dueDays);
 
+    const getDateDescription = (todo, dueDays) => {
+        if (dueDays === 2) {
+            return 'Tomorrow';
+        } else if (dueDays === 0 || dueDays === 1 ) {
+            return 'Today';
+        } else if (dueDays < 0) {
+            return 'Overdue';
+        } else {
+            return `${todo.dueDate} at ${todo.dueTime || 'n/a'}`;
+        }
+    };
 
     return (
         <div>
@@ -55,18 +66,18 @@ const DetailTask = () => {
                 <HeaderContainer>
                     <Link to='/'>
                         <BackButton>
-                            <FontAwesomeIcon icon={faArrowLeft} style={{ color: '#FFFFFF' }} />
+                            <FontAwesomeIcon icon={faArrowLeft} />
                         </BackButton>
                     </Link>
-                    Task Details
+                    <Title>Task Details</Title>
                     <Link to={`/editTask/${todo.id}`}>
                         <TaskEditButton>
-                            <FontAwesomeIcon icon={faPen} style={{ color: '#FFFFFF' }} />
+                            <FontAwesomeIcon icon={faPen} />
                         </TaskEditButton>
                     </Link >
                 </HeaderContainer>
 
-                <ToDoContainer>
+                <ToDoContainer completed={todo.isCompleted} dueDays={dueDays}>
                     <ToDoLeft>
                         <TaskTitleLine>
                             <TaskBullet style={{ marginLeft: '1px' }} dueDaysColor={dueDaysColor} />
@@ -75,7 +86,7 @@ const DetailTask = () => {
                         <TaskInfoLine>
                             <FontAwesomeIcon icon={faCalendarDays} style={{ fontSize: '20px', paddingLeft: '2px' }} />
                             <TaskInfo style={{ paddingLeft: '11px' }}>Due Date:</TaskInfo>
-                            <DueDate style={{ paddingLeft: '8px' }}>{`${todo.dueDate} ${todo.dueTime}`}</DueDate>
+                            <DueDate style={{ paddingLeft: '8px' }} dueDaysColor={dueDaysColor}>{todo.isCompleted ? `Completed` : `${ getDateDescription(todo, dueDays)}`}</DueDate>
                         </TaskInfoLine>
                         <TaskInfoLine>
                             <FontAwesomeIcon icon={faArrowUp} style={{ fontSize: '20px', paddingLeft: '3px' }} />

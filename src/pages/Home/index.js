@@ -30,6 +30,7 @@ import { useTodo } from "../../context/todoContext";
 import styled from "styled-components";
 import NoTodoLogo from "../../components/Logos/NoTodosLogo.js";
 import DeleteTaskModal from "../../components/DeleteTaskModal";
+import DeleteAllTasksModal from "../../components/DeleteAllTasksModal";
 
 const Home = (props) => {
     const { todos, removeAllTodos, removeTodo } = useTodo();
@@ -40,6 +41,7 @@ const Home = (props) => {
     const [checkedTags, setCheckedTags] = useState({});
     const [sort, setSort] = useState('');
     const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
+    const [showDeleteTaskModalAll, setShowDeleteTaskModalAll] = useState(false);
     const [todoToDelete, setTodoToDelete] = useState(null);
     const refSorting = useRef(null);
     const refFilters = useRef(null);
@@ -125,10 +127,14 @@ const Home = (props) => {
                 return acc;
             }, new Map()).values()
         );
-
         // console.log('s',uniqueTags);
         return uniqueTags;
     }
+
+    const getTagsColors = () => {
+        console.log(tagsList);
+    }
+    getTagsColors();
 
     const openModal = (todo) => {
         setShowDeleteTaskModal(true);
@@ -137,6 +143,14 @@ const Home = (props) => {
 
     const closeModal = () => {
         setShowDeleteTaskModal(false);
+    }
+
+    const openModalAll = () => {
+        setShowDeleteTaskModalAll(true);
+    }
+
+    const closeModalAll = () => {
+        setShowDeleteTaskModalAll(false);
     }
 
     const filteredTodos = todos
@@ -172,8 +186,9 @@ const Home = (props) => {
     return (
         <div>
             {showDeleteTaskModal && <DeleteTaskModal todoToDelete={todoToDelete} removeTodo={removeTodo} closeModal={closeModal}/>}
+            {showDeleteTaskModalAll && <DeleteAllTasksModal removeAllTodos={removeAllTodos} closeModal={closeModalAll}/>}
 
-            <MainContainer showDeleteTaskModal={showDeleteTaskModal}>
+            <MainContainer showDeleteTaskModal={showDeleteTaskModal} showDeleteTaskModalAll={showDeleteTaskModalAll}>
                 <InputContainer>
                     <SearchInput type='text' placeholder="Search..." value={searchValue} onChange={handleSearch} {...props}></SearchInput>
                     <InputButton>
@@ -224,7 +239,7 @@ const Home = (props) => {
                     </AddButton>
                 </Link>
 
-                <DeleteAllButton onClick={removeAllTodos}>
+                <DeleteAllButton onClick={() => openModalAll()}>
                     <FontAwesomeIcon icon={faTrash} />
                     Delete All Tasks
                 </DeleteAllButton>

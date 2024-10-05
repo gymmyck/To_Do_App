@@ -12,6 +12,7 @@ const StyledSearchInput = styled.input`
     position: relative;
   font-size: 16px;
   background-color: ${(props) => props.theme.inputPrimary};
+  color:${(props) => props.theme.textSecondary};
 
   &::placeholder {
     font-size: 16px;

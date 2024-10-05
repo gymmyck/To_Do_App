@@ -14,13 +14,14 @@ const StyledList = styled.ul`
   display: flex;
   flex-direction:column;
   align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 `;
 
 const StyledListItem = styled.li`
 width:90%;
 height:34px;
 font-size:12px;
-border-bottom: 1px solid #D9D9D9;
+border-bottom: 1px solid ${(props) => props.theme.dropListBorder};
 display:flex;
 &:last-child {
     border:none;
@@ -36,7 +37,7 @@ padding-right:2px;
 `;
 
 const StyledLabelText = styled.p`
-color: #717171;
+color:  ${(props)=> props.theme.textSecondary};
 `;
 
 type SortingListProps = {

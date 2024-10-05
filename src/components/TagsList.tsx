@@ -6,10 +6,10 @@ import {
     faX
 } from "@fortawesome/free-solid-svg-icons";
 
-const TagContainer = styled.div`
+const TagContainer = styled.div<{bgColor?:any}>`
 min-width:50px;
 height:27px;
-background-color:#FFF6E8;
+background-color:${(props) => props.bgColor};
 border-radius:60px;
 font-size:12px;
 display: flex;
@@ -31,6 +31,7 @@ position:relative;
   border-color: transparent;
   outline: none;
   background-color: #ede0d422;
+  cursor: pointer;
 }
 
 &:focus {
@@ -53,15 +54,16 @@ position:relative;
 type Tags = {
     id: string,
     name: string,
+    bgColor:any,
 }
 
-const TagsList = ({ tags, removeTag, edit }: { tags: Tags[], removeTag?: any, edit?:boolean }) => {
+const TagsList = ({ tags, removeTag, edit }: { tags: Tags[], removeTag?: any, edit?:boolean}) => {
     // const tagss = ['school', 'cooking', 'job']
 
     return (
         <>
             {tags && tags.map((item, index) => (
-                <TagContainer key={item.id}>
+                <TagContainer key={item.id} bgColor={item.bgColor}>
                     {`${item.name}`}
                     { edit ? (
                         <RemoveButton onClick={() => removeTag(item.id)}>

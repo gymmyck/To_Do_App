@@ -5,7 +5,7 @@ const StyledTimeInput = styled.input<{nameError?:any}>`
   width: 90%;
   min-height: 44px;
   border-radius: 60px;
-  border: ${(props) => props.nameError ? '1px solid red' : 'none'};
+  border: ${(props) => props.nameError ? '1px solid red' : 'transparent'};
   // border: none;
   outline: none;
   text-indent: 42px;
@@ -13,6 +13,12 @@ const StyledTimeInput = styled.input<{nameError?:any}>`
   font-size: 16px;
 //   display:flex;
 //   justify-content:center;
+background-color: ${(props) => props.theme.inputPrimary};
+color: ${(props) => props.theme.inputSecondary};
+
+  &::-webkit-calendar-picker-indicator{
+    filter: ${(props) => props.theme.timeSymbol};
+  }
 
   &::placeholder {
     font-size: 16px;
@@ -21,12 +27,12 @@ const StyledTimeInput = styled.input<{nameError?:any}>`
   }
 
   &:hover {
-    border: ${(props) => props.nameError ? '1px solid red' : 'none'};
+    border: ${(props) => props.nameError ? '1px solid red' : 'transparent'};
     outline: none;
   }
 
   &:focus {
-    border: ${(props) => props.nameError ? '1px solid red' : 'none'};
+    border: ${(props) => props.nameError ? '1px solid red' : 'transparent'};
     outline: none;
   }
 `;

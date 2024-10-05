@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { BackButton, AddSubtaskButton, FormSection, HeaderContainer, MainContainer, SaveTaskButton, SectionContent, SectionTitle, TimeSection, TimeSubSection, TagsSection, ErrorDiv, ErrorMessage } from "./styles";
+import { BackButton, Title, AddSubtaskButton, FormSection, HeaderContainer, MainContainer, SaveTaskButton, SectionContent, SectionTitle, TimeSection, TimeSubSection, TagsSection, ErrorDiv, ErrorMessage } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faArrowLeft,
@@ -105,11 +105,29 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
         const newTagsArray = arrayTags.map((item) => (
             {
                 id: uid(),
-                name: item
+                name: item,
+                bgColor:  getRandomColor(),
             }));
         setTagsArray([...tagsArray, ...newTagsArray]);
         setTags('');
     }
+
+    function getRandomColor () {
+        let hexColor = '#';
+
+        function getRandomHexDigit() {
+            const hexDigits = '0123456789abcdef';
+            const randomIndex = Math.floor(Math.random() * 16);
+            return hexDigits[randomIndex];
+        }
+        for (let i = 0; i <= 5; i++) {
+            hexColor += getRandomHexDigit();
+        }
+        return hexColor;
+    }
+
+    getRandomColor();
+
 
     const removeTag = (id) => {
         const newTags = tagsArray.filter((tag) => id !== tag.id)
@@ -117,7 +135,7 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
     }
 
     useEffect(() => {
-        // console.log(tags)
+        console.log(tags)
     }, [tags])
 
     return (
@@ -125,10 +143,10 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
             <HeaderContainer>
                 <Link to='/'>
                     <BackButton>
-                        <FontAwesomeIcon icon={faArrowLeft} style={{ color: '#FFFFFF' }} />
+                        <FontAwesomeIcon icon={faArrowLeft} />
                     </BackButton>
                 </Link>
-                {title}
+                <Title>{title}</Title>
             </HeaderContainer>
 
             <form onSubmit={handleSubmit}>
@@ -169,11 +187,6 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                         </SectionTitle>
                         <SectionContent justifyType='date'>
                             <TimeInput nameError={errorMessage.dueDate} type='date' value={dueDate} min={currentDate} onChange={(e) => { setDueDate(e.target.value); checkInputChange('dueDate', e.target.value) }} />
-                            {/* <DatePicker
-                        selected={date}
-                        onSelect={handleDateSelect} //when day is clicked
-                    //   onChange={handleDateChange} //only when value has changed
-                    /> */}
                         </SectionContent>
 
                     </TimeSubSection>

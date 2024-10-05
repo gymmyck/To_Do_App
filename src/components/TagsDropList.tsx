@@ -5,7 +5,7 @@ const StyledList = styled.ul`
 width: 100%;
 //   border: 1px solid blue;
   border-radius:14px;
-  background-color: #FFFFFF;
+  background-color: ${(props) => props.theme.inputPrimary};
   margin-top:48px;
   list-style-type: none;
   margin-left: 0px;
@@ -20,7 +20,7 @@ const StyledListItem = styled.li`
 width:90%;
 height:34px;
 font-size:12px;
-border-bottom: 1px solid #D9D9D9;
+border-bottom: 1px solid ${(props) => props.theme.dropListBorder};
 display:flex;
 &:last-child {
     border:none;
@@ -36,7 +36,7 @@ padding-right:2px;
 `;
 
 const StyledLabelText = styled.p`
-color: #717171;
+color:  ${(props)=> props.theme.textSecondary};
 `;
 
 type TagsListProps = {

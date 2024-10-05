@@ -20,10 +20,11 @@ font-size: 16px;
 display:flex;
 justify-content:start;
 align-items:center;
-color: #FFFFFF;
+color: ${(props)=> props.theme.textSecondary};
 margin-top:4px;
 margin-bottom:4px;
 text-decoration: ${(props) => props.isCompleted ? 'line-through' : null};
+background-color:${(props) => props.theme.bgSubtask};
 
 &::placeholder {
   font-size: 16px;
@@ -34,7 +35,7 @@ text-decoration: ${(props) => props.isCompleted ? 'line-through' : null};
 &:hover {
   border-color: transparent;
   outline: none;
-  background-color: #ede0d422;
+  background-color:${(props) => props.theme.bgSubtaskHover};
 }
 
 &:focus {

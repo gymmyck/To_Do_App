@@ -10,7 +10,7 @@ display: flex;
 flex-direction: column;
 justify-content: start;
 align-items:center;
-filter: ${(props) => props.showDeleteTaskModal ? 'blur(4px)' : 'none'};
+filter: ${(props) => props.showDeleteTaskModal || props.showDeleteTaskModalAll ? 'blur(4px)' : 'none'};
 `;
 
 export const InputContainer = styled.div`
@@ -52,13 +52,13 @@ border-radius:60px;
 border: none;
 padding-inline: 12px;
 right: 14px;
-background-color: #0D99FF;
+background-color: ${(props) => props.theme.bgAddButton};
 margin-top: 20px;
 font-size:18px;
-color: #FFFFFF;
+color: ${(props) => props.theme.textSecondary};
 
 &:hover {
-    background-color: ${(props) => props.theme.hoverSecondary};
+    background-color: ${(props) => props.theme.bgAddButtonHover};
   }
 `;
 
@@ -72,14 +72,14 @@ border-radius:60px;
 border: none;
 padding-inline: 12px;
 right: 14px;
-background-color: #f67e7d;
+background-color:${(props) => props.theme.bgDeleteButton};
 margin-top: 20px;
 margin-bottom: 20px;
 font-size:18px;
-color: #FFFFFF;
+color: ${(props) => props.theme.textSecondary};
 
 &:hover {
-    background-color: ${(props) => props.theme.hoverSecondary};
+    background-color: ${(props) => props.theme.bgDeleteButtonHover};
   }
 `;
 
@@ -93,13 +93,13 @@ border-radius:60px;
 border: none;
 padding-inline: 12px;
 right: 14px;
-background-color: #0D99FF;
+background-color:${(props) => props.theme.bgAddButton};
 margin-top: 20px;
 font-size:18px;
-color: #FFFFFF;
+color: ${(props) => props.theme.textSecondary};
 
 &:hover {
-    background-color: ${(props) => props.theme.hoverSecondary};
+  background-color: ${(props) => props.theme.bgAddButtonHover};
   }
 `;
 
@@ -135,6 +135,7 @@ border-radius:60px;
 border: none;
 position:absolute;
 background-color: ${(props) => props.theme.inputPrimary};
+color: ${(props) => props.theme.textSecondary};
 
 &:hover {
     background-color: ${(props) => props.theme.hoverMain};
