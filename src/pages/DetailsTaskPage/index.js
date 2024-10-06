@@ -130,7 +130,7 @@ const DetailTask = () => {
                                 Checklist for subtasks
                             </SectionTitle>
                             <SectionContent>
-                                {subtasks ? <SubtaskList subtasks={subtasks} detailsPage completeSubtask={completeSubtask} todoId={id} todo={todo}></SubtaskList> : null}
+                                {subtasks ? <SubtaskList subtasks={subtasks} detailsPage completeSubtask={completeSubtask} todoId={id} todo={todo}/> : null}
                             </SectionContent>
                         </FormSection>
 

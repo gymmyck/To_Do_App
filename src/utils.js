@@ -61,13 +61,23 @@ export function percentageCalculator(todo) {
                     return percentage;
                 }
                 return 100;
+
+                // if (todo.subtasks.length) {
+                //     return percentage;
+                // }
+                // return 0;
             }
-        }
-        else {
-            if (todo.subtasks.length) {
-                return percentage;
-            }
-            return 0;
+        } else {
+           if (todo.subtasks.length) {
+                    return percentage;
+                }
+                return 0;
+
+            // if (incompleteSubtasks.length > 0) {
+            //     todo.isCompleted = !todo.isCompleted;
+            //     return percentage;
+            // }
+            // return 100;
         }
     }
     return 100;
@@ -82,6 +92,39 @@ export function completeAllSubtasks(todo) {
     }
 }
 
+
+
+
+// export function percentageCalculator(todo) {
+
+//     if (Array.isArray(todo.subtasks)) {
+//         const completedSubtasks = todo.subtasks.filter((subtask) => subtask.isCompleted);
+//         const incompleteSubtasks = todo.subtasks.filter((subtask) => !subtask.isCompleted);
+//         const percentage = Math.floor((completedSubtasks.length / todo.subtasks.length) * 100);
+
+//         if (completedSubtasks.length === todo.subtasks.length) {
+//             todo.isCompleted = !todo.isCompleted;
+//         }
+
+//         if (todo.isCompleted) {
+//             if (todo.subtasks.length === 0) {
+//                 return 100;
+//             } else {
+//                 if (incompleteSubtasks.length > 0) {
+//                     todo.isCompleted = !todo.isCompleted;
+//                     return percentage;
+//                 }
+//                 return 100;
+//             }
+//         } else {
+//             if (todo.subtasks.length) {
+//                 return percentage;
+//             }
+//             return 0;
+//         }
+//     }
+//     return 100;
+// }
 
 
 // if (todo.isCompleted) {

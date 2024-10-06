@@ -200,7 +200,7 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
                         <FontAwesomeIcon icon={faTrash} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
 
-                    <ProgressCircle todo={todo} completed={todo.isCompleted} />
+                    <ProgressCircle todo={todo} />
                 </TaskButtons>
 
             </ToDoRight>

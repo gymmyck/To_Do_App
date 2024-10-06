@@ -23,10 +23,9 @@ p {width:100%;
 
 type progressCircleProps = {
     todo: any;
-    completed: boolean;
 }
 
-const ProgressCircle = ({ todo, completed }: progressCircleProps) => {
+const ProgressCircle = ({ todo}: progressCircleProps) => {
     const percentage = percentageCalculator(todo);
 
     return (
