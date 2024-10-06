@@ -6,6 +6,7 @@ import {
     faArrowLeft,
     faPlus
 } from "@fortawesome/free-solid-svg-icons";
+import {motion} from "framer-motion";
 import FormInput from "../FormInput";
 import FormButtons from "../FormButtons";
 import TimeInput from "../TimeInput";
@@ -139,6 +140,17 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
     }, [tags])
 
     return (
+        <motion.div
+        initial={{ x: "100vw" }} // Start completely off-screen to the right
+        animate={{ x: "-50%" }} // Animate to center the div
+        transition={{ type: "spring", stiffness: 100, damping: 20 }} // Smooth spring transition
+        style={{
+          position: "absolute",
+          left: "50%",
+          transform: "translate(-50%, -50%)", // Center both horizontally and vertically
+        }}
+        >
+
         <MainContainer>
             <HeaderContainer>
                 <Link to='/'>
@@ -234,6 +246,8 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                 <SaveTaskButton onClick={handleSubmit}>Save Task</SaveTaskButton>
             </form>
         </MainContainer>
+
+        </motion.div>
 
     )
 }

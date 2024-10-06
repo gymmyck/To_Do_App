@@ -14,10 +14,13 @@ display: flex;
 flex-direction: column;
 justify-content: start;
 align-items:center;
-margin-top:50px;
+margin-top:20px;
 `;
 
 export const Title = styled.p`
+// width: 536px;
+// height: 36px;
+// border:1px solid red;
 color: ${(props) => props.theme.textMain};
 `;
 
@@ -27,7 +30,7 @@ height: 36px;
 display:flex;
 position: absolute;
 left:-10px;
-top:-8px;
+top:16px;
 justify-content: center;
 align-items: center;
 border-radius:50%;
@@ -54,7 +57,7 @@ padding-inline: 12px;
 right: 14px;
 background-color:  ${(props) => props.theme.bgAddButton};
 margin-top: 10px;
-margin-bottom: 10px;
+margin-bottom: 20px;
 font-size:18px;
 color: ${(props) => props.theme.textSecondary};
 
@@ -91,8 +94,7 @@ display: flex;
 justify-content: center;
 align-items:center;
 position:relative;
-margin-top:60px;
-margin-bottom:36px;
+margin-top:10px;
 font-size:24px;
 color: #FFFFFF;
 `;

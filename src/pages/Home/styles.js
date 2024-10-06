@@ -21,7 +21,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 position: relative;
-margin-top:40px;
+margin-top:20px;
 `;
 
 

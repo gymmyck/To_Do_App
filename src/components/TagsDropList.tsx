@@ -1,7 +1,8 @@
 import React, {useState} from "react";
+import {motion} from "framer-motion";
 import styled from "styled-components";
 
-const StyledList = styled.ul`
+const StyledList = styled(motion.ul)`
 width: 100%;
 //   border: 1px solid blue;
   border-radius:14px;
@@ -50,7 +51,15 @@ const TagsList = ({ tagsList = [], checkedTags, handleCheckboxChange }: TagsList
 
 
   return (
-    <StyledList>
+    <StyledList
+    initial={{ opacity: 0, scale: 0.5 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{
+      duration: 0.2,
+      delay: 0,
+      ease: [0, 0.71, 0.2, 1.01]
+    }}
+    >
       {tagsList.map((el) =>
         <StyledListItem key={el.id}>
           <StyledLabel>

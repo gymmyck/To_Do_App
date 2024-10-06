@@ -89,8 +89,7 @@ export default App;
 
 // --v-- add light/dark themes - look for all the properties containing 'color' in every file and change it to props.
 
+// --v-- Power Mode On
 
-
-// Power Mode On
 
 // Add motion animations

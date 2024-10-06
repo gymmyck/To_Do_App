@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {motion} from "framer-motion";
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -27,7 +28,7 @@ const hexToRgba = (hex: string, alpha: number) => {
     const g = parseInt(hex.slice(3, 5), 16);
     const b = parseInt(hex.slice(5, 7), 16);
 
-    return `${r}, ${g}, ${b}, ${alpha}`; // Returns "r, g, b, a"
+    return `${r}, ${g}, ${b}, ${alpha}`;
 };
 
 const MainContainer = styled.div<MainContainerProps>`
@@ -131,6 +132,12 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
     };
 
     return (
+        <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+      >
         <MainContainer completed={todo.isCompleted} dueDays={dueDays}>
             <ToDoLeft>
                 <TaskTitleLine>
@@ -183,7 +190,9 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
                 </TaskButtons>
 
             </ToDoRight>
-        </MainContainer>)
+        </MainContainer>
+        </motion.div>
+        )
 }
 
 export default ToDo;

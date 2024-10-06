@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import {motion} from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCheck,
     faX
 } from "@fortawesome/free-solid-svg-icons";
 
-const TagContainer = styled.div<{bgColor?:any}>`
+const TagContainer = styled(motion.div)<{bgColor?:any}>`
 min-width:50px;
 height:27px;
 background-color:${(props) => props.bgColor};
@@ -63,7 +64,11 @@ const TagsList = ({ tags, removeTag, edit }: { tags: Tags[], removeTag?: any, ed
     return (
         <>
             {tags && tags.map((item, index) => (
-                <TagContainer key={item.id} bgColor={item.bgColor}>
+                <TagContainer key={item.id} bgColor={item.bgColor}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 200, damping: 10 }}
+                >
                     {`${item.name}`}
                     { edit ? (
                         <RemoveButton onClick={() => removeTag(item.id)}>

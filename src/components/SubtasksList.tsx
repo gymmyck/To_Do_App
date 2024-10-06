@@ -9,7 +9,7 @@ import { percentageCalculator } from '../utils';
 
 const SubtaskContainer = styled.div<{ isCompleted?: boolean }>`
 width: 100%;
-height: 60px;
+height: 40px;
 border-radius: 60px;
 border: 1px solid #e2e2e2;
 // border: none;
@@ -45,8 +45,8 @@ background-color:${(props) => props.theme.bgSubtask};
 `;
 
 const SubtaskButton = styled.button<{ isCompleted?: boolean }>`
-width: 32px;
-height: 32px;
+width: 28px;
+height: 28px;
 display:flex;
 justify-content: center;
 align-items: center;
@@ -56,8 +56,8 @@ background-color: ${(props) => props.isCompleted ? '#0D99FF9A' : '#b24029'};
 color: #717171;
 margin-bottom:8px;
 position: absolute;
-right:16px;
-top: 15px;
+right:10px;
+top: 6px;
 
 &:hover {
     background-color:#0D99FF9A;
