@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MainContainer = styled.div`
 margin:0;
-width: 44vw;
+min-width: 44vw;
 min-height: 90vh;
 position:relative;
 background-color: ${(props) => props.theme.bgColor};
