@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext, createContext } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,7 +21,7 @@ import {
     PowerModeButton,
     ToDosContainer,
 } from "./styles.js";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import SearchInput from "../../components/SearchInput";
 import SortingDropList from "../../components/SortingDropList";
 import TagsDropList from "../../components/TagsDropList";
@@ -61,7 +61,6 @@ const Home = (props) => {
                 return todoWithTag?.tagsArray.find((tag) => tag.id === tagId)?.name;
             })
             .filter((tagName) => tagName);
-        // console.log('n',theArray);
         return theArray;
     }
 
@@ -99,29 +98,19 @@ const Home = (props) => {
                 sortedTodos.sort((a, b) => b.complexity - a.complexity);
                 break;
             case 'Power Mode':
-                sortedTodos.sort((a, b) => {
-                    const scoreA = a.complexity + a.priority;
-                    const scoreB = b.complexity + b.priority;
-                    // console.log(`A: ${scoreA}, B: ${scoreB}`);
-                    return scoreB - scoreA;
-                });
+                sortedTodos.sort((a, b) => (b.complexity + b.priority) - (a.complexity + a.priority));
                 break;
             default:
                 break;
         }
-        console.log(sortedTodos);
-        // console.log(sortedTodos.map((el) => el.dueDate));
         return sortedTodos;
     }
-
-    // (b.complexity + b.priority) - (a.complexity + a.priority)
 
     const handleSearch = (e) => {
         setSearchValue(e.target.value.trim());
     }
 
     const clickOutside = (e) => {
-        // console.log("clicking")
         if (refSorting.current && !refSorting.current.contains(e.target)) {
             setShowSortingFilters(false);
         }
@@ -143,14 +132,8 @@ const Home = (props) => {
                 return acc;
             }, new Map()).values()
         );
-        // console.log('s',uniqueTags);
         return uniqueTags;
     }
-
-    const getTagsColors = () => {
-        // console.log(tagsList);
-    }
-    getTagsColors();
 
     const openModal = (todo) => {
         setShowDeleteTaskModal(true);
@@ -173,7 +156,6 @@ const Home = (props) => {
         .filter((todo) => todo.name.toLowerCase().includes(searchValue.toLowerCase()))
         .filter((todo) => {
             const checkedTagNames = getCheckedTagNames() || [];
-            // console.log('checked tags:', checkedTagNames);
             if (checkedTagNames.length === 0) return true;
             return checkedTagNames.every((tag) => todo.tagsArray.some((todoTag) => todoTag.name === tag)
             );
@@ -197,16 +179,13 @@ const Home = (props) => {
     useEffect(() => {
         const tags = getTagsList();
         setTagsList(tags);
-        // console.log('list tags', tags);
     }, [todos]);
 
     useEffect(() => {
         getCheckedTagNames();
-        // console.log(checkedTags)
     }, [checkedTags])
 
     return (
-
         <>
             {showDeleteTaskModal && <DeleteTaskModal todoToDelete={todoToDelete} removeTodo={removeTodo} closeModal={closeModal} />}
             {showDeleteTaskModalAll && <DeleteAllTasksModal removeAllTodos={removeAllTodos} closeModal={closeModalAll} />}
@@ -275,10 +254,7 @@ const Home = (props) => {
                             )
                             }
                         </ToDosContainer>
-                        <Link
-                            to='/newTask'
-                        // onClick={logHook}
-                        >
+                        <Link to='/newTask'>
                             <AddButton>
                                 <FontAwesomeIcon icon={faPlus} />
                                 Add New Task
@@ -297,55 +273,3 @@ const Home = (props) => {
 };
 
 export default Home;
-
-
-// The snippet below uses the .reduce() method and it does the same thing,
-// essentially adding all the tags from all the todos into one single list
-
-// const tagsList = todos.reduce ((acc,todo, index) => {
-//     if(Array.isArray(todo.tagsArray)){
-//         acc.push(...todo.tagsArray);
-//         todo.tagsArray.forEach((item,idx) => console.log(`todo ${index}, tag ${idx}:`, item))
-//     } else {
-//         console.log(`todo ${index} has no tagsArray or it's not an array.`);
-//     }
-//     return acc;
-// }, []);
-
-// console.log('HERE', tagsList);
-
-// const tagsList  = todos.flatMap((todo) => todo.tagsArray)
-
-// const filterByName = () => {
-//     setFilteredTodos(todos.filter((todo) => todo.name.toLowerCase().includes(searchValue.toLowerCase())));
-// }
-
-// const filterByTag = () => {
-
-// }
-
-// const clickObject = (e) => {
-// console.log(e.target);
-// }
-
-// useEffect(() => {
-//     // console.log("Search value updated:", searchValue);
-//     filterByName();
-// }, [searchValue]);
-
-
-
-
-// const getCheckedTagNames = () => {
-//     const theArray = Object.keys(checkedTags)
-//         .filter((tagId) => checkedTags[tagId])
-//         .map((tagId) => {
-//             const todoWithTag = todos.find((todo) =>
-//                 todo.tagsArray.some((tag) => tag.id === tagId)
-//             );
-//             return todoWithTag?.tagsArray.find((tag) => tag.id === tagId)?.name;
-//         })
-//         .filter((tagName) => tagName);
-//     // console.log(theArray);
-//     return theArray;
-// }

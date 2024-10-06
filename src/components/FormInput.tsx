@@ -41,6 +41,7 @@ type FormInputProps = {
 };
 
 const FormInput = ({ nameError, type, value, placeholder, onChange, children }: FormInputProps) => {
+  
   return (
     <StyledFormInput nameError={nameError} type={type} value={value} placeholder={placeholder} onChange={onChange}>{children}</StyledFormInput>
   );

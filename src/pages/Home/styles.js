@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
 export const MainContainer = styled.div`
@@ -23,7 +22,6 @@ align-items: center;
 position: relative;
 margin-top:20px;
 `;
-
 
 export const InputButton = styled.button`
 width: 36px;
@@ -151,5 +149,3 @@ flex-direction:column;
 justify-content: center;
 align-items:center;
 `;
-
-// const tagsList  = todos.flatMap((todo) => todo.tagsArray)

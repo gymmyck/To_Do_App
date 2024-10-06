@@ -1,4 +1,3 @@
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import styled from "styled-components";
 
 const ButtonsContainer = styled.div<{nameError? : any}>`
@@ -85,6 +84,7 @@ type FormButtonsProps = {
 };
 
 const FormButtons = ({nameError, name, value, handleChange}: FormButtonsProps) => {
+    
     return (
         <ButtonsContainer nameError={nameError} >
             {numberArray.map((number) =>

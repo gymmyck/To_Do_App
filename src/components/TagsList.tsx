@@ -1,9 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
 import {motion} from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faCheck,
     faX
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -59,11 +57,10 @@ type Tags = {
 }
 
 const TagsList = ({ tags, removeTag, edit }: { tags: Tags[], removeTag?: any, edit?:boolean}) => {
-    // const tagss = ['school', 'cooking', 'job']
 
     return (
         <>
-            {tags && tags.map((item, index) => (
+            {tags && tags.map((item) => (
                 <TagContainer key={item.id} bgColor={item.bgColor}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}

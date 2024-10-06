@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
 export const MainContainer = styled.div`
@@ -223,7 +222,6 @@ padding-bottom:104px;
 padding-left:16px;
 `;
 
-
 export const FormSection = styled.div`
 width: 60%;
 // height: 100px;
@@ -288,4 +286,3 @@ color: ${(props) => props.theme.textSecondary};
   background-color: ${(props) => props.theme.bgDeleteButtonHover};
   }
 `;
-

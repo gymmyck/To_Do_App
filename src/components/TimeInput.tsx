@@ -47,6 +47,7 @@ type TimeInputProps = {
 };
 
 const TimeInput = ({nameError, type, value, min, onChange, children }: TimeInputProps) => {
+  
     return (
         <StyledTimeInput nameError={nameError} type={type} value={value} min={min} onChange={onChange}>{children}</StyledTimeInput>
     );

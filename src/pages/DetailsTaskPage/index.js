@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,23 +6,18 @@ import {
     faArrowUp,
     faArrowsUpDownLeftRight,
     faRotate,
-    faCopy,
     faTrash,
-    faCheck,
     faArrowLeft,
     faPen
 } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import { MainContainer, Title, ToDoContainer, TaskBullet, TaskTitleLine, TaskInfoLine, TaskTitle, ToDoLeft, TaskInfo, DueDate, TaskData, TaskTag, TaskProgress, HeaderContainer, BackButton, RepeatButton, DeleteTaskButton, FormSection, SectionTitle, SectionContent, TaskEditButton, TagsSection } from "./styles.js";
-import { Line, Circle } from 'rc-progress';
-import FormInput from "../../components/FormInput";
+import { MainContainer, Title, ToDoContainer, TaskBullet, TaskTitleLine, TaskInfoLine, TaskTitle, ToDoLeft, TaskInfo, DueDate, TaskData, TaskProgress, HeaderContainer, BackButton, RepeatButton, DeleteTaskButton, FormSection, SectionTitle, SectionContent, TaskEditButton, TagsSection } from "./styles.js";
+import { Line } from 'rc-progress';
 import { useTodo } from "../../context/todoContext";
 import { levelDescription, percentageCalculator, calculateDueDays, setDueDaysColor, updateTodoCompleteness } from "../../utils.js";
 import SubtaskList from "../../components/SubtasksList";
-import styled from "styled-components";
 import TagsList from "../../components/TagsList";
 import DeleteTaskModal from "../../components/DeleteTaskModal";
-
 
 const DetailTask = () => {
     const navigate = useNavigate();
@@ -130,7 +125,7 @@ const DetailTask = () => {
                                 Checklist for subtasks
                             </SectionTitle>
                             <SectionContent>
-                                {subtasks ? <SubtaskList subtasks={subtasks} detailsPage completeSubtask={completeSubtask} updateTodoCompleteness={updateTodoCompleteness} todoId={id} todo={todo}/> : null}
+                                {subtasks ? <SubtaskList subtasks={subtasks} detailsPage completeSubtask={completeSubtask} updateTodoCompleteness={updateTodoCompleteness} todoId={id} todo={todo} /> : null}
                             </SectionContent>
                         </FormSection>
 
@@ -153,7 +148,3 @@ const DetailTask = () => {
 }
 
 export default DetailTask;
-
-
-
-// removeTodo(todo)

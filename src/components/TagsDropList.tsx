@@ -1,16 +1,16 @@
-import React, {useState} from "react";
 import {motion} from "framer-motion";
 import styled from "styled-components";
 
 const StyledList = styled(motion.ul)`
-width: 100%;
-//   border: 1px solid blue;
+  width: 100%;
+  // border: 1px solid blue;
   border-radius:14px;
   background-color: ${(props) => props.theme.inputPrimary};
   margin-top:48px;
   list-style-type: none;
   margin-left: 0px;
   padding-left:0px;
+  padding-bottom:10px;
   z-index:5;
   display: flex;
   flex-direction:column;
@@ -48,8 +48,6 @@ type TagsListProps = {
 
 const TagsList = ({ tagsList = [], checkedTags, handleCheckboxChange }: TagsListProps) => {
 
-
-
   return (
     <StyledList
     initial={{ opacity: 0, scale: 0.5 }}
@@ -60,21 +58,15 @@ const TagsList = ({ tagsList = [], checkedTags, handleCheckboxChange }: TagsList
       ease: [0, 0.71, 0.2, 1.01]
     }}
     >
-      {tagsList.map((el) =>
+      {tagsList.length ? (tagsList.map((el) =>
         <StyledListItem key={el.id}>
           <StyledLabel>
             <StyledLabelText>{el.name}</StyledLabelText>
             <input type='checkbox' value={el.name} checked={!!checkedTags[el.id]} onChange={(e) => handleCheckboxChange (e, el.id)} />
           </StyledLabel>
-        </StyledListItem>)}
+        </StyledListItem>)) : <StyledList>No tags</StyledList>}
     </StyledList>
   );
 };
 
 export default TagsList;
-
-
-// selectedTags: any[];
-// setSelectedTags: (tags: any[]) => void;
-
-// selectedTags, setSelectedTags

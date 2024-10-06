@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -63,8 +62,6 @@ top: 6px;
     background-color:#0D99FF9A;
     color: #717171;
 }
-
-
 `;
 
 type Subtask = {
@@ -74,7 +71,6 @@ type Subtask = {
 }
 
 const SubtaskList = ({ detailsPage, subtasks, completeSubtask, removeSubtask, todoId, todo, updateTodoCompleteness }: { subtasks: Subtask[], completeSubtask?: any, removeSubtask?: any, detailsPage: boolean, todoId: any, todo:any, updateTodoCompleteness:any }) => {
-
 
     return (
         <>
@@ -88,7 +84,6 @@ const SubtaskList = ({ detailsPage, subtasks, completeSubtask, removeSubtask, to
                         <SubtaskButton onClick={() => removeSubtask(item.id)}>
                             <FontAwesomeIcon icon={faX} style={{ color: '#FFFFFF' }} />
                         </SubtaskButton>
-
                     }
                 </SubtaskContainer>))}
         </>

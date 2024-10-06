@@ -1,7 +1,4 @@
-import { useTheme } from "styled-components";
-
 const NoTodoLogo = (props) => {
-    // const theme = useTheme();
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { BackButton, Title, AddSubtaskButton, FormSection, HeaderContainer, MainContainer, SaveTaskButton, SectionContent, SectionTitle, TimeSection, TimeSubSection, TagsSection, ErrorDiv, ErrorMessage } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +16,7 @@ import { uid } from "uid";
 import SubtaskList from "../SubtasksList";
 import TagsList from "../TagsList";
 
-const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
+const ToDoForm = ({ todo, title, handleSubmitHook }) => {
     const [name, setName] = useState(todo ? todo.name : '');
     const [priority, setPriority] = useState(todo ? todo.priority : '');
     const [complexity, setComplexity] = useState(todo ? todo.complexity : '');
@@ -32,8 +32,6 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
 
     const currentDate = new Date().toISOString().split('T')[0];
     const currentTime = new Date().toISOString().split('T')[1].slice(0, 5);
-
-    // console.log(dueDate, dueTime);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -58,7 +56,6 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
                 tagsArray
             }
             handleSubmitHook(task);
-            // console.log(task);
             navigate('/');
         }
     }
@@ -128,7 +125,6 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
     }
 
     getRandomColor();
-
 
     const removeTag = (id) => {
         const newTags = tagsArray.filter((tag) => id !== tag.id)
@@ -253,39 +249,3 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
 }
 
 export default ToDoForm;
-
-
-// const checkInputChange = (field, value) => {
-
-//     let updatedErrors = { ...errorMessage }
-
-//     if (field === 'name' && value.trim() === '') {
-//         updatedErrors[field] = 'Task name is required';
-//     } else {
-//         delete updatedErrors[field];
-//     };
-
-//     if (field === 'priority' && value === '') {
-//         updatedErrors[field] = 'Priority is required';
-
-//     } else {
-//         delete updatedErrors[field];
-//     }
-//     if (field === 'complexity' && value === '') {
-//         updatedErrors[field] = 'Complexity is required';
-
-//     } else {
-//         delete updatedErrors[field];
-//     }
-//     if (field === 'dueDate' && value === '') {
-//         updatedErrors[field] = 'Due date is required';
-
-//     } else {
-//         delete updatedErrors[field];
-//     }
-
-//     if (Object.keys(errorMessage).length !== Object.keys(updatedErrors).length) {
-//     setErrorMessage(updatedErrors);
-//     }
-//     console.log(updatedErrors);
-// }

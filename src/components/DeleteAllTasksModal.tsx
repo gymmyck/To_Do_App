@@ -1,11 +1,5 @@
-import React from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import { useTodo } from "../context/todoContext";
-
-type MainContainerProps = {
-    completed: boolean;
-}
 
 const MainContainer = styled.div`
 width: 398px;
@@ -60,7 +54,7 @@ type ToDoProps = {
     closeModal: any;
 }
 
-const DeleteAllTasksModal = ({ todoToDelete, removeAllTodos, closeModal }: ToDoProps) => {
+const DeleteAllTasksModal = ({ removeAllTodos, closeModal }: ToDoProps) => {
     const navigate = useNavigate();
 
     return (

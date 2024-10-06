@@ -1,6 +1,4 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import { completeAllSubtasks } from "../utils";
-import { useParams } from "react-router-dom";
 import { uid } from "uid";
 
 type Subtask = {
@@ -17,7 +15,6 @@ type Todo = {
 
 type TodoContextType = {
   todos: Todo[];
-  // filteredTodos: Todo[];
   addTodo: (text: string) => void;
   editTodo: (id: string, item: Partial<Todo>) => void;
   completeTodo: (todo: Todo) => void;
@@ -27,7 +24,6 @@ type TodoContextType = {
   completeSubtask: (todoId: any, subtaskId: any) => void;
   duplicateTodo: (item: any) => void;
   updateStorage: any;
-
 };
 
 type TodoProviderProps = {
@@ -49,7 +45,6 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
     return tasks ? JSON.parse(tasks) : [];
   }
 
-  const { id } = useParams();
   const [todos, setTodos] = useState<Todo[]>(() => getStoredTasks());
 
 
@@ -60,7 +55,6 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
       ...item
     };
     setTodos([...todos, newTodo]);
-    // console.log(todos);
   };
 
   const editTodo = (id: any, item: any) => {
@@ -92,7 +86,6 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
       return todo;
     }
     )
-    // console.log('checked:', item.name);
     setTodos(newTodos);
   };
 
@@ -110,7 +103,6 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
         todo.subtasks.map((subtask) => {
           if (subtaskId === subtask.id) {
             subtask.isCompleted = !subtask.isCompleted;
-            // console.log('subtask checked:', subtask.name, subtask.isCompleted)
           }
           return subtask;
         });
@@ -130,7 +122,6 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
 
   useEffect(() => {
     updateStorage(todos);
-    // console.log("Updated todos:", todos);
   }, [todos]);
 
   return (
@@ -143,23 +134,3 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
 };
 
 export default TodoProvider;
-
-
-
-// const completeSubtask = (id) => {
-//     const newSubtasks = subtasks.map((subtask) => {
-//         if (id = subtask.id) {
-//             subtask.isCompleted = !subtask.isCompleted;
-//         }
-//         return subtask;
-//     }
-//     )
-//     setSubtasks(newSubtasks);
-// }
-
-// const completeTodo = (item: any) => {
-//   const newTodos = todos.map((todo) =>
-//     todo.id === item.id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-//   )
-//   setTodos(newTodos);
-// };

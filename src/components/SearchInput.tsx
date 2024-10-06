@@ -40,6 +40,7 @@ type SearchInputProps = {
 };
 
 const SearchInput = ({ type, value, onChange, placeholder, children }: SearchInputProps) => {
+  
     return (
         <StyledSearchInput type={type} placeholder={placeholder} value={value} onChange={onChange}>{children}</StyledSearchInput>
     );

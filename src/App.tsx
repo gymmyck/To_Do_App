@@ -1,6 +1,4 @@
-import React, {useState} from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import {useState} from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./styles.css";
 import { ThemeProvider } from "styled-components";
@@ -12,7 +10,6 @@ import AddTask from "./pages/AddTaskPage";
 import EditTask from "./pages/EditTaskPage";
 import DetailTask from "./pages/DetailsTaskPage";
 import "./styles.css";
-
 
 function App() {
 
@@ -91,5 +88,4 @@ export default App;
 
 // --v-- Power Mode On
 
-
-// Add motion animations
+// --v-- Add motion animations

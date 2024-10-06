@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {motion} from "framer-motion";
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,10 +10,10 @@ import {
     faTrash,
     faCheck
 } from "@fortawesome/free-solid-svg-icons";
-import { TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, TaskData, TaskTag, TaskButtons, TagsSection } from "./styles";
+import { TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, TaskData, TaskButtons, TagsSection } from "./styles";
 import ProgressCircle from "../ProgressCircle";
 import styled from "styled-components";
-import { levelDescription, percentageCalculator, completeAllSubtasks, calculateDueDays, setDueDaysColor, updateTodoCompleteness } from "../../utils";
+import { levelDescription, percentageCalculator, calculateDueDays, setDueDaysColor, updateTodoCompleteness } from "../../utils";
 import { useTodo } from "../../context/todoContext";
 import TagsList from "../TagsList";
 
@@ -47,7 +46,7 @@ padding:10px;
 &:hover {
     background-color: ${(props) => {
         const taskColor = props.completed ? `#DCFCE7` : props.dueDays < 0 ? `#bfb49fb1` : props.theme.taskBackgroundColor;
-        return `rgba(${hexToRgba(taskColor, 0.85)})`;  // Slightly reduced opacity (0.9)
+        return `rgba(${hexToRgba(taskColor, 0.85)})`;
     }};
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
@@ -110,20 +109,17 @@ type ToDoProps = {
 
 const ToDo = ({ todo, openModal }: ToDoProps) => {
     const navigate = useNavigate();
-    const { completeTodo, removeTodo, duplicateTodo } = useTodo() ?? {};
-    const [dateDescription, setDateDescription] = useState('');
+    const { completeTodo, duplicateTodo } = useTodo() ?? {};
 
     const dueDays = calculateDueDays(todo.dueDate);
-    // console.log(todo.dueDate);
 
     const dueDaysColor = setDueDaysColor(todo.isCompleted, dueDays);
 
     const getDateDescription = (todo:any, dueDays: any) => {
-        // console.log(todo.dueTime);
-        if (dueDays === 2) {
-            return 'Tomorrow';
-        } else if (dueDays === 0 || dueDays === 1 ) {
+        if (dueDays === 0) {
             return 'Today';
+        } else if (dueDays === 1) {
+            return 'Tomorrow';
         } else if (dueDays < 0) {
             return 'Overdue';
         } else {
@@ -135,6 +131,7 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
         if (completeTodo) {
             completeTodo(todo);
             percentageCalculator(todo);
+            updateTodoCompleteness(todo);
         }
     };
 
@@ -188,11 +185,11 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
                         </TaskEditButton>
                     </Link >
 
-                    <TaskEditButton onClick={() => { completeTodo && completeTodo(todo); percentageCalculator(todo); completeAllSubtasks(todo); updateTodoCompleteness(todo) }}>
+                    <TaskEditButton onClick={handleCompleteTodo}>
                         <FontAwesomeIcon icon={faCheck} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
 
-                    <TaskEditButton onClick={() => { duplicateTodo && duplicateTodo(todo); navigate('/') }}>
+                    <TaskEditButton onClick={handleDuplicateTodo}>
                         <FontAwesomeIcon icon={faCopy} style={{ fontSize: '14px' }} />
                     </TaskEditButton>
 
