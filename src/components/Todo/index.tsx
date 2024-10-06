@@ -174,7 +174,7 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
                         </TaskEditButton>
                     </Link >
 
-                    <TaskEditButton onClick={() => { !!completeTodo && completeTodo(todo); percentageCalculator(todo); completeAllSubtasks(todo) }}>
+                    <TaskEditButton onClick={() => { !!completeTodo && completeTodo(todo); percentageCalculator(todo) }}>
                         <FontAwesomeIcon icon={faCheck} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
 
