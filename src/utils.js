@@ -41,7 +41,7 @@ export function setDueDaysColor(isCompleted, days) {
     return '#640d14';
 }
 
-export function percentageCalculator(todo, id) {
+export function percentageCalculator(todo) {
 
     if (Array.isArray(todo.subtasks)) {
         const completedSubtasks = todo.subtasks.filter((subtask) => subtask.isCompleted);

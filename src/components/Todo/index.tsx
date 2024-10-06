@@ -141,7 +141,6 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
     const handleDuplicateTodo = () => {
         if (duplicateTodo) {
             duplicateTodo(todo)
-            percentageCalculator(todo);
             navigate('/');
         }
     };
