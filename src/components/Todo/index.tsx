@@ -174,11 +174,11 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
                         </TaskEditButton>
                     </Link >
 
-                    <TaskEditButton onClick={() => { completeTodo && completeTodo(todo); percentageCalculator(todo); completeAllSubtasks(todo) }}>
+                    <TaskEditButton onClick={() => { !!completeTodo && completeTodo(todo); percentageCalculator(todo); completeAllSubtasks(todo) }}>
                         <FontAwesomeIcon icon={faCheck} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
 
-                    <TaskEditButton onClick={() => { duplicateTodo && duplicateTodo(todo); navigate('/') }}>
+                    <TaskEditButton onClick={() => { !!duplicateTodo && duplicateTodo(todo); navigate('/') }}>
                         <FontAwesomeIcon icon={faCopy} style={{ fontSize: '14px' }} />
                     </TaskEditButton>
 

@@ -153,7 +153,7 @@ text-decoration:${(props) => props.completed ? `line-through` : `none`};
 `;
 
 export const TaskInfo = styled.p`
-color: #616161;
+color: ${(props)=> props.theme.tasksInfo};
 font-size: 16px;
 margin: 0px;
 padding-left:10px;
