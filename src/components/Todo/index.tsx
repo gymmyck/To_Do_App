@@ -131,6 +131,21 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
         }
     };
 
+    const handleCompleteTodo = () => {
+        if (completeTodo) {
+            completeTodo(todo);
+            percentageCalculator(todo);
+        }
+    };
+
+    const handleDuplicateTodo = () => {
+        if (duplicateTodo) {
+            duplicateTodo(todo)
+            percentageCalculator(todo);
+            navigate('/');
+        }
+    };
+
     return (
         <motion.div
         initial={{ opacity: 0 }}
@@ -174,11 +189,11 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
                         </TaskEditButton>
                     </Link >
 
-                    <TaskEditButton onClick={() => { !!completeTodo && completeTodo(todo); percentageCalculator(todo) }}>
+                    <TaskEditButton onClick={handleCompleteTodo}>
                         <FontAwesomeIcon icon={faCheck} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
 
-                    <TaskEditButton onClick={() => { !!duplicateTodo && duplicateTodo(todo); navigate('/') }}>
+                    <TaskEditButton onClick={handleDuplicateTodo}>
                         <FontAwesomeIcon icon={faCopy} style={{ fontSize: '14px' }} />
                     </TaskEditButton>
 
@@ -196,7 +211,3 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
 }
 
 export default ToDo;
-
-// () => removeTodo && removeTodo(todo)
-
-// ${todo.dueDate} ${todo.dueTime}
