@@ -224,7 +224,6 @@ const Home = (props) => {
 
                 <div>
 
-
                     <MainContainer showDeleteTaskModal={showDeleteTaskModal} showDeleteTaskModalAll={showDeleteTaskModalAll}>
                         <InputContainer>
                             <SearchInput type='text' placeholder="Search..." value={searchValue} onChange={handleSearch} {...props}></SearchInput>
@@ -275,7 +274,6 @@ const Home = (props) => {
                             )
                             )
                             }
-
                         </ToDosContainer>
                         <Link
                             to='/newTask'

@@ -73,7 +73,7 @@ type Subtask = {
     isCompleted: boolean,
 }
 
-const SubtaskList = ({ detailsPage, subtasks, completeSubtask, removeSubtask, todoId, todo }: { subtasks: Subtask[], completeSubtask?: any, removeSubtask?: any, detailsPage: boolean, todoId: any, todo:any }) => {
+const SubtaskList = ({ detailsPage, subtasks, completeSubtask, removeSubtask, todoId, todo, updateTodoCompleteness }: { subtasks: Subtask[], completeSubtask?: any, removeSubtask?: any, detailsPage: boolean, todoId: any, todo:any, updateTodoCompleteness:any }) => {
 
 
     return (
@@ -82,7 +82,7 @@ const SubtaskList = ({ detailsPage, subtasks, completeSubtask, removeSubtask, to
                 <SubtaskContainer isCompleted={item.isCompleted} key={item.id}>
                     {`${index + 1}. ${item.name}`}
                     {detailsPage ?
-                        <SubtaskButton isCompleted={item.isCompleted} onClick={() => {completeSubtask(todoId, item.id); percentageCalculator(todo)}}>
+                        <SubtaskButton isCompleted={item.isCompleted} onClick={() => {completeSubtask(todoId, item.id); percentageCalculator(todo); updateTodoCompleteness(todo)}}>
                             <FontAwesomeIcon icon={faCheck} style={{ color: '#FFFFFF' }} />
                         </SubtaskButton> :
                         <SubtaskButton onClick={() => removeSubtask(item.id)}>

@@ -48,47 +48,30 @@ export function percentageCalculator(todo) {
         const incompleteSubtasks = todo.subtasks.filter((subtask) => !subtask.isCompleted);
         const percentage = Math.floor((completedSubtasks.length / todo.subtasks.length) * 100);
 
-        if (completedSubtasks.length === todo.subtasks.length) {
-            todo.isCompleted = !todo.isCompleted;
-        }
-
-        if (todo.isCompleted) {
-            if (todo.subtasks.length === 0) {
-                return 100;
-            } else {
-                if (incompleteSubtasks.length > 0) {
-                    todo.isCompleted = !todo.isCompleted;
-                    return percentage;
-                }
-                return 100;
-
-                // if (todo.subtasks.length) {
-                //     return percentage;
-                // }
-                // return 0;
-            }
+        if (todo.subtasks.length === 0) {
+            if (todo.isCompleted) return 100;
+            else return 0;
         } else {
-           if (todo.subtasks.length) {
-                    return percentage;
-                }
-                return 0;
-
-            // if (incompleteSubtasks.length > 0) {
-            //     todo.isCompleted = !todo.isCompleted;
-            //     return percentage;
-            // }
-            // return 100;
+            if (completedSubtasks.length === todo.subtasks.length)
+                return 100;
+            else return percentage;
         }
     }
-    return 100;
 }
 
 export function completeAllSubtasks(todo) {
-    todo.isCompleted = !todo.isCompleted;
-    if (todo.subtasks.length) {
-        todo.subtasks.map((subtask) =>
-            subtask.isCompleted = !subtask.isCompleted
-        )
+    // todo.isCompleted = !todo.isCompleted;
+    // if (todo.subtasks.length) {
+    //     todo.subtasks.map((subtask) =>
+    //         subtask.isCompleted = !subtask.isCompleted
+    //     )
+    // }
+}
+
+export function updateTodoCompleteness (todo) {
+    if (Array.isArray(todo.subtasks) && todo.subtasks.length > 0){
+        const allSubtasksCompleted = todo.subtasks.every((subtask) => subtask.isCompleted);
+        todo.isCompleted = allSubtasksCompleted;
     }
 }
 
@@ -117,10 +100,10 @@ export function completeAllSubtasks(todo) {
 //                 return 100;
 //             }
 //         } else {
-//             if (todo.subtasks.length) {
-//                 return percentage;
-//             }
-//             return 0;
+//            if (todo.subtasks.length) {
+//                     return percentage;
+//                 }
+//                 return 0;
 //         }
 //     }
 //     return 100;

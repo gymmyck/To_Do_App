@@ -17,7 +17,7 @@ import { MainContainer, Title, ToDoContainer, TaskBullet, TaskTitleLine, TaskInf
 import { Line, Circle } from 'rc-progress';
 import FormInput from "../../components/FormInput";
 import { useTodo } from "../../context/todoContext";
-import { levelDescription, percentageCalculator, calculateDueDays, setDueDaysColor } from "../../utils.js";
+import { levelDescription, percentageCalculator, calculateDueDays, setDueDaysColor, updateTodoCompleteness } from "../../utils.js";
 import SubtaskList from "../../components/SubtasksList";
 import styled from "styled-components";
 import TagsList from "../../components/TagsList";
@@ -130,7 +130,7 @@ const DetailTask = () => {
                                 Checklist for subtasks
                             </SectionTitle>
                             <SectionContent>
-                                {subtasks ? <SubtaskList subtasks={subtasks} detailsPage completeSubtask={completeSubtask} todoId={id} todo={todo}/> : null}
+                                {subtasks ? <SubtaskList subtasks={subtasks} detailsPage completeSubtask={completeSubtask} updateTodoCompleteness={updateTodoCompleteness} todoId={id} todo={todo}/> : null}
                             </SectionContent>
                         </FormSection>
 

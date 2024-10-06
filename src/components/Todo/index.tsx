@@ -14,7 +14,7 @@ import {
 import { TaskTitleLine, TaskInfoLine, ToDoLeft, ToDoRight, TaskInfo, TaskData, TaskTag, TaskButtons, TagsSection } from "./styles";
 import ProgressCircle from "../ProgressCircle";
 import styled from "styled-components";
-import { levelDescription, percentageCalculator, completeAllSubtasks, calculateDueDays, setDueDaysColor } from "../../utils";
+import { levelDescription, percentageCalculator, completeAllSubtasks, calculateDueDays, setDueDaysColor, updateTodoCompleteness } from "../../utils";
 import { useTodo } from "../../context/todoContext";
 import TagsList from "../TagsList";
 
@@ -188,7 +188,7 @@ const ToDo = ({ todo, openModal }: ToDoProps) => {
                         </TaskEditButton>
                     </Link >
 
-                    <TaskEditButton onClick={() => { completeTodo && completeTodo(todo); percentageCalculator(todo); completeAllSubtasks(todo) }}>
+                    <TaskEditButton onClick={() => { completeTodo && completeTodo(todo); percentageCalculator(todo); completeAllSubtasks(todo); updateTodoCompleteness(todo) }}>
                         <FontAwesomeIcon icon={faCheck} style={{ fontSize: '18px' }} />
                     </TaskEditButton>
 
