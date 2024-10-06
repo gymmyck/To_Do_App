@@ -141,13 +141,13 @@ const ToDoForm = ({ todo, title, handleSubmitHook, updateStorage }) => {
 
     return (
         <motion.div
-        initial={{ x: "100vw" }} // Start completely off-screen to the right
-        animate={{ x: "-50%" }} // Animate to center the div
-        transition={{ type: "spring", stiffness: 100, damping: 20 }} // Smooth spring transition
+        initial={{ x: "100vw" }}
+        animate={{ x: "-50%" }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
         style={{
           position: "absolute",
           left: "50%",
-          transform: "translate(-50%, -50%)", // Center both horizontally and vertically
+          transform: "translate(-50%, -50%)",
         }}
         >
 
