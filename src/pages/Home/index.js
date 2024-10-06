@@ -45,7 +45,6 @@ const Home = (props) => {
     const [isPowerMode, setIsPowerMode] = useState(false);
     const refSorting = useRef(null);
     const refFilters = useRef(null);
-    const [seconds, setSeconds] = useState(0);
 
     const handleCheckboxChange = (e, id) => {
         const isChecked = e.target.checked;
@@ -205,13 +204,6 @@ const Home = (props) => {
         getCheckedTagNames();
         // console.log(checkedTags)
     }, [checkedTags])
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setSeconds((seconds) => seconds + 1);
-        }, 1000);
-        return () => clearInterval(interval);
-    }, []);
 
     return (
 
