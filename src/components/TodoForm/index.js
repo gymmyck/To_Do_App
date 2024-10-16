@@ -10,7 +10,6 @@ import {motion} from "framer-motion";
 import FormInput from "../FormInput";
 import FormButtons from "../FormButtons";
 import TimeInput from "../TimeInput";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { uid } from "uid";
 import SubtaskList from "../SubtasksList";

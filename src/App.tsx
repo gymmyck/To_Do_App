@@ -19,6 +19,8 @@ function App() {
     setIsLightTheme(!isLightTheme);
   };
 
+  console.log('here');
+
   return (
     <Router>
       <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
